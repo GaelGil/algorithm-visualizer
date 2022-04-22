@@ -1,0 +1,10 @@
+
+
+
+.array-bar{
+    background-color: blue;
+    width: 100%;
+    margin: 20px;
+    position: relative;
+    float: inline-end;
+}
