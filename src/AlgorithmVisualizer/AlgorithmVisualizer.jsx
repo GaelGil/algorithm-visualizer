@@ -1,8 +1,6 @@
 import React from "react";
 import './AlgorithmVisualizer.css';
 
-
-
 export default class AlgorithmVisualizer extends React.Component{
     constructor(props) {
         super(props);
@@ -26,12 +24,20 @@ export default class AlgorithmVisualizer extends React.Component{
         const {array} = this.state;
 
         return (
-            <div className="array">
-            {array.map((value, index) => (
-                <div className="array-bar" key={index}>{value}</div>
+
+            <div className="array-container">
+            {array.map((value, idx) => (
+              <div
+                className="array-bar"
+                key={idx}
+                style={{
+                  backgroundColor: "blue",
+                  height: `${value}px`,
+                }}>
+                </div>
             ))}
-            </div>
-        )
+          </div>
+        );
     };
 
 }

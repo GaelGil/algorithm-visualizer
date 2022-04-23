@@ -1,18 +1,13 @@
-.array {
-    /* display: flex; */
-    /* justify-content: center; */
-    /* align-self: center; */
-    position: absolute;
-    left: 100px;
-    /* top: 50vh; */
-}
-
-.array-bar{
+.array-container {
+    /* position: absolute; */
+    /* left: 100px; */
+    background-color: aqua;
+    width: 100%;
+    /* top: 100px; */
+  }
+  
+  .array-bar {
     width: 2px;
-    background-color: blue;
-    /* height: 30px; */
     display: inline-block;
     margin: 0 1px;
-}
-
-
+  }

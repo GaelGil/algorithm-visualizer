@@ -1,16 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-// import App from './App';
 import AlgorithmVisualizer from './AlgorithmVisualizer/AlgorithmVisualizer.jsx';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    {/* <algorithm_visualizer /> */}
     <AlgorithmVisualizer />
-    {/* <App /> */}
   </React.StrictMode>
 );
 
