@@ -1,28 +1,9 @@
 import React from "react";
-import './AlgorithmVisualizer.css';
-import Button from "../components/Button/button";
+// import './navbar.css'
+import Button from "../Button/button";
 
-export default class AlgorithmVisualizer extends React.Component{
-    constructor(props) {
-        super(props);
-        this.state = { array : [] };
-      }
-
-
-resetArray() {
-    const array = [];
-    for (let i = 0; i < 100; i++) {
-      array.push(randInts(5, 1000));
-    }
-    this.setState({array});
-  }
-    componentDidMount() {
-        this.resetArray();
-    }
-
-
-
-    render() {
+const Visualizer = () => {
+    return (
         const {array} = this.state;
 
         return (
@@ -51,15 +32,9 @@ resetArray() {
         </div>
           </div>
         );
-    };
-
+        )
 }
 
-// export default AlgorithmVisualizer;
 
 
-function randInts(min, max){
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
+export default Visualizer;

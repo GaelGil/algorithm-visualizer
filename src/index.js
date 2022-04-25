@@ -10,7 +10,7 @@ root.render(
   <React.StrictMode>
     <NavBar /> 
     <AlgorithmVisualizer />
-    <Controler />
+    {/* <Controler /> */}
   </React.StrictMode>
 );
 

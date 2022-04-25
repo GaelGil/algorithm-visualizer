@@ -2,15 +2,15 @@ import React from "react";
 import ReactPropTypes from 'prop-types'
 import './button.css'
 
-const Button = ({ onClick, text }) => {
+const Button = ({ text }) => {
     return (
-        <button onClick={onClick} className="btn"> {text} </button>
+        <button className="btn"> {text} </button>
     )
 }
 
 Button.ReactPropTypes = {
     text: ReactPropTypes.string,
-    onClick: ReactPropTypes.object,
+    // onClick: ReactPropTypes.object,
 }
 
 export default Button;
