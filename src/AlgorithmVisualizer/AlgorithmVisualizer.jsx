@@ -8,17 +8,18 @@ export default class AlgorithmVisualizer extends React.Component{
       }
 
 
-    setArray(){
-        let array = [];
-        for (let i = 0; i < 100; i ++){
-            array.push(randInts(5, 1000));
-        }
-        this.setState({array})
+  resetArray() {
+    const array = [];
+    for (let i = 0; i < 100; i++) {
+      array.push(randInts(5, 1000));
+    }
+    this.setState({array});
+  }
+    componentDidMount() {
+        this.resetArray();
     }
 
-    componentDidMount() {
-        this.setArray();
-    }
+
 
     render() {
         const {array} = this.state;
@@ -41,6 +42,8 @@ export default class AlgorithmVisualizer extends React.Component{
     };
 
 }
+
+// export default AlgorithmVisualizer;
 
 
 function randInts(min, max){
