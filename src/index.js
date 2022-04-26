@@ -1,16 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import NavBar from './components/NavBar/navbar.jsx';
-import AlgorithmVisualizer from './AlgorithmVisualizer/AlgorithmVisualizer.jsx';
-import Controler from './components/Controler/controler.jsx';
 import reportWebVitals from './reportWebVitals';
+import App from './App.js';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <NavBar /> 
-    <AlgorithmVisualizer />
-    {/* <Controler /> */}
+    <App />
   </React.StrictMode>
 );
 
