@@ -1,5 +1,4 @@
-
-
+let array = [23, 452, 52, 35, 235,  2, 3, 42, 78, 2332, 2234, 312, 98, 132]
 
 
 function merge(nums_one, nums_two){
@@ -7,7 +6,7 @@ function merge(nums_one, nums_two){
     let j = 0
     let array = []
 
-    while (i < nums_one.length && i < nums_two.length){
+    while (i < nums_one.length && j < nums_two.length){
         if (nums_one[i] < nums_two[j]){
             array.push(nums_one[i]);
             i++;
@@ -24,10 +23,10 @@ function merge(nums_one, nums_two){
 
 
     if (i < nums_one.length){
-        let array = array.join(nums_one.slice(i, nums_one.length))
+        array = array.concat(nums_one.slice(i));
     }
     if (j < nums_two.length){
-        let array = array.join(nums_two.slice(j, nums_two.length)) 
+        array = array.concat(nums_two.slice(j));
     }
 
 
@@ -36,16 +35,33 @@ function merge(nums_one, nums_two){
 }
 
 function mergeSort(arr){
-    
+    if (arr.length <= 1){
+        return arr;
+    }
+    let mid = Math.floor(arr.length/2);
+    let left = arr.slice(0, mid);
+    let right = arr.slice(mid);
+
+    left = mergeSort(left);
+    right = mergeSort(right);
+
+
+    let array = merge(left, right);
+
+    return array;
 }
 
 
-let array = [23, 452, 52, 35, 235,  2, 3, 42, 78, 2332, 2234, 312, 98, 132]
 
-let sorted_one = [1,2 ,3 ,4, 5]
-let sorted_two = [5, 6, 7, 8, 9]
-
-// console.log(mergeSort(array));
-
-
-console.log(merge(sorted_one, sorted_two))
+function bubbleSort(arr){
+    for (let j = 0; j < arr.length-1; j++){
+        for (let i = 0; i < arr.length; i++){
+            if (arr[i] > arr[i+1]){
+                let temp = arr[i];
+                arr[i] = arr[i+1];
+                arr[i+1] = temp;
+            }
+        }
+    }
+    return arr;
+}
