@@ -12,7 +12,7 @@ class App extends React.Component {
 
   resetArray() {
     let array = [];
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 300; i++) {
       array.push(randInts(5, 1000));
     }
     this.setState({array});
@@ -25,11 +25,15 @@ class App extends React.Component {
     alert('Click happened');
   }
 
+  handleSubmit(value){
+    value.preventDefault();
+    console.log(value)
+  }
   
   render (){
     const {array} = this.state;
     return (
-      <div className="App">
+      <div className='App'>
         <NavBar/ >
         <header className="App-header">
           <div className="array-container">
@@ -45,8 +49,19 @@ class App extends React.Component {
               ))}
               <br></br>
           </div> 
-          <div className="controler">
-                <div className="dropdown">
+          {/* <div className="controler"> */}
+          <form >
+            <label htmlFor='algorithm' className='label'>Sorting Algorithms: </label>
+            <select>
+              <option value='Reset'>Reset Array</option>
+              <option value='Merge'>Merge Sort</option>
+              <option value='Bubble'>Bubble Sort</option>
+              <option value='Selection'>Selection Sort</option>
+              <option value='Insertion'>Insertion Sort</option>
+            </select>
+            <input type='button' onClick={() => this.handleSubmit('Merge')} value='Submit'></input>
+          </form>
+                {/* <div className="dropdown">
                   <button onClick={() => this.resetArray()} className='dropbtn'> Algorithms</button> 
                     <div className="dropdown-content">
                       <button className='btn' onClick={() => this.resetArray()}> Merge Sort</button>
@@ -54,8 +69,8 @@ class App extends React.Component {
                       <button className='btn' onClick={() => this.resetArray()}> Selection Sort</button>
                       <button className='btn' onClick={() => this.resetArray()}> Insertion Sort</button>
                     </div>
-                </div>
-              </div>
+                </div> */}
+              {/* </div> */}
       </header>
     </div>
   );}
