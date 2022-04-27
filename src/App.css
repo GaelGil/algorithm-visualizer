@@ -1,7 +1,3 @@
-.App {
-  text-align: center;
-}
-
 /*  visualizer start */
 .array-container {
   /* background-color: aqua; */
@@ -18,9 +14,9 @@
 
 /* button start */
 .btn {
-  background-color: #282c34;
+  background-color: white;
   border: none;
-  color: white;
+  color: #282c34;
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
@@ -32,67 +28,24 @@
 
 /* button end */
 
-/* controler start */
-
-.controler {
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  transition: 0.3s;
-  width: 50%;
-  align-content: center;
-}
-
-.controler:hover {
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-}
-
-.container {
-  padding: 2px 16px;
-}
-
-
-.dropbtn {
-  background-color: #282c34;
-  color: white;
-  text-align: center;
-  padding: 16px;
-  font-size: 16px;
+/* Select menu button start */
+.custom-select .menu {
+  background-color: white;
   border: none;
-  cursor: pointer;
-}
-
-.dropdown {
-  position: relative;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-.label {
-  color: black;
-}
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
+  color: #282c34;
+  padding: 11px 28px;
+  text-align: center;
   text-decoration: none;
-  display: block;
+  display: inline-block;
+  font-size: 16px;
+  margin: 1px;
 }
+/* Select menu button end */
 
-.dropdown-content a:hover {background-color: #f1f1f1}
-
-.dropdown:hover .dropdown-content {
-  display: block;
+/* Default app css */
+.App {
+  text-align: center;
 }
-
-.dropdown:hover .dropbtn {
-  background-color: #282c34;
-}
-
-/* controler end */
 
 .App-logo {
   height: 40vmin;
@@ -106,7 +59,6 @@
 }
 
 .App-header {
-  /* background-color: #282c34; */
   min-height: 100vh;
   display: flex;
   flex-direction: column;

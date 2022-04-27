@@ -8,7 +8,7 @@ class App extends React.Component {
     super(props);
     this.state = { 
       array : [],
-      algorithm : 'merge',
+      algorithm : 'Reset',
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -60,7 +60,7 @@ class App extends React.Component {
                   className="array-bar"
                   key={idx}
                   style={{
-                    backgroundColor: "blue",
+                    backgroundColor: "grey",
                     height: `${value}px`,
                   }}>
                 </div>
@@ -68,9 +68,10 @@ class App extends React.Component {
               <br></br>
           </div> 
           {/* Algorithms available */}
+          <div className="custom-select">
           <form onSubmit={this.handleSubmit}>
             <label htmlFor='algorithm' className='label'>Sorting Algorithms: 
-              <select value={this.state.value} onChange={this.handleChange}>
+              <select className='menu' value={this.state.value} onChange={this.handleChange}>
                 <option value='Reset'>Reset Array</option>
                 <option value='Merge'>Merge Sort</option>
                 <option value='Bubble'>Bubble Sort</option>
@@ -78,8 +79,9 @@ class App extends React.Component {
                 <option value='Insertion'>Insertion Sort</option>
               </select>
             </label>
-            <input type="submit" value="Submit" />
+            <input className='btn' type="submit" value="Submit" />
           </form>
+          </div>
       </header>
     </div>
   );}
