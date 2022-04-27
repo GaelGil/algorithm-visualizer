@@ -6,8 +6,13 @@ import NavBar from './components/NavBar/navbar';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { array : [] };
+    this.state = { 
+      array : [],
+      algorithm : 'merge',
+    };
     this.handleClick = this.handleClick.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   resetArray() {
@@ -25,10 +30,22 @@ class App extends React.Component {
     alert('Click happened');
   }
 
-  handleSubmit(value){
-    value.preventDefault();
-    console.log(value)
+  handleChange(event) {
+    this.setState({algorithm: event.target.value});
   }
+
+  handleSubmit(event) {
+    alert('Your favorite flavor is: ' + this.state.algorithm);
+    // let method = this.state.algorithm;
+    // if (method == 'Merge'){
+    //   mergeSort(this.state.array);
+    // }
+    // else if (method == 'Bubble'){
+    //   bubbleSort(this.state.array);
+    // }
+    event.preventDefault();
+  }
+
   
   render (){
     const {array} = this.state;
@@ -36,6 +53,7 @@ class App extends React.Component {
       <div className='App'>
         <NavBar/ >
         <header className="App-header">
+          {/* The array to be sorted */}
           <div className="array-container">
               {array.map((value, idx) => (
                 <div
@@ -49,28 +67,19 @@ class App extends React.Component {
               ))}
               <br></br>
           </div> 
-          {/* <div className="controler"> */}
-          <form >
-            <label htmlFor='algorithm' className='label'>Sorting Algorithms: </label>
-            <select>
-              <option value='Reset'>Reset Array</option>
-              <option value='Merge'>Merge Sort</option>
-              <option value='Bubble'>Bubble Sort</option>
-              <option value='Selection'>Selection Sort</option>
-              <option value='Insertion'>Insertion Sort</option>
-            </select>
-            <input type='button' onClick={() => this.handleSubmit('Merge')} value='Submit'></input>
+          {/* Algorithms available */}
+          <form onSubmit={this.handleSubmit}>
+            <label htmlFor='algorithm' className='label'>Sorting Algorithms: 
+              <select value={this.state.value} onChange={this.handleChange}>
+                <option value='Reset'>Reset Array</option>
+                <option value='Merge'>Merge Sort</option>
+                <option value='Bubble'>Bubble Sort</option>
+                <option value='Selection'>Selection Sort</option>
+                <option value='Insertion'>Insertion Sort</option>
+              </select>
+            </label>
+            <input type="submit" value="Submit" />
           </form>
-                {/* <div className="dropdown">
-                  <button onClick={() => this.resetArray()} className='dropbtn'> Algorithms</button> 
-                    <div className="dropdown-content">
-                      <button className='btn' onClick={() => this.resetArray()}> Merge Sort</button>
-                      <button className='btn' onClick={() => this.resetArray()}> Bubble Sort</button>
-                      <button className='btn' onClick={() => this.resetArray()}> Selection Sort</button>
-                      <button className='btn' onClick={() => this.resetArray()}> Insertion Sort</button>
-                    </div>
-                </div> */}
-              {/* </div> */}
       </header>
     </div>
   );}
