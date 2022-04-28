@@ -1,6 +1,3 @@
-let array = [23, 452, 52, 35, 235,  2, 3, 42, 78, 2332, 2234, 312, 98, 132]
-
-
 function merge(nums_one, nums_two){
     let i = 0
     let j = 0
@@ -13,7 +10,7 @@ function merge(nums_one, nums_two){
         } else if (nums_one[i] > nums_two[j]){
             array.push(nums_two[j])
             j++;
-        } else if (nums_one[i] == nums_two[j]){
+        } else if (nums_one[i] === nums_two[j]){
             array.push(nums_one[i]);
             array.push(nums_two[j]);
             i++;
@@ -34,7 +31,7 @@ function merge(nums_one, nums_two){
     return array;
 }
 
-function mergeSort(arr){
+export function mergeSort(arr){
     if (arr.length <= 1){
         return arr;
     }
@@ -53,7 +50,7 @@ function mergeSort(arr){
 
 
 
-function bubbleSort(arr){
+export function bubbleSort(arr){
     for (let j = 0; j < arr.length-1; j++){
         for (let i = 0; i < arr.length; i++){
             if (arr[i] > arr[i+1]){
@@ -65,3 +62,37 @@ function bubbleSort(arr){
     }
     return arr;
 }
+
+export function selectionSort(arr){
+    for (let i = 0; i < arr.length-1; i++){
+        let currentMin = i
+        for (var j = i+1; j < arr.length; j++){
+            if (arr[j] < arr[currentMin]){
+                currentMin = j;
+            }
+        }
+        // sawp
+        if (currentMin !== i){
+            let temp = arr[i]
+            arr[i] = arr[currentMin]
+            arr[currentMin] = temp
+        }
+        
+    }
+    return arr;
+}
+
+export function insertionSort(arr){
+    for (let i = 1; i < arr.length; i++){
+        let right = arr[i];
+
+        while (arr[i-1] > right){
+            let temp = arr[i];
+            arr[i] = arr[i-1];
+            arr[i-1] = temp;
+            i-=1
+        }
+    }
+    return arr
+}
+
