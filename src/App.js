@@ -2,6 +2,7 @@ import './App.css';
 import './index.css'
 import React from 'react';
 import NavBar from './components/NavBar/navbar';
+import { mergeSort, bubbleSort, insertionSort, selectionSort } from './sortingAlgorithms/sortingAlgorithms';
 
 class App extends React.Component {
   constructor(props) {
@@ -10,24 +11,20 @@ class App extends React.Component {
       array : [],
       algorithm : 'Reset',
     };
-    this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   resetArray() {
     let array = [];
-    for (let i = 0; i < 300; i++) {
+    for (let i = 0; i < 100; i++) {
       array.push(randInts(5, 1000));
     }
     this.setState({array});
   }
+
   componentDidMount() {
       this.resetArray();
-  }
-
-  handleClick() {
-    alert('Click happened');
   }
 
   handleChange(event) {
@@ -35,14 +32,27 @@ class App extends React.Component {
   }
 
   handleSubmit(event) {
-    alert('Your favorite flavor is: ' + this.state.algorithm);
-    // let method = this.state.algorithm;
-    // if (method == 'Merge'){
-    //   mergeSort(this.state.array);
-    // }
-    // else if (method == 'Bubble'){
-    //   bubbleSort(this.state.array);
-    // }
+    // alert('Your favorite flavor is: ' + this.state.algorithm);
+    let method = this.state.algorithm;
+    if (method === 'Merge'){
+      let sorted = mergeSort(this.state.array);
+      this.setState({sorted});
+    }
+    else if (method === 'Bubble'){
+      let sorted = bubbleSort(this.state.array);
+      this.setState({sorted});
+    }
+    else if (method === 'Reset'){
+      this.resetArray()
+    }
+    else if (method === 'Insertion'){
+      let sorted = insertionSort(this.state.array);
+      this.setState({sorted});
+    }
+    else if (method === 'Selection'){
+      let sorted = selectionSort(this.state.array);
+      this.setState({sorted});
+    }
     event.preventDefault();
   }
 
