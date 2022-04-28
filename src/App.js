@@ -2,7 +2,13 @@ import './App.css';
 import './index.css'
 import React from 'react';
 import NavBar from './components/NavBar/navbar';
-import { mergeSort, bubbleSort, insertionSort, selectionSort } from './sortingAlgorithms/sortingAlgorithms';
+// import { bubbleSort, insertionSort, selectionSort } from './sortingAlgorithms/sortingAlgorithms';
+import { getMergeSortAnimations } from './sortingAlgorithms/mergeSort';
+import { getBubbleSortAnimations } from './sortingAlgorithms/bubbleSort';
+const ANIMATION_SPEED_MS = 1;
+const SECONDARY_COLOR = 'white';
+const PRIMARY_COLOR = 'purple';
+
 
 class App extends React.Component {
   constructor(props) {
@@ -17,8 +23,8 @@ class App extends React.Component {
 
   resetArray() {
     let array = [];
-    for (let i = 0; i < 100; i++) {
-      array.push(randInts(5, 1000));
+    for (let i = 0; i < 50; i++) {
+      array.push(randInts(5, 300));
     }
     this.setState({array});
   }
@@ -31,27 +37,76 @@ class App extends React.Component {
     this.setState({algorithm: event.target.value});
   }
 
+  mergeSort() {
+    const animations = getMergeSortAnimations(this.state.array);
+    for (let i = 0; i < animations.length; i++) {
+      const arrayBars = document.getElementsByClassName('array-bar');
+      const isColorChange = i % 3 !== 2;
+      if (isColorChange) {
+        const [barOneIdx, barTwoIdx] = animations[i];
+        const barOneStyle = arrayBars[barOneIdx].style;
+        const barTwoStyle = arrayBars[barTwoIdx].style;
+        const color = i % 3 === 0 ? SECONDARY_COLOR : PRIMARY_COLOR;
+        setTimeout(() => {
+          barOneStyle.backgroundColor = color;
+          barTwoStyle.backgroundColor = color;
+        }, i * ANIMATION_SPEED_MS);
+      } else {
+        setTimeout(() => {
+          const [barOneIdx, newHeight] = animations[i];
+          const barOneStyle = arrayBars[barOneIdx].style;
+          barOneStyle.height = `${newHeight}px`;
+        }, i * ANIMATION_SPEED_MS);
+      }
+    }
+    // Set sorted array to green bars
+    // for (let i = 0; i < this.state.array.length; i++){
+    //   const arrayBars = document.getElementsByClassName('array-bar');
+    //   array
+    // }
+  }
+
+  bubbleSort(){
+    const animations = getBubbleSortAnimations(this.state.array);
+    for (let i = 0; i < animations.length; i++) {
+      const arrayBars = document.getElementsByClassName('array-bar');
+      const isColorChange = i % 3 !== 2;
+      if (isColorChange) {
+        const [barOneIdx, barTwoIdx] = animations[i];
+        const barOneStyle = arrayBars[barOneIdx].style;
+        const barTwoStyle = arrayBars[barTwoIdx].style;
+        const color = i % 3 === 0 ? SECONDARY_COLOR : PRIMARY_COLOR;
+        setTimeout(() => {
+          barOneStyle.backgroundColor = color;
+          barTwoStyle.backgroundColor = color;
+        }, i * ANIMATION_SPEED_MS);
+      } else {
+        setTimeout(() => {
+          const [barOneIdx, newHeight] = animations[i];
+          const barOneStyle = arrayBars[barOneIdx].style;
+          barOneStyle.height = `${newHeight}px`;
+        }, i * ANIMATION_SPEED_MS);
+      }
+    }
+  }
+
   handleSubmit(event) {
     // alert('Your favorite flavor is: ' + this.state.algorithm);
     let method = this.state.algorithm;
     if (method === 'Merge'){
-      let sorted = mergeSort(this.state.array);
-      this.setState({sorted});
+      this.mergeSort();
     }
     else if (method === 'Bubble'){
-      let sorted = bubbleSort(this.state.array);
-      this.setState({sorted});
+      this.bubbleSort();
     }
     else if (method === 'Reset'){
-      this.resetArray()
+      this.resetArray();
     }
     else if (method === 'Insertion'){
-      let sorted = insertionSort(this.state.array);
-      this.setState({sorted});
+      this.resetArray();
     }
     else if (method === 'Selection'){
-      let sorted = selectionSort(this.state.array);
-      this.setState({sorted});
+      this.resetArray();
     }
     event.preventDefault();
   }
