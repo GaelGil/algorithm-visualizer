@@ -9,17 +9,15 @@ export function getBubbleSortAnimations(array){
 }
 
 
-function bubbleSort(arr, animations, aux){
-    // console.log(arr);
-    // console.log(aux);
-    for (let j = 0; j < arr.length-1; j++){
-        for (let i = 0; i < arr.length; i++){
-            // animations.push([i, arr[i+1]]);
-            // animations.push([aux[i], aux[i+1]]);
+function bubbleSort(arr, animations){
+    for (let j = 0; j < arr.length; j++){
+        for (let i = 0; i < arr.length-1; i++){
+            // add the animations once to change the color
             animations.push({'compare' : [i, i+1]});
+            // add the animations again to remove that color
             animations.push({'compare' : [i, i+1]});
-
             if (arr[i] > arr[i+1]){
+                // add the animations for the swap
                 animations.push([i, arr[i+1]]);
                 animations.push([i+1, arr[i]])
                 let temp = arr[i];
