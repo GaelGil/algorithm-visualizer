@@ -7,8 +7,8 @@ import { getMergeSortAnimations } from './sortingAlgorithms/mergeSort';
 import { getBubbleSortAnimations } from './sortingAlgorithms/bubbleSort';
 import { getInsertionSortAnimations } from './sortingAlgorithms/insertionSort';
 import { getSelectionSortAnimations } from './sortingAlgorithms/selectionSort';
-const ANIMATION_SPEED_MS = 10;
-const SECONDARY_COLOR = 'white';
+const ANIMATION_SPEED_MS = 5;
+const SECONDARY_COLOR = 'green';
 const PRIMARY_COLOR = 'aqua';
 
 
@@ -25,7 +25,7 @@ class App extends React.Component {
 
   resetArray() {
     let array = [];
-    for (let i = 0; i < 300; i++) {
+    for (let i = 0; i < 100; i++) {
       array.push(randInts(5, 300));
     }
     this.setState({array});
@@ -73,15 +73,36 @@ class App extends React.Component {
     const animations = getBubbleSortAnimations(this.state.array);
     for (let i = 0; i < animations.length; i++) {
       const arrayBars = document.getElementsByClassName('array-bar');
-      // const isColorChange = i % 3 !== 2;
-      // console.log(isColorChange);
-      // const [barOneIdx, barTwoIdx] = animations[i];
-      // const barOneStyle = arrayBars[barOneIdx].style;
-      // const barTwoStyle = arrayBars[barTwoIdx].style;
-      
+      // let isColorChange = false
+      if (animations[i].constructor === Object){
+        // console.log(animations[i]);
+        // console.log(animations[i].compare[0]);
+        // console.log(animations[i].compare[1]);
+        // console.log();
+        // isColorChange = true;
+        const barOneIdx = animations[i].compare[0];
+        const barTwoIdx = animations[i].compare[1];
+        console.log(barTwoIdx);
+        console.log(arrayBars[barTwoIdx])
+        // const barOneStyle = arrayBars[barOneIdx].style;
+        // const barTwoStyle = arrayBars[barTwoIdx].style;
+        console.log()
+        // const color = i % 3 === 0 ? SECONDARY_COLOR : PRIMARY_COLOR;
+        // setTimeout(() => {
+        //   barOneStyle.backgroundColor = color;
+        //   barTwoStyle.backgroundColor = color;
+        // }, i * ANIMATION_SPEED_MS);
+      } else {
+        setTimeout(() => {
+          const [barOneIdx, newHeight] = animations[i];
+          const barOneStyle = arrayBars[barOneIdx].style;
+          barOneStyle.height = `${newHeight}px`;
+        }, i * ANIMATION_SPEED_MS);
+      }
 
       // if (isColorChange) {
-      //   const [barOneIdx, barTwoIdx] = animations[i];
+      //   const barOneIdx = animations[i].compare[0];
+      //   const barTwoIdx = animations[i].compare[1];
       //   const barOneStyle = arrayBars[barOneIdx].style;
       //   const barTwoStyle = arrayBars[barTwoIdx].style;
       //   const color = i % 3 === 0 ? SECONDARY_COLOR : PRIMARY_COLOR;
@@ -90,11 +111,11 @@ class App extends React.Component {
       //     barTwoStyle.backgroundColor = color;
       //   }, i * ANIMATION_SPEED_MS);
       // } else {
-        setTimeout(() => {
-          const [barOneIdx, newHeight] = animations[i];
-          const barOneStyle = arrayBars[barOneIdx].style;
-          barOneStyle.height = `${newHeight}px`;
-        }, i * ANIMATION_SPEED_MS);
+      //   setTimeout(() => {
+      //     const [barOneIdx, newHeight] = animations[i];
+      //     const barOneStyle = arrayBars[barOneIdx].style;
+      //     barOneStyle.height = `${newHeight}px`;
+      //   }, i * ANIMATION_SPEED_MS);
       // }
     }
   }

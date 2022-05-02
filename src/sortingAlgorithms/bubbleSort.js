@@ -16,12 +16,12 @@ function bubbleSort(arr, animations, aux){
         for (let i = 0; i < arr.length; i++){
             // animations.push([i, arr[i+1]]);
             // animations.push([aux[i], aux[i+1]]);
+            animations.push({'compare' : [i, i+1]});
+            animations.push({'compare' : [i, i+1]});
 
             if (arr[i] > arr[i+1]){
                 animations.push([i, arr[i+1]]);
                 animations.push([i+1, arr[i]])
-                // animations.push([i, i+1]);
-                // animations.push([i, aux[i+1]]);
                 let temp = arr[i];
                 arr[i] = arr[i+1];
                 arr[i+1] = temp;
