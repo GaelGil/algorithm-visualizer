@@ -11,11 +11,18 @@ export function getSelectionSortAnimations(array){
 export function selectionSort(arr, animations){
     for (let i = 0; i < arr.length-1; i++){
         let currentMin = i
+
+        
         for (var j = i+1; j < arr.length; j++){
+            // add the animations once to change the color
+            animations.push({'compare' : [j, currentMin]});
+            // add the animations again to remove that color
+            animations.push({'compare' : [j, currentMin]});
             if (arr[j] < arr[currentMin]){
                 currentMin = j;
             }
         }
+
         // sawp
         if (currentMin !== i){
             animations.push([i, arr[currentMin]]);
@@ -26,5 +33,5 @@ export function selectionSort(arr, animations){
         }
         
     }
-    return arr;
+    // return arr;
 }
