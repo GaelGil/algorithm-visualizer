@@ -7,8 +7,9 @@ import { getBubbleSortAnimations } from './sortingAlgorithms/bubbleSort';
 import { getInsertionSortAnimations } from './sortingAlgorithms/insertionSort';
 import { getSelectionSortAnimations } from './sortingAlgorithms/selectionSort';
 const ANIMATION_SPEED_MS = 5;
-const PRIMARY_COLOR = 'aqua';
-const SECONDARY_COLOR = 'green';
+const PRIMARY_COLOR = 'red';
+const SECONDARY_COLOR = 'grey';
+
 
 
 class App extends React.Component {
@@ -17,6 +18,7 @@ class App extends React.Component {
     this.state = { 
       array : [],
       algorithm : 'Reset',
+      current : false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -38,34 +40,38 @@ class App extends React.Component {
     this.setState({algorithm: event.target.value});
   }
 
-  handleAnimations(animate, animation, arrayBars, current_animation, i){
-    if (animate) {
-        // select the first bar index
-        const barOneIdx = (animation.compare[0]);
-        // select the second bar index
-        const barTwoIdx = (animation.compare[1]);
+  handleAnimations(animations){
+    const menu = document.getElementsByClassName('menu');
+    const btn = document.getElementsByClassName('btn');
+    btn[0].disabled = true;
+    menu[0].disabled = true;
+    const arrayBars = document.getElementsByClassName('array-bar'); // select the array bars
+    let current_animation = {'compare': []}; // we compare this to the first animation
+    for (let i = 0; i < animations.length; i++) {
+      // if the current item in animations is a dictionary change the color
+      if (animations[i].constructor === Object){
+        const barOneIdx = (animations[i].compare[0]);  // select the first bar index
+        const barTwoIdx = (animations[i].compare[1]); // select the second bar index
         const barOneStyle = arrayBars[barOneIdx].style; 
         const barTwoStyle = arrayBars[barTwoIdx].style;
         let color = PRIMARY_COLOR; 
-        // if the animation is the first as the previous one change the color
-        if (JSON.stringify(animation.compare) === JSON.stringify(current_animation.compare)){
+        // if the animation is the sane as the previous one change the color
+        if (JSON.stringify(animations[i].compare) === JSON.stringify(current_animation.compare)){
           color = SECONDARY_COLOR;
         }
-        current_animation = animation;
+        current_animation = animations[i];
         setTimeout(() => {
           barOneStyle.backgroundColor = color;
           barTwoStyle.backgroundColor = color;
         }, i * ANIMATION_SPEED_MS);
-        return current_animation
+      } else { // swap the positions
+        setTimeout(() => {
+          const [barOneIdx, newHeight] = animations[i];
+          const barOneStyle = arrayBars[barOneIdx].style;
+          barOneStyle.height = `${newHeight}px`;
+        }, i * ANIMATION_SPEED_MS);
+      }
     }
-    else {
-      setTimeout(() => {
-        const [barOneIdx, newHeight] = animation;
-        const barOneStyle = arrayBars[barOneIdx].style;
-        barOneStyle.height = `${newHeight}px`;
-      }, i * ANIMATION_SPEED_MS);
-    }
-    return current_animation;
   }
 
   mergeSort() {
@@ -95,66 +101,46 @@ class App extends React.Component {
 
   bubbleSort(){
     const animations = getBubbleSortAnimations(this.state.array);
-    let current_animation = {'compare': []}; // we compare this to the first animation
-    for (let i = 0; i < animations.length; i++) {
-      const arrayBars = document.getElementsByClassName('array-bar'); // select the array bars
-      // if the current item in animations is a dictionary change the color
-      if (animations[i].constructor === Object){
-          current_animation = this.handleAnimations(true, animations[i], arrayBars, current_animation, i);
-      } else { // swap the positions
-        this.handleAnimations(false, animations[i], arrayBars, current_animation, i);
-      }
-    }
+    this.handleAnimations(animations);
+    return true;
   }
 
   insertionSort(){
     const animations = getInsertionSortAnimations(this.state.array);
-    let current_animation = {'compare': []}; // we compare this to the first animation
-    for (let i = 0; i < animations.length; i++) {
-      const arrayBars = document.getElementsByClassName('array-bar'); // select the array bars
-      // if the current item in animations is a dictionary change the color
-      // if the current item in animations is a dictionary change the color
-      if (animations[i].constructor === Object){
-        current_animation = this.handleAnimations(true, animations[i], arrayBars, current_animation, i);
-      }
-      else { // swap the positions
-      this.handleAnimations(false, animations[i], arrayBars, current_animation, i);
-      }
-    }
+    this.handleAnimations(animations);
+    return true;
   }
 
   selectionSort(){
     const animations = getSelectionSortAnimations(this.state.array);
-    let current_animation = {'compare': []}; // we compare this to the first animation
-    for (let i = 0; i < animations.length; i++) {
-      const arrayBars = document.getElementsByClassName('array-bar'); // select the array bars
-      // if the current item in animations is a dictionary change the color
-      if (animations[i].constructor === Object){
-        current_animation = this.handleAnimations(true, animations[i], arrayBars, current_animation, i);
-      } 
-      else { // swap the positions
-      this.handleAnimations(false, animations[i], arrayBars, current_animation, i);
-      }
-    }
+    this.handleAnimations(animations);
+    return true;
   }
 
   handleSubmit(event) {
     let method = this.state.algorithm;
+    let done = false;
     if (method === 'Merge'){
       this.mergeSort();
     }
     else if (method === 'Bubble'){
-      this.bubbleSort();
+      done = this.bubbleSort();
     }
     else if (method === 'Reset'){
-      this.resetArray();
+      done = this.resetArray();
     }
     else if (method === 'Insertion'){
-      this.insertionSort();
+      done = this.insertionSort();
     }
     else if (method === 'Selection'){
-      this.selectionSort();
+      done = this.selectionSort();
     }
+    // if (done){
+    //   const menu = document.getElementsByClassName('menu');
+    //   const btn = document.getElementsByClassName('btn');
+    //   btn[0].disabled = false;
+    //   menu[0].disabled = false;
+    // }
     event.preventDefault();
   }
 
@@ -180,10 +166,10 @@ class App extends React.Component {
               <br></br>
           </div> 
           {/* Algorithms available */}
-          <div className="custom-select">
+          <div style={{text:'black'}} className="custom-select">
           <form onSubmit={this.handleSubmit}>
             <label htmlFor='algorithm' className='label'>Sorting Algorithms: 
-              <select className='menu' value={this.state.value} onChange={this.handleChange}>
+              <select className='menu' id='menu' value='0' onChange={this.handleChange}>
                 <option value='Reset'>Reset Array</option>
                 <option value='Merge'>Merge Sort</option>
                 <option value='Bubble'>Bubble Sort</option>
@@ -191,7 +177,7 @@ class App extends React.Component {
                 <option value='Insertion'>Insertion Sort</option>
               </select>
             </label>
-            <input className='btn' type="submit" value="Submit" />
+            <input style={{color: 'black'}} className="btn" type="submit" value="Submit" />
           </form>
           </div>
       </header>
