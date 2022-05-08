@@ -26,7 +26,7 @@ class App extends React.Component {
 
   resetArray() {
     let array = [];
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 50; i++) {
       array.push(randInts(5, 300));
     }
     this.setState({array});
@@ -45,6 +45,7 @@ class App extends React.Component {
     const btn = document.getElementsByClassName('btn');
     btn[0].disabled = true;
     menu[0].disabled = true;
+    let time = 0;
     const arrayBars = document.getElementsByClassName('array-bar'); // select the array bars
     let current_animation = {'compare': []}; // we compare this to the first animation
     for (let i = 0; i < animations.length; i++) {
@@ -71,7 +72,9 @@ class App extends React.Component {
           barOneStyle.height = `${newHeight}px`;
         }, i * ANIMATION_SPEED_MS);
       }
+      time += i;
     }
+    return time/2;
   }
 
   mergeSort() {
@@ -101,46 +104,48 @@ class App extends React.Component {
 
   bubbleSort(){
     const animations = getBubbleSortAnimations(this.state.array);
-    this.handleAnimations(animations);
-    return true;
+    let done = this.handleAnimations(animations);
+    return done;
   }
 
   insertionSort(){
     const animations = getInsertionSortAnimations(this.state.array);
-    this.handleAnimations(animations);
-    return true;
+    let done = this.handleAnimations(animations);
+    return done;
   }
 
   selectionSort(){
     const animations = getSelectionSortAnimations(this.state.array);
-    this.handleAnimations(animations);
-    return true;
+    let done = this.handleAnimations(animations);
+    return done;
   }
 
   handleSubmit(event) {
     let method = this.state.algorithm;
-    let done = false;
+    let time = 0;
     if (method === 'Merge'){
       this.mergeSort();
     }
     else if (method === 'Bubble'){
-      done = this.bubbleSort();
+      time = this.bubbleSort();
     }
     else if (method === 'Reset'){
-      done = this.resetArray();
+      time = this.resetArray();
     }
     else if (method === 'Insertion'){
-      done = this.insertionSort();
+      time = this.insertionSort();
     }
     else if (method === 'Selection'){
-      done = this.selectionSort();
+      time = this.selectionSort();
     }
-    // if (done){
-    //   const menu = document.getElementsByClassName('menu');
-    //   const btn = document.getElementsByClassName('btn');
-    //   btn[0].disabled = false;
-    //   menu[0].disabled = false;
-    // }
+    if (time>0){
+      setInterval(function() {
+        const menu = document.getElementsByClassName('menu');
+        const btn = document.getElementsByClassName('btn');
+        btn[0].disabled = false;
+        menu[0].disabled = false;
+            }, 5000);
+    }
     event.preventDefault();
   }
 
@@ -160,6 +165,7 @@ class App extends React.Component {
                   style={{
                     backgroundColor: "grey",
                     height: `${value}px`,
+                    width: "20px",
                   }}>
                 </div>
               ))}
@@ -169,7 +175,7 @@ class App extends React.Component {
           <div style={{text:'black'}} className="custom-select">
           <form onSubmit={this.handleSubmit}>
             <label htmlFor='algorithm' className='label'>Sorting Algorithms: 
-              <select className='menu' id='menu' value='0' onChange={this.handleChange}>
+              <select className='menu' id='menu' value={this.state.value} onChange={this.handleChange}>
                 <option value='Reset'>Reset Array</option>
                 <option value='Merge'>Merge Sort</option>
                 <option value='Bubble'>Bubble Sort</option>
