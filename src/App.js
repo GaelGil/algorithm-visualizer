@@ -74,9 +74,7 @@ class App extends React.Component {
       }
       time += i;
     }
-    // console.log(time);
     return Math.floor(Math.floor(time)*0.005);
-    // return time;
   }
 
   mergeSort() {

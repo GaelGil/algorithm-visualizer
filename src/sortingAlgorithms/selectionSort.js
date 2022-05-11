@@ -8,7 +8,7 @@ export function getSelectionSortAnimations(array){
     return animations;
 }
 
-export function selectionSort(arr, animations){
+function selectionSort(arr, animations){
     for (let i = 0; i < arr.length-1; i++){
         let currentMin = i
 
@@ -33,5 +33,5 @@ export function selectionSort(arr, animations){
         }
         
     }
-    // return arr;
+    return arr;
 }

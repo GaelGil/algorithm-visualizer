@@ -26,5 +26,5 @@ function bubbleSort(arr, animations){
             }
         }
     }
-    // return animations;
+    return arr;
 }

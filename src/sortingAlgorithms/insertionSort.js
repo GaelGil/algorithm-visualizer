@@ -31,6 +31,6 @@ function insertionSort(arr, animations){
             i-=1
         }
     }
-    // return arr
+    return arr;
 }
 
