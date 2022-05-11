@@ -74,7 +74,9 @@ class App extends React.Component {
       }
       time += i;
     }
-    return time/2;
+    // console.log(time);
+    return Math.floor(Math.floor(time)*0.005);
+    // return time;
   }
 
   mergeSort() {
@@ -138,13 +140,14 @@ class App extends React.Component {
     else if (method === 'Selection'){
       time = this.selectionSort();
     }
+    console.log(time);
     if (time>0){
       setInterval(function() {
         const menu = document.getElementsByClassName('menu');
         const btn = document.getElementsByClassName('btn');
         btn[0].disabled = false;
         menu[0].disabled = false;
-            }, 5000);
+            }, time);
     }
     event.preventDefault();
   }
