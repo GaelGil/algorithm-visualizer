@@ -1,9 +1,6 @@
 export function getInsertionSortAnimations(array){
     const animations = [];
     if (array.length <= 1) return array;
-    // const auxiliaryArray = array.slice();
-    // console.log(array)
-    // console.log(auxiliaryArray)
     insertionSort(array, animations);
     return animations;
 }
@@ -22,7 +19,7 @@ function insertionSort(arr, animations){
             // add the animations again to remove that color
             animations.push({'compare' : [i-1, i]});
         
-
+            // add the animations to perform the swap
             animations.push([i, arr[i-1]]);
             animations.push([i-1, arr[i]]);
             let temp = arr[i];

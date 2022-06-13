@@ -11,7 +11,6 @@ const PRIMARY_COLOR = 'red';
 const SECONDARY_COLOR = 'grey';
 
 
-
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -25,6 +24,7 @@ class App extends React.Component {
   }
 
   resetArray() {
+    // Function to reset array
     let array = [];
     for (let i = 0; i < 50; i++) {
       array.push(randInts(5, 300));
@@ -41,6 +41,7 @@ class App extends React.Component {
   }
 
   handleAnimations(animations){
+    // Function to handle the animations
     const menu = document.getElementsByClassName('menu');
     const btn = document.getElementsByClassName('btn');
     btn[0].disabled = true;
@@ -51,12 +52,13 @@ class App extends React.Component {
     for (let i = 0; i < animations.length; i++) {
       // if the current item in animations is a dictionary change the color
       if (animations[i].constructor === Object){
-        const barOneIdx = (animations[i].compare[0]);  // select the first bar index
+        const barOneIdx = (animations[i].compare[0]); // select the first bar index
         const barTwoIdx = (animations[i].compare[1]); // select the second bar index
         const barOneStyle = arrayBars[barOneIdx].style; 
         const barTwoStyle = arrayBars[barTwoIdx].style;
         let color = PRIMARY_COLOR; 
-        // if the animation is the sane as the previous one change the color
+        // If the animation is the same this means that we are only adding it to show the values we 
+        // are comparing. So we change the color of them.
         if (JSON.stringify(animations[i].compare) === JSON.stringify(current_animation.compare)){
           color = SECONDARY_COLOR;
         }
@@ -72,7 +74,7 @@ class App extends React.Component {
           barOneStyle.height = `${newHeight}px`;
         }, i * ANIMATION_SPEED_MS);
       }
-      time += i;
+      time += (i);
     }
     return Math.floor(Math.floor(time)*0.005);
   }
@@ -140,12 +142,19 @@ class App extends React.Component {
     }
     console.log(time);
     if (time>0){
-      setInterval(function() {
+      setTimeout(() => {
         const menu = document.getElementsByClassName('menu');
         const btn = document.getElementsByClassName('btn');
         btn[0].disabled = false;
         menu[0].disabled = false;
-            }, time);
+      }, time);
+
+      // setInterval(function() {
+      //   const menu = document.getElementsByClassName('menu');
+      //   const btn = document.getElementsByClassName('btn');
+      //   btn[0].disabled = false;
+      //   menu[0].disabled = false;
+      //       }, time);
     }
     event.preventDefault();
   }

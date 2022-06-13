@@ -3,7 +3,6 @@ export function merge(nums_one, nums_two){
     let j = 0
     let array = []
 
-    // console.log('here')
     while (i < nums_one.length && j < nums_two.length){
         if (nums_one[i] < nums_two[j]){
             array.push(nums_one[i]);
@@ -32,7 +31,6 @@ export function merge(nums_one, nums_two){
 }
 
 export function mergeSort(arr){
-    // console.log(arr)
     if (arr.length <= 1){
         return arr;
     }
@@ -43,7 +41,6 @@ export function mergeSort(arr){
     left = mergeSort(left);
     right = mergeSort(right);
     let array = merge(left, right);
-    console.log(array);
 
     return array;
 }

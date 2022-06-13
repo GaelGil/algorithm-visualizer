@@ -1,9 +1,6 @@
 export function getSelectionSortAnimations(array){
     const animations = [];
     if (array.length <= 1) return array;
-    // const auxiliaryArray = array.slice();
-    // console.log(array)
-    // console.log(auxiliaryArray)
     selectionSort(array, animations);
     return animations;
 }
