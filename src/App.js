@@ -76,7 +76,8 @@ class App extends React.Component {
       }
       time += (i);
     }
-    return Math.floor(Math.floor(time)*0.005);
+    // console.log(`animations: ${animations.length}`)
+    return Math.floor(Math.floor(animations.length)*2);
   }
 
   mergeSort() {
@@ -148,13 +149,6 @@ class App extends React.Component {
         btn[0].disabled = false;
         menu[0].disabled = false;
       }, time);
-
-      // setInterval(function() {
-      //   const menu = document.getElementsByClassName('menu');
-      //   const btn = document.getElementsByClassName('btn');
-      //   btn[0].disabled = false;
-      //   menu[0].disabled = false;
-      //       }, time);
     }
     event.preventDefault();
   }
