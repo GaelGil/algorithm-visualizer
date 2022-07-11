@@ -108,7 +108,6 @@ class App extends React.Component {
   }
 
 
-
   bubbleSort(){
     // get sorting algorithm animations
     const animations = getBubbleSortAnimations(this.state.array);
