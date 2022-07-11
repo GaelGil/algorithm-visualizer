@@ -22,7 +22,6 @@ class App extends React.Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.buttonHide = this.buttonHide.bind(this);
   }
 
 
@@ -45,19 +44,11 @@ class App extends React.Component {
     this.setState({algorithm: event.target.value});
   }
 
-  buttonHide(event){
-    this.setState({button: event})
-  }
-
 
   handleAnimations(animations){
-    // Function to handle the animations
-
-    // this.hideButton(true)
-    const arrayBars = document.getElementsByClassName('array-bar'); // select the array bars
+    // Function to handle the animations for sorting algorithms
+    const arrayBars = document.getElementsByClassName('array-bar'); // select the array bars html
     let current_animation = {'compare': []}; // we compare this to the first animation
-
-
       for (let i = 0; i < animations.length; i++) {
         // if the current item in animations is a dictionary change the color
         if (animations[i].constructor === Object){
@@ -66,8 +57,8 @@ class App extends React.Component {
           const barOneStyle = arrayBars[barOneIdx].style; 
           const barTwoStyle = arrayBars[barTwoIdx].style;
           let color = PRIMARY_COLOR; 
-          // If the animation is the same this means that we are only adding it to show the values we 
-          // are comparing. So we change the color of them.
+          // If the animation is the same as the previous one this means that we are only adding it
+          // to show the values we are currently comparing. So we change the color of them.
           if (JSON.stringify(animations[i].compare) === JSON.stringify(current_animation.compare)){
             color = SECONDARY_COLOR;
           }
@@ -76,7 +67,8 @@ class App extends React.Component {
             barOneStyle.backgroundColor = color;
             barTwoStyle.backgroundColor = color;
           }, i * ANIMATION_SPEED_MS);
-        } else { // swap the positions
+        } 
+        else { // if not we are just performing a swap on the array bars
           setTimeout(() => {
             const [barOneIdx, newHeight] = animations[i];
             const barOneStyle = arrayBars[barOneIdx].style;
@@ -84,94 +76,85 @@ class App extends React.Component {
           }, i * ANIMATION_SPEED_MS);
         }
       }
-      // let menu = document.getElementsByClassName('menu');
-      // let btn = document.getElementsByClassName('btn');
-
     return animations.length*ANIMATION_SPEED_MS;
   }
 
   mergeSort() {
+    // get sorting algorithm animations
     const animations = getMergeSortAnimations(this.state.array);
-    for (let i = 0; i < animations.length; i++) {
-      const arrayBars = document.getElementsByClassName('array-bar');
-      const isColorChange = i % 3 !== 2;
-      if (isColorChange) {
-        const [barOneIdx, barTwoIdx] = animations[i];
-        const barOneStyle = arrayBars[barOneIdx].style;
-        const barTwoStyle = arrayBars[barTwoIdx].style;
-        const color = i % 3 === 0 ? PRIMARY_COLOR : SECONDARY_COLOR ;
-        setTimeout(() => {
-          barOneStyle.backgroundColor = color;
-          barTwoStyle.backgroundColor = color;
-        }, i * ANIMATION_SPEED_MS);
-      } else {
-        setTimeout(() => {
-          const [barOneIdx, newHeight] = animations[i];
-          const barOneStyle = arrayBars[barOneIdx].style;
-          barOneStyle.height = `${newHeight}px`;
-        }, i * ANIMATION_SPEED_MS);
-      }
-    }
+    // handle the animations
+    let time = this.handleAnimations(animations);
+    return time; // return time for animations to run
   }
+
+  disableButtons(){
+    // disable menu and btn
+    let menu = document.getElementsByClassName('menu');
+    let btn = document.getElementsByClassName('btn');
+    btn[0].disabled = true;
+    menu[0].disabled = true;
+  }
+
+  enableButtons(time){
+    // enable buttons
+    let menu = document.getElementsByClassName('menu');
+    let btn = document.getElementsByClassName('btn');
+    window.setTimeout(function(){
+      for (let i = 0; i < time; i++){
+      btn[0].disabled = false;
+      menu[0].disabled = false;
+      }
+    },time);
+  }
+
 
 
   bubbleSort(){
+    // get sorting algorithm animations
     const animations = getBubbleSortAnimations(this.state.array);
-    let time = 0;
-    let menu = document.getElementsByClassName('menu');
-    let btn = document.getElementsByClassName('btn');
-    console.log('also here')
-    btn[0].disabled = true;
-    menu[0].disabled = true;
-    time = this.handleAnimations(animations);
-    return time
+    // handle the animations
+    let time = this.handleAnimations(animations);
+    return time; // return time for animations to run
   }
 
   insertionSort(){
+    // get sorting algorithm animations
     const animations = getInsertionSortAnimations(this.state.array);
-    this.handleAnimations(animations);
+    // handle the animations
+    let time = this.handleAnimations(animations);
+    return time; // return time for animations to run
   }
 
   selectionSort(){
+    // get sorting algorithm animations
     const animations = getSelectionSortAnimations(this.state.array);
-    this.handleAnimations(animations);
+    // handle the animations
+    let time = this.handleAnimations(animations);
+    return time; // return time for animations to run
   }
 
   handleSubmit(event) {
     let method = this.state.algorithm;
-    let menu = document.getElementsByClassName('menu');
-    let btn = document.getElementsByClassName('btn');
-    let done = 0
+    let time = 0;
+    this.disableButtons()
     if (method === 'Merge'){
-      this.mergeSort();
+      time = this.mergeSort();
     }
     else if (method === 'Bubble'){
-      done = this.bubbleSort();
-
+      time = this.bubbleSort();
     }
     else if (method === 'Reset'){
       this.resetArray();
-      // btn[0].disabled = false;
-      // menu[0].disabled =false;
+      this.enableButtons(1);
     }
     else if (method === 'Insertion'){
-      this.insertionSort();
-      btn[0].disabled = false;
-      menu[0].disabled =false;
+      time = this.insertionSort();
     }
     else if (method === 'Selection'){
-      this.selectionSort();
-      btn[0].disabled = false;
-      menu[0].disabled =false;
+      time = this.selectionSort();
     }
 
-    window.setTimeout(function(){
-      for (let i = 0; i < done; i++){
-      btn[0].disabled = false;
-      menu[0].disabled = false;
-      }
-    },done);
-
+    this.enableButtons(time);
     event.preventDefault();
   }
 

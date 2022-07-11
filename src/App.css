@@ -13,7 +13,7 @@
 /*  visualizer end */
 
 /* button start */
-/* .btn {
+.btn {
   background-color: white;
   border: none;
   color: #282c34;
@@ -23,23 +23,22 @@
   display: inline-block;
   font-size: 16px;
   margin: 1px;
-  width: 50%;
-} */
+  width: 30%;
+}
 
 /* button end */
 
 /* Select menu button start */
-/* .custom-select .menu {
+.custom-select .menu {
   background-color: white;
   border: none;
   color: #282c34;
   padding: 11px 28px;
-  text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
   margin: 1px;
-} */
+}
 /* Select menu button end */
 
 /* Default app css */
