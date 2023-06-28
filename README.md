@@ -15,6 +15,8 @@ This will install all the necessary packages to run the project. Once it is done
 npm start
 ~~~
 
+To find where the sorting algorithms are implemented go to `src/SortingAlgorithms`. There you can find the algorithms and how they are implemented. You can also implement your own. Just make sure to import it into `App.js` :) .
+
 
 ### Deployment
 

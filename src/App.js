@@ -26,7 +26,7 @@ class App extends React.Component {
 
 
   resetArray() {
-    // Function to reset array
+    // Function to reset array.
     let array = [];
     for (let i = 0; i < 50; i++) {
       array.push(randInts(5, 300));
