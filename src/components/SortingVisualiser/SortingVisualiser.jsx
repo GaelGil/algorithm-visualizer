@@ -3,13 +3,13 @@ import { getMergeSortAnimations } from "./sortingAlgorithms/mergeSort";
 import { getBubbleSortAnimations } from './sortingAlgorithms/bubbleSort';
 import { getInsertionSortAnimations } from './sortingAlgorithms/insertionSort';
 import { getSelectionSortAnimations } from './sortingAlgorithms/selectionSort';
-import './SortingVisualiser.css'; // You can create a CSS file for styling
+import './SortingVisualiser.css'; 
 const ANIMATION_SPEED_MS = 5;
 const PRIMARY_COLOR = 'red';
 const SECONDARY_COLOR = 'grey';
 
 const SortingVisualiser = () => {
-  const [array, setArray] = useState([]); // Manage the array to be sorted here
+  const [array, setArray] = useState([]); 
   const [algorithm, setAlgorithm] = useState('Reset');
   const [current, setCurrent] = useState(false);
   const [button, setButton] = useState(false);
@@ -63,7 +63,6 @@ const SortingVisualiser = () => {
     disableButtons();
     if (method === 'Merge') {
       time = startSorting(getMergeSortAnimations(array));
-      // time = mergeSort();
     } else if (method === 'Bubble') {
       time = startSorting(getBubbleSortAnimations(array));
     } else if (method === 'Reset') {
@@ -73,17 +72,17 @@ const SortingVisualiser = () => {
       time = startSorting(getInsertionSortAnimations(array));
     } else if (method === 'Selection') {
       time = startSorting(getSelectionSortAnimations(array));
-
     }
-
     enableButtons(time);
     event.preventDefault();
   };
 
+  // TODO: move this function into the one above
   const handleChange = (event) => {
     setAlgorithm(event.target.value);
   };
 
+  // TODO: Move disable/enable buttons into a helper file
   const disableButtons = () => {
     setButton(true);
   };
@@ -134,6 +133,7 @@ const SortingVisualiser = () => {
 
 export default SortingVisualiser;
 
+// TODO: Move to helper file
 function randInts(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);

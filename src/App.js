@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 import SortingVisualiser from './components/SortingVisualiser/SortingVisualiser';
-// import GraphTraversalVisualiser from './components/GraphTraversalVisualiser/GraphTraversalVisualiser';
+import GraphTraversalVisualiser from './components/GraphTraversalVisualiser/GraphTraversalVisualiser';
 import NavBar from './components/NavBar/NavBar';
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
     <div className="App">
       <NavBar onNavigate={handleViewChange} />
       {currentView === 'sorting' ? <SortingVisualiser /> : null}
-      {/* {currentView === 'traversal' ? <GraphTraversalVisualiser /> : null} */}
+      {currentView === 'traversal' ? <GraphTraversalVisualiser /> : null}
     </div>
   );
 }
