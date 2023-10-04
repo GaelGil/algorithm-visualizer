@@ -1,7 +1,7 @@
 export function getInsertionSortAnimations(array){
     const animations = [];
     if (array.length <= 1) return array;
-    insertionSort(array, animations);
+    insertionSort(array.slice(), animations);
     return animations;
 }
 

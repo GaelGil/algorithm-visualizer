@@ -16,7 +16,6 @@ const SortingVisualiser = () => {
 
   // Function to reset the array
   const resetArray = () => {
-    // Generate a new array of random values
     const newArray = Array.from({ length: 50 }, () => randInts(5, 300));
     setArray(newArray);
   };
@@ -57,57 +56,24 @@ const SortingVisualiser = () => {
   };
 
 
-const mergeSort = () => {
-    // get sorting algorithm animations
-    const animations = getMergeSortAnimations(array);
-    // handle the animations
-    let time = startSorting(animations);
-    return time; // return time for animations to run
-  }
-
-
- const bubbleSort= () =>{
-    // get sorting algorithm animations
-    const animations = getBubbleSortAnimations(array);
-    // handle the animations
-    let time = startSorting(animations);
-    return time; // return time for animations to run
-  }
-
-  const insertionSort= () =>{
-    // get sorting algorithm animations
-    const animations = getInsertionSortAnimations(array);
-    // handle the animations
-    // let time = this.handleAnimations(animations);
-    let time = startSorting(animations);
-    return time; // return time for animations to run
-  }
-
-  const selectionSort = () =>{
-    // get sorting algorithm animations
-    const animations = getSelectionSortAnimations(array);
-    // handle the animations
-    let time = startSorting(animations);
-    return time; // return time for animations to run
-  }
-
-
 
   const handleSubmit = (event) => {
     let method = algorithm;
     let time = 0;
     disableButtons();
     if (method === 'Merge') {
-      time = mergeSort();
+      time = startSorting(getMergeSortAnimations(array));
+      // time = mergeSort();
     } else if (method === 'Bubble') {
-      time = bubbleSort();
+      time = startSorting(getBubbleSortAnimations(array));
     } else if (method === 'Reset') {
       resetArray();
       enableButtons(1);
     } else if (method === 'Insertion') {
-      time = insertionSort();
+      time = startSorting(getInsertionSortAnimations(array));
     } else if (method === 'Selection') {
-      time = selectionSort();
+      time = startSorting(getSelectionSortAnimations(array));
+
     }
 
     enableButtons(time);
