@@ -55,8 +55,6 @@ const SortingVisualiser = () => {
     return animations.length*ANIMATION_SPEED_MS;
   };
 
-
-
   const handleSubmit = (event) => {
     let method = algorithm;
     let time = 0;
@@ -77,12 +75,10 @@ const SortingVisualiser = () => {
     event.preventDefault();
   };
 
-  // TODO: move this function into the one above
   const handleChange = (event) => {
     setAlgorithm(event.target.value);
   };
 
-  // TODO: Move disable/enable buttons into a helper file
   const disableButtons = () => {
     setButton(true);
   };
@@ -133,7 +129,6 @@ const SortingVisualiser = () => {
 
 export default SortingVisualiser;
 
-// TODO: Move to helper file
 function randInts(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
