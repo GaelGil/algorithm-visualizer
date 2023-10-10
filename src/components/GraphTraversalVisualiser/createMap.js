@@ -13,7 +13,7 @@ class Map{
     setObstacles(numObstacles, numObjectives){
         let obstacles = {};
         let objectives = {};
-        while (length(obstacles) + length(objectives) < numObstacles+numObjectives){
+        while (obstacles.length + objectives.length < numObstacles+numObjectives){
             // generate tuples
             // if tuple not in set,
                 // add to set
@@ -24,11 +24,11 @@ class Map{
 
     }
 
-    setStart(){
-        for (let i = 0; i < length(maze); i++){
-            for (let j = 0; j < length(maze[i]); j++){
-                if (maze[i][j] != 1 || maze[i][j] != 2){
-                    maze[i][j] == "s";
+    setStart(maze){
+        for (let i = 0; i < maze.length; i++){
+            for (let j = 0; j < maze[i].length; j++){
+                if (maze[i][j] !== 1 || maze[i][j] !== 2){
+                    maze[i][j] = "s";
                 }
             }
         }
