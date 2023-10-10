@@ -5,10 +5,9 @@ import { Map } from './createMap';
 // import { UCS } from './graphAlgorithms/ucs'; 
 // import { IDS } from './graphAlgorithms/ids'; 
 // import { Astar } from './graphAlgorithms/astar'; 
-import './GraphTraversalVisualiser.css'; // You can create a CSS file for styling
+import './GraphTraversalVisualiser.css'; 
 
 const GraphTraversalVisualiser = () => {
-  // Define your graph data structure and state here
   const [graph, setGraph] = useState([]);
   const [algorithm, setAlgorithm] = useState('Reset');
   const [button, setButton] = useState(false);
@@ -25,13 +24,19 @@ const GraphTraversalVisualiser = () => {
         row.push(0); 
       }
       newGraph.push(row);
-    }
+    } 
+      // setGraphVisuals(graph)
       setGraph(newGraph);
   };
 
-  const setGraphVisuals = () => {
-    const arrayBars = document.getElementsByClassName('grid-item'); // select the array bars html
-
+  const setGraphVisuals = (graph) => {
+    const graphItem = document.getElementsByClassName('grid-item');
+    // const graph =
+    for (let i = 0; i <= graphItem.length; i ++){
+      for (let j = 0; j <= graphItem[i].length; j++){
+        
+      }
+    }
   }
 
 
