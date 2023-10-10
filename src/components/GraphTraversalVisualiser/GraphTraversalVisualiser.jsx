@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Map } from './createMap';
 // import { BFS } from './graphAlgorithms/bfs'; 
 // import { DFS } from './graphAlgorithms/dfs'; 
 // import { UCS } from './graphAlgorithms/ucs'; 
@@ -10,11 +11,12 @@ const GraphTraversalVisualiser = () => {
   // Define your graph data structure and state here
   const [graph, setGraph] = useState([]);
   const [algorithm, setAlgorithm] = useState('Reset');
-  // const [current, setCurrent] = useState(false);
   const [button, setButton] = useState(false);
 
 
   const resetGraph = () => {
+    // const graph = Map();
+    // setGraph(graph.newGraph());
     let n =50;
     const newGraph = []
     for (let i = 0; i < n; i++) {
@@ -26,6 +28,11 @@ const GraphTraversalVisualiser = () => {
     }
       setGraph(newGraph);
   };
+
+  const setGraphVisuals = () => {
+    const arrayBars = document.getElementsByClassName('grid-item'); // select the array bars html
+
+  }
 
 
   
