@@ -11,7 +11,7 @@ const SECONDARY_COLOR = 'grey';
 const SortingVisualiser = () => {
   const [array, setArray] = useState([]); 
   const [algorithm, setAlgorithm] = useState('Reset');
-  const [current, setCurrent] = useState(false);
+  // const [current, setCurrent] = useState(false);
   const [button, setButton] = useState(false);
 
   // Function to reset the array

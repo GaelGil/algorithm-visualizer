@@ -1,56 +1,56 @@
 import React, { useState } from 'react';
-import { BFS } from './graphAlgorithms/bfs'; 
-import { DFS } from './graphAlgorithms/dfs'; 
-import { UCS } from './graphAlgorithms/ucs'; 
-import { IDS } from './graphAlgorithms/ids'; 
-import { Astar } from './graphAlgorithms/astar'; 
+// import { BFS } from './graphAlgorithms/bfs'; 
+// import { DFS } from './graphAlgorithms/dfs'; 
+// import { UCS } from './graphAlgorithms/ucs'; 
+// import { IDS } from './graphAlgorithms/ids'; 
+// import { Astar } from './graphAlgorithms/astar'; 
 import './GraphTraversalVisualiser.css'; // You can create a CSS file for styling
 
 const GraphTraversalVisualiser = () => {
   // Define your graph data structure and state here
-  const [graph, setGraph] = useState(/* Initialize your graph */);
+  const [graph, setGraph] = useState([]);
   const [algorithm, setAlgorithm] = useState('Reset');
-  const [current, setCurrent] = useState(false);
+  // const [current, setCurrent] = useState(false);
   const [button, setButton] = useState(false);
 
-  // Function to visualize BFS
-  // const visualiseBFS = () => {
-  //   const result = BFS(/* Provide required parameters */);
-  //   // Implement the visualization for BFS traversal
-  //   // ...
-  // };
 
-  // const resetArray = () => {
-  //   const newArray = Array.from({ length: 50 }, () => randInts(5, 300));
-  //   setGraph(newArray);
-  // };
+  const resetGraph = () => {
+    let n =50;
+    const newGraph = []
+    for (let i = 0; i < n; i++) {
+      const row = [];
+      for (let j = 0; j < n; j++) {
+        row.push(0); 
+      }
+      newGraph.push(row);
+    }
+      setGraph(newGraph);
+  };
 
 
-  const startTraversal = () => {
-
-  }
+  
 
   const handleSubmit = (event) => {
 
-    // let method = algorithm;
-    // let time = 0;
-    // disableButtons();
-    // if (method === 'Merge') {
-    //   time = startSorting(getMergeSortAnimations(array));
-    //   // time = mergeSort();
-    // } else if (method === 'Bubble') {
-    //   time = startSorting(getBubbleSortAnimations(array));
-    // } else if (method === 'Reset') {
-    //   resetArray();
-    //   enableButtons(1);
-    // } else if (method === 'Insertion') {
-    //   time = startSorting(getInsertionSortAnimations(array));
-    // } else if (method === 'Selection') {
-    //   time = startSorting(getSelectionSortAnimations(array));
+    let method = algorithm;
+    let time = 0;
+    disableButtons();
+    if (method === 'Merge') {
+      // time = startSorting(getMergeSortAnimations(array));
+      // time = mergeSort();
+    } else if (method === 'Bubble') {
+      // time = startSorting(getBubbleSortAnimations(array));
+    } else if (method === 'Reset') {
+      resetGraph();
+      enableButtons(1);
+    } else if (method === 'Insertion') {
+      // time = startSorting(getInsertionSortAnimations(array));
+    } else if (method === 'Selection') {
+      // time = startSorting(getSelectionSortAnimations(array));
 
-    // }
+    }
 
-    // enableButtons(time);
+    enableButtons(time);
     event.preventDefault();
   };
 
@@ -69,16 +69,28 @@ const GraphTraversalVisualiser = () => {
   };
 
 
+
   return (
     <div className="GraphTraversalVisualiser">
-      {/* Render your graph */}
       <div className="graph-container">
-        {/* Graph rendering */}
+        <table>
+          <tbody>
+            {graph.map((row, rowIndex) => (
+              <tr key={rowIndex}>
+                {row.map((cell, cellIndex) => (
+                  <td
+                    key={cellIndex}
+                    className={"grid-item"}>
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
-      {/* Add buttons for other traversal algorithms */}
       <div style={{ text: 'black' }} className="custom-select">
-          <form onSubmit={handleSubmit}>
-            <label htmlFor='algorithm' className='label'>Sorting Algorithms: 
+      <form onSubmit={handleSubmit}>
+            <label htmlFor='algorithm' className='label'>Algorithms: 
               <select className='menu' id='menu' value={algorithm} onChange={handleChange}>
                 <option value='Reset'>Reset Array</option>
                 <option value='BFS'>BFS</option>
@@ -90,9 +102,17 @@ const GraphTraversalVisualiser = () => {
             </label>
             <input style={{ color: 'black' }} className="btn" type="submit" value="Submit" disabled={button} />
           </form>
-        </div>
+      </div>
     </div>
   );
 };
 
+
 export default GraphTraversalVisualiser;
+
+
+// function randInts(min, max) {
+//   min = Math.ceil(min);
+//   max = Math.floor(max);
+//   return Math.floor(Math.random() * (max - min + 1)) + min;
+// }

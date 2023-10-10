@@ -1,17 +1,8 @@
-/*  visualizer start */
-.array-container {
-    /* background-color: aqua; */
-    width: 100%;
-  }
-  
-  .array-bar {
-    width: 2px;
-    display: inline-block;
-    margin: 0 1px;
-  }
-  
-  /*  visualizer end */
-  
+
+
+.graph-container{
+  align-content: center;
+}
   /* button start */
   .btn {
     background-color: white;
@@ -42,22 +33,26 @@
   /* Select menu button end */
   
   /* Default app css */
-  .App {
+  .GraphTraversalVisualiser {
     text-align: center;
   }
   
-  .App-logo {
-    height: 40vmin;
-    pointer-events: none;
+
+  .grid-item {
+    /* background-color: green; */
+    border: 1px solid black;
+    height: 15px;
+    width: 15px;
+    padding: 0px;
+    margin: 0px;
   }
-  
   @media (prefers-reduced-motion: no-preference) {
     .App-logo {
       animation: App-logo-spin infinite 20s linear;
     }
   }
   
-  .App-header {
+  .graph-container {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
