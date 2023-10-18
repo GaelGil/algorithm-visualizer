@@ -1,56 +1,54 @@
 class Map{
     constructor(maze){
         this.maze = maze
-        // this.obstacles = 0;
-        // this.objectives = 0
     }
 
-    conflict(i, j){
-        // for i in obstacles and start
-        // if obstacles is or start is blocked
-        if (this.maze[i][j] === "w" || this.maze[i][j] === "o"){
+    conflict(i, j) {
+        if (i < 0 || i >= this.maze.length || j < 0 || j >= this.maze[0].length) {
             return false;
         }
-        else if (i < 0 || j <0 ){
-            if (this.maze[i+1][j+1] ){
-                
+        if (this.maze[i][j] === "w") {
+            return true;
+        }
+        if (this.maze[i][j] === "o") {
+            if (
+                (i > 0 && this.maze[i - 1][j] === "w") ||
+                (i < this.maze.length - 1 && this.maze[i + 1][j] === "w") || 
+                (j > 0 && this.maze[i][j - 1] === "w") || 
+                (j < this.maze[0].length - 1 && this.maze[i][j + 1] === "w") 
+            ) {
+                return true;
             }
         }
-
-        return true;
+        return false;
     }
+    
 
     setMap(numObjectives, numObstacles){
-        let objectivesAndObstacles = {};
-        let objectives = {};
-        // create a randpm tuple and set is as start
-        this.maze[i][j] = "s";
+        let indices = {}
+        let x = Math.floor(Math.random() * (this.maze.length + 1));
+        let y = Math.floor(Math.random() * (this.maze.length + 1));
+        this.maze[x][y] = "s";
+        indices[(x, y)] = 0;
 
-        while (objective.length < numObjectives+numObstacles){
-            // generate tuples
-            if (objectives.length === numObjectives){
-
-            }
-            // if tuple not in set
-                // add to set
-                // set the obstacle in the maze
-                if (objectives.length === numObjectives){
-
+        while (indices.length < numObjectives+numObstacles){
+            x = Math.floor(Math.random() * (this.maze.length + 1));
+            y = Math.floor(Math.random() * (this.maze.length + 1));
+            if (indices.length === numObjectives){
+                if (this.conflict(x ,y)){
+                    continue;
+                } else {
+                    this.maze[x][y] = "w"
                 }
-            // else
-                // ignore and continue
+            } 
+            else if(indices.hasOwnProperty((x,y))){
+                continue;
+            } else {
+                this.maze[x][y] = "o"
+            }
+
         }
 
-    }
-
-    setStart(){
-        for (let i = 0; i < this.maze.length; i++){
-            for (let j = 0; j < this.maze[i].length; j++){
-                if (!this.conflict(i, j)){
-                    this.maze[i][j] = "s";
-                }
-            }
-        }
     }
 
     getMap(){
@@ -59,4 +57,4 @@ class Map{
     }
 }
 
-export default Map;
+export default { Map };

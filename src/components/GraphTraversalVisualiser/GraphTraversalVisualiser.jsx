@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Map } from './createMap';
+import Map from './createMap';
 // import { BFS } from './graphAlgorithms/bfs'; 
 // import { DFS } from './graphAlgorithms/dfs'; 
 // import { UCS } from './graphAlgorithms/ucs'; 
@@ -14,8 +14,6 @@ const GraphTraversalVisualiser = () => {
 
 
   const resetGraph = () => {
-    // const graph = Map();
-    // setGraph(graph.newGraph());
     let n =50;
     const newGraph = []
     for (let i = 0; i < n; i++) {
@@ -25,8 +23,9 @@ const GraphTraversalVisualiser = () => {
       }
       newGraph.push(row);
     } 
-      setGraphVisuals(newGraph);
-      setGraph(newGraph);
+    let graph = Map(newGraph);
+    // setGraphVisuals(graph.getMap());
+    // setGraph(graph.getMap());
   };
   const setGraphVisuals = (graph) => {
     const graphItem = document.getElementsByClassName('grid-item');
