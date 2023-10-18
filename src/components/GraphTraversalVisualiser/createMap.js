@@ -1,37 +1,61 @@
 class Map{
     constructor(maze){
         this.maze = maze
-        this.obstacles = 0;
-        this.objectives = 0
+        // this.obstacles = 0;
+        // this.objectives = 0
     }
 
-    checkConflicts(){
+    conflict(i, j){
         // for i in obstacles and start
         // if obstacles is or start is blocked
+        if (this.maze[i][j] === "w" || this.maze[i][j] === "o"){
+            return false;
+        }
+        else if (i < 0 || j <0 ){
+            if (this.maze[i+1][j+1] ){
+                
+            }
+        }
+
+        return true;
     }
 
-    setObstacles(numObstacles, numObjectives){
-        let obstacles = {};
+    setMap(numObjectives, numObstacles){
+        let objectivesAndObstacles = {};
         let objectives = {};
-        while (obstacles.length + objectives.length < numObstacles+numObjectives){
+        // create a randpm tuple and set is as start
+        this.maze[i][j] = "s";
+
+        while (objective.length < numObjectives+numObstacles){
             // generate tuples
-            // if tuple not in set,
+            if (objectives.length === numObjectives){
+
+            }
+            // if tuple not in set
                 // add to set
                 // set the obstacle in the maze
+                if (objectives.length === numObjectives){
+
+                }
             // else
                 // ignore and continue
         }
 
     }
 
-    setStart(maze){
-        for (let i = 0; i < maze.length; i++){
-            for (let j = 0; j < maze[i].length; j++){
-                if (maze[i][j] !== 1 || maze[i][j] !== 2){
-                    maze[i][j] = "s";
+    setStart(){
+        for (let i = 0; i < this.maze.length; i++){
+            for (let j = 0; j < this.maze[i].length; j++){
+                if (!this.conflict(i, j)){
+                    this.maze[i][j] = "s";
                 }
             }
         }
+    }
+
+    getMap(){
+        this.setMap(30, 10);
+        return this.maze
     }
 }
 

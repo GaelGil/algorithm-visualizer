@@ -26,7 +26,6 @@ const GraphTraversalVisualiser = () => {
       newGraph.push(row);
     } 
       setGraphVisuals(newGraph);
-      changeAllGridItemColors();
       setGraph(newGraph);
   };
   const setGraphVisuals = (graph) => {
