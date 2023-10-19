@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Map from './createMap';
+import {getMap} from './createMap' 
 // import { BFS } from './graphAlgorithms/bfs'; 
 // import { DFS } from './graphAlgorithms/dfs'; 
 // import { UCS } from './graphAlgorithms/ucs'; 
@@ -23,21 +23,23 @@ const GraphTraversalVisualiser = () => {
       }
       newGraph.push(row);
     } 
-    let graph = Map(newGraph);
-    // setGraphVisuals(graph.getMap());
-    // setGraph(graph.getMap());
+    var graph = getMap(newGraph);
+    console.log(graph);
+    setGraphVisuals(graph);
+    setGraph(graph);
   };
   const setGraphVisuals = (graph) => {
+    // console.log(graph);
     const graphItem = document.getElementsByClassName('grid-item');
     for (var i = 0; i < graphItem.length; i++) {
-      graphItem[i].style.backgroundColor ="red";
-      if (graph[i] === 's'){
-        graphItem[i].style.backgroundColor ="red";
+      // graphItem[i].style.backgroundColor = "red";
+      if (graph[i] === "s"){
+        graphItem[i].style.backgroundColor = "red";
       }
-      else if (graph[i] === 'w'){
+      else if (graph[i] === "w"){
         graphItem[i].style.backgroundColor ="black";
       }
-      if (graph[i] === 'o'){
+      if (graph[i] === "o"){
         graphItem[i].style.backgroundColor ="yellow";
       }    
     }
@@ -94,6 +96,7 @@ const GraphTraversalVisualiser = () => {
                 {row.map((cell, cellIndex) => (
                   <td
                     key={cellIndex}
+                    value={cell}
                     className={"grid-item"}>
                   </td>
                 ))}

@@ -1,21 +1,17 @@
-class Map{
-    constructor(maze){
-        this.maze = maze
-    }
 
-    conflict(i, j) {
-        if (i < 0 || i >= this.maze.length || j < 0 || j >= this.maze[0].length) {
+   function conflict(i, j, maze) {
+        if (i < 0 || i >= maze.length || j < 0 || j >= maze[0].length) {
             return false;
         }
-        if (this.maze[i][j] === "w") {
+        if (maze[i][j] === "w") {
             return true;
         }
-        if (this.maze[i][j] === "o") {
+        if (maze[i][j] === "o") {
             if (
-                (i > 0 && this.maze[i - 1][j] === "w") ||
-                (i < this.maze.length - 1 && this.maze[i + 1][j] === "w") || 
-                (j > 0 && this.maze[i][j - 1] === "w") || 
-                (j < this.maze[0].length - 1 && this.maze[i][j + 1] === "w") 
+                (i > 0 && maze[i - 1][j] === "w") ||
+                (i < maze.length - 1 && maze[i + 1][j] === "w") || 
+                (j > 0 && maze[i][j - 1] === "w") || 
+                (j < maze[0].length - 1 && maze[i][j + 1] === "w") 
             ) {
                 return true;
             }
@@ -24,37 +20,46 @@ class Map{
     }
     
 
-    setMap(numObjectives, numObstacles){
+    function setMap(numObjectives, numObstacles, maze){
         let indices = {}
-        let x = Math.floor(Math.random() * (this.maze.length + 1));
-        let y = Math.floor(Math.random() * (this.maze.length + 1));
-        this.maze[x][y] = "s";
+        let x = Math.floor(Math.random() * (maze.length + 1));
+        let y = Math.floor(Math.random() * (maze.length + 1));
+        maze[x][y] = "s";
         indices[(x, y)] = 0;
-
-        while (indices.length < numObjectives+numObstacles){
-            x = Math.floor(Math.random() * (this.maze.length + 1));
-            y = Math.floor(Math.random() * (this.maze.length + 1));
-            if (indices.length === numObjectives){
-                if (this.conflict(x ,y)){
-                    continue;
-                } else {
-                    this.maze[x][y] = "w"
-                }
-            } 
-            else if(indices.hasOwnProperty((x,y))){
+    
+        // console.log(Object.keys(indices).length)
+        while (Object.keys(indices).length < numObjectives+numObstacles){
+            // console.log("here");
+            // console.log(Object.keys(indices).length)
+            x = Math.floor(Math.random() * (maze.length + 1));
+            y = Math.floor(Math.random() * (maze.length + 1));
+    
+            if (indices.hasOwnProperty((x,y))){
                 continue;
-            } else {
-                this.maze[x][y] = "o"
             }
-
+            else {
+                if (Object.keys(indices).length > numObjectives-1){
+                    if (conflict(x ,y, maze)){
+                        continue;
+                    } else {
+                        maze[x][y] = "w";
+                        indices[(x, y)] = 0;
+                    }
+                }
+                else {
+                    maze[x][y] = "o";
+                    indices[(x, y)] = 0;
+                }
+            }
+    
+    
         }
-
+        return maze;
     }
 
-    getMap(){
-        this.setMap(30, 10);
-        return this.maze
-    }
+export function getMap(grid){
+    let maze = setMap(30, 10, grid);
+    console.log(maze);
+    return maze;
 }
 
-export default { Map };
