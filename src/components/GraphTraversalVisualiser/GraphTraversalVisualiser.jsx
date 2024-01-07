@@ -1,45 +1,45 @@
-import React, { useState } from 'react';
-import {getMap} from './createMap' 
-// import { BFS } from './graphAlgorithms/bfs'; 
-// import { DFS } from './graphAlgorithms/dfs'; 
-// import { UCS } from './graphAlgorithms/ucs'; 
-// import { IDS } from './graphAlgorithms/ids'; 
-// import { Astar } from './graphAlgorithms/astar'; 
-import './GraphTraversalVisualiser.css'; 
+import React, { useState, useEffect } from 'react';
+import { getMap } from './createMap';
+import './GraphTraversalVisualiser.css';
 
 const GraphTraversalVisualiser = () => {
   const [graph, setGraph] = useState([]);
   const [algorithm, setAlgorithm] = useState('Reset');
   const [button, setButton] = useState(false);
 
+  useEffect(() => {
+    // Load the maze grid on page load
+    resetGraph();
+  }, []); // Empty dependency array to run only once on mount
 
   const resetGraph = () => {
-    let n =50;
-    const newGraph = []
+    let n = 50;
+    const newGraph = [];
     for (let i = 0; i < n; i++) {
       const row = [];
       for (let j = 0; j < n; j++) {
-        row.push(0); 
+        row.push("0");
       }
       newGraph.push(row);
-    } 
+    }
     var graph = getMap(newGraph);
-    console.log(graph);
     setGraphVisuals(graph);
     setGraph(graph);
   };
+
   const setGraphVisuals = (graph) => {
-    // console.log(graph);
+    console.log(graph);
     const graphItem = document.getElementsByClassName('grid-item');
+    console.log(graphItem.length);
     for (var i = 0; i < graphItem.length; i++) {
-      // graphItem[i].style.backgroundColor = "red";
-      if (graph[i] === "s"){
+      console.log(graphItem[i]);
+      if (graph[i] === "s"){ // need i and j
         graphItem[i].style.backgroundColor = "red";
       }
-      else if (graph[i] === "w"){
+      else if (graph[i] === "w"){  // need i and j
         graphItem[i].style.backgroundColor ="black";
       }
-      if (graph[i] === "o"){
+      if (graph[i] === "o"){ // need i and j
         graphItem[i].style.backgroundColor ="yellow";
       }    
     }
@@ -84,8 +84,6 @@ const GraphTraversalVisualiser = () => {
     }, time);
   };
 
-
-
   return (
     <div className="GraphTraversalVisualiser">
       <div className="graph-container">
@@ -97,8 +95,8 @@ const GraphTraversalVisualiser = () => {
                   <td
                     key={cellIndex}
                     value={cell}
-                    className={"grid-item"}>
-                  </td>
+                    className={"grid-item"}
+                  ></td>
                 ))}
               </tr>
             ))}
@@ -106,30 +104,34 @@ const GraphTraversalVisualiser = () => {
         </table>
       </div>
       <div style={{ text: 'black' }} className="custom-select">
-      <form onSubmit={handleSubmit}>
-            <label htmlFor='algorithm' className='label'>Algorithms: 
-              <select className='menu' id='menu' value={algorithm} onChange={handleChange}>
-                <option value='Reset'>Reset Array</option>
-                <option value='BFS'>BFS</option>
-                <option value='DFS'>DFS</option>
-                <option value='UCS'>UCS</option>
-                <option value='Astar'>Astar</option>
-                <option value='IDS'>IDS</option>
-              </select>
-            </label>
-            <input style={{ color: 'black' }} className="btn" type="submit" value="Submit" disabled={button} />
-          </form>
+        <form onSubmit={handleSubmit}>
+          <label htmlFor='algorithm' className='label'>
+            Algorithms:
+            <select
+              className='menu'
+              id='menu'
+              value={algorithm}
+              onChange={handleChange}
+            >
+              <option value='Reset'>Reset Array</option>
+              <option value='BFS'>BFS</option>
+              <option value='DFS'>DFS</option>
+              <option value='UCS'>UCS</option>
+              <option value='Astar'>Astar</option>
+              <option value='IDS'>IDS</option>
+            </select>
+          </label>
+          <input
+            style={{ color: 'black' }}
+            className="btn"
+            type="submit"
+            value="Submit"
+            disabled={button}
+          />
+        </form>
       </div>
     </div>
   );
 };
 
-
 export default GraphTraversalVisualiser;
-
-
-// function randInts(min, max) {
-//   min = Math.ceil(min);
-//   max = Math.floor(max);
-//   return Math.floor(Math.random() * (max - min + 1)) + min;
-// }

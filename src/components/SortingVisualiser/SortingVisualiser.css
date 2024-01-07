@@ -40,7 +40,12 @@
     margin: 1px;
   }
   /* Select menu button end */
-  
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: #282c34;
+  }
+
   /* Default app css */
   .App {
     text-align: center;

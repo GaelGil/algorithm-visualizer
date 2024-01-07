@@ -2,6 +2,7 @@
   background-color: #333; /* Background color of the navbar */
   overflow: hidden;
   width: 100%;
+  padding: 1%;
 }
 
 .NavBar li {
