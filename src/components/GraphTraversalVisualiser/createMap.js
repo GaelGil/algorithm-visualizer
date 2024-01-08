@@ -50,7 +50,7 @@ function setMap(numObjectives, numObstacles, maze) {
   
 
 export function getMap(grid){
-    let maze = setMap(30, 10, grid);
+    let maze = setMap(2, 10, grid);
     // console.log(maze);
     return maze;
 }

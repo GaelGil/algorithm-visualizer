@@ -12,8 +12,9 @@ const GraphTraversalVisualiser = () => {
     resetGraph();
   }, []); // Empty dependency array to run only once on mount
 
+  // function to reset graph the graph
   const resetGraph = () => {
-    let n = 50;
+    let n = 30;
     const newGraph = [];
     for (let i = 0; i < n; i++) {
       const row = [];
@@ -22,26 +23,52 @@ const GraphTraversalVisualiser = () => {
       }
       newGraph.push(row);
     }
-    var graph = getMap(newGraph);
-    setGraphVisuals(graph);
-    setGraph(graph);
-  };
+    // set an empty graph
+    setGraph([]);
+    // create a new graph using createMap.js
+    const updatedGraph = getMap(newGraph);
+    // update the visuales of the graph
+    setGraphVisuals(updatedGraph);
+    // set the new graph
+    setGraph(updatedGraph);
 
+  };
+  
+  // clear the old graph of its obstacles and medals
+  const setCleanGraph = () => {
+    const graph = document.getElementsByClassName('grid-item');
+    if (graph[0]){
+      for (let i = 0; i < graph.length; i++){
+        graph[i].style.backgroundColor = "#282c34";
+      }
+    }
+
+  }
+  
+  // set the new visuals
   const setGraphVisuals = (graph) => {
-    console.log(graph);
-    const graphItem = document.getElementsByClassName('grid-item');
-    console.log(graphItem.length);
-    for (var i = 0; i < graphItem.length; i++) {
-      console.log(graphItem[i]);
-      if (graph[i] === "s"){ // need i and j
-        graphItem[i].style.backgroundColor = "red";
+    // the graph comes from createmap.js where we create some number of obstacles 
+    setCleanGraph(); // clear the old obstacles
+    const graphContainer = document.getElementsByClassName('graph-container');
+    if (graphContainer){
+      for (let i = 0; i < graph.length; i++){
+        for (let j = 0; j < graph[i].length; j++){
+          let row = "row-index-" + i;
+          let col = "grid-item-" + j;
+          let node = document.querySelector("." + row + " ." + col);
+          if (node){
+            if (graph[i][j] === "o"){  // for objective
+              node.style.backgroundColor = "green";
+            } 
+            else if (graph[i][j] === "w"){  // for wall 
+              node.style.backgroundColor = "black";
+            }
+            else if (graph[i][j] === "s"){  // for start
+              node.style.backgroundColor = "red";
+            }
+          }
+        }
       }
-      else if (graph[i] === "w"){  // need i and j
-        graphItem[i].style.backgroundColor ="black";
-      }
-      if (graph[i] === "o"){ // need i and j
-        graphItem[i].style.backgroundColor ="yellow";
-      }    
     }
   }
   
@@ -90,12 +117,12 @@ const GraphTraversalVisualiser = () => {
         <table>
           <tbody>
             {graph.map((row, rowIndex) => (
-              <tr key={rowIndex} className={"row-index"}>
+              <tr key={rowIndex} className={"row-index row-index-" + rowIndex}>
                 {row.map((cell, cellIndex) => (
                   <td
                     key={cellIndex}
                     value={cell}
-                    className={"grid-item"}
+                    className={"grid-item grid-item-" + cellIndex}
                   ></td>
                 ))}
               </tr>

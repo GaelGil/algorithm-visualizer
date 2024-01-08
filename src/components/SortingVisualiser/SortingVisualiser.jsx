@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { getMergeSortAnimations } from "./sortingAlgorithms/mergeSort";
 import { getBubbleSortAnimations } from './sortingAlgorithms/bubbleSort';
 import { getInsertionSortAnimations } from './sortingAlgorithms/insertionSort';
 import { getSelectionSortAnimations } from './sortingAlgorithms/selectionSort';
 import './SortingVisualiser.css'; 
+
 const ANIMATION_SPEED_MS = 5;
 const PRIMARY_COLOR = 'red';
 const SECONDARY_COLOR = 'grey';
@@ -11,9 +12,12 @@ const SECONDARY_COLOR = 'grey';
 const SortingVisualiser = () => {
   const [array, setArray] = useState([]); 
   const [algorithm, setAlgorithm] = useState('Reset');
-  // const [current, setCurrent] = useState(false);
   const [button, setButton] = useState(false);
 
+  useEffect(() => {
+    // Load a new array on page load
+    resetArray();
+  }, []); // Empty dependency array to run only once on mount
   // Function to reset the array
   const resetArray = () => {
     const newArray = Array.from({ length: 50 }, () => randInts(5, 300));
