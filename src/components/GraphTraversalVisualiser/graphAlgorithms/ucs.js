@@ -1,39 +1,5 @@
 import { PriorityQueue } from './datastructures/priorityQueue';
-
-function isValidIndex(matrix, i, j) {
-    return i >= 0 && i < matrix.length && j >= 0 && j < matrix[0].length;
-}
-
-
-function getNeighbors(matrix, current_node) {
-    let neighbors = []
-    let i = current_node[0];
-    let j = current_node[1];
-    // top neihgbor
-    if (isValidIndex(matrix, i - 1, j)) {
-        neighbors.push([i - 1, j]);
-    }
-
-    // bottom neighbor
-    if (isValidIndex(matrix, i + 1, j)) {
-        neighbors.push([i + 1, j]);
-    }
-
-    // left neighbor
-    if (isValidIndex(matrix, i, j - 1)) {
-        neighbors.push([i, j-1]);
-
-    }
-
-    // right neighbor
-    if (isValidIndex(matrix, i, j + 1)) {
-        neighbors.push([i, j+1]);
-
-    }
-
-
-    return neighbors;
-}
+import { getNeighbors } from './helper';
 
 
 
@@ -63,7 +29,7 @@ export function UCS(grid, start, destination) {
                         neighborCost += 5;
                     }else {
                         neighborCost +=1;
-                    }; // Assuming each step has a uniform cost of 1 (change as needed)
+                    };
 
                     if (!(visited.hasOwnProperty(neighborKey))) { // if the neighbor has not been visited, add to the priority queue
                         if (!(grid[neighbor[0]][neighbor[1]] === "w")) { // if there is no wall, then we add
