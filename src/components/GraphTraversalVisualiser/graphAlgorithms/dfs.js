@@ -1,43 +1,69 @@
-
-
-export function DFS(grid, start, destination){
-    // let queue = [start];
-    // let visited = {}
-    // // let path = []
-
-    // while (queue) {
-    //     let current_node = queue.splice(-1);
-    //     if (current_node === destination){
-    //         return "found";
-    //     }
-    //     else {
-
-    //     }
-    // }
-
-
-
-    // let root = start;
-    // let queue = [start];
-    // let path = {}
-    // let expanded = {}
-    // let visited = {}
-    // while (queue){
-    //     let current_node = queue[queue.length-1]
-    //     // stack.remove(stack.length-1)
-    //     if (current_node === destination){
-    //         return path
-    //     }
-
-    // }
-        // let current_node = stack.pop()
-        // if current_node == destination;
-        // solution found 
-        // else if current_node not in visited and current_node in grid:
-            // visited[curernt_node] = 0
-            // get neighbors 
-            // append_neihbors to stack
-    // get neighbors
-    return 0
+function isValidIndex(matrix, i, j) {
+    return i >= 0 && i < matrix.length && j >= 0 && j < matrix[0].length;
 }
 
+
+function getNeighbors(matrix, current_node) {
+    let neighbors = []
+    let i = current_node[0];
+    let j = current_node[1];
+    // top neihgbor
+    if (isValidIndex(matrix, i - 1, j)) {
+        neighbors.push([i - 1, j]);
+    }
+
+    // bottom neighbor
+    if (isValidIndex(matrix, i + 1, j)) {
+        neighbors.push([i + 1, j]);
+    }
+
+    // left neighbor
+    if (isValidIndex(matrix, i, j - 1)) {
+        neighbors.push([i, j-1]);
+
+    }
+
+    // right neighbor
+    if (isValidIndex(matrix, i, j + 1)) {
+        neighbors.push([i, j+1]);
+
+    }
+
+
+    return neighbors;
+}
+
+
+
+
+export function DFS(grid, start, destination) {
+    let queue = [{ node: start, path: [start] }];
+    let visited = {};
+    let expanded = [];
+
+    while (queue.length > 0) {
+        let { node, path } = queue.shift(); // get the node and its path from the front of the queue
+        let current_node_key = node.toString(); // to string for comparison
+        // console.log(current_node_key)
+        if (current_node_key === destination.toString()) { // check if we have arrived at the solution
+            return { status: "found", path , expanded};
+        } else {
+            if (!(visited.hasOwnProperty(current_node_key))) { // if we have not been to this node add it to visited
+                visited[current_node_key] = true; // mark as visited
+                let neighbors = getNeighbors(grid, node); // get neighbors of the current node
+                for (let i = 0; i < neighbors.length; i++) {
+                    let neighbor = neighbors[i]; 
+                    let neighbor_key = neighbor.toString();
+                    if (!(visited.hasOwnProperty(neighbor_key))) { // if the neighbor has not been visited, add to the queue
+                        if (!(grid[neighbor[0]][neighbor[1]] === "w")) { // if there is no wall, then we add beggining of queue
+                            queue.unshift({ node: neighbor, path: path.concat([neighbor]) });
+                            expanded.push(neighbor); // add the expanded node to the list
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    return { status: "not found", path: [], expanded};
+}

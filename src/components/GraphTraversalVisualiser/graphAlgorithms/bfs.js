@@ -38,14 +38,14 @@ function getNeighbors(matrix, current_node) {
 
 
 // Example Usage
-const matrix = [
-    ["s", "0", "0", "0", "0"],
-    ["0", "0", "0", "0", "0"],
-    ["0", "0", "0", "0", "0"],
-    ["0", "0", "0", "0", "0"],
-    ["0", "0", "0", "0", "0"],
-    ["0", "0", "0", "0", "o"],
-];
+// const matrix = [
+//     ["s", "0", "0", "0", "0"],
+//     ["0", "0", "0", "0", "0"],
+//     ["0", "0", "0", "0", "0"],
+//     ["0", "0", "0", "0", "0"],
+//     ["0", "0", "0", "0", "0"],
+//     ["0", "0", "0", "0", "o"],
+// ];
 
 
 
@@ -53,32 +53,37 @@ const matrix = [
 
 
 export function BFS(grid, start, destination) {
-    let queue = [start];
+    let queue = [{ node: start, path: [start] }];
     let visited = {};
+    let expanded = [];
 
     while (queue.length > 0) {
-        // console.log(queue);
-        // fix the checking if visited
-        let current_node = queue.shift();  // Use shift to remove the first element (FIFO for BFS)
-        console.log(current_node);
-        if (current_node === destination) {
-            return "found";
-        } else { 
-            let current_node_key = JSON.stringify(current_node);
-            // console.log(current_node_key)
-            if (!(visited.hasOwnProperty(current_node_key))) {
-                // console.log("here");
-                visited[current_node_key] = current_node;
-                let neighbors = getNeighbors(grid, current_node);
-                // console.log(neighbors)
+        let { node, path } = queue.shift(); // get the node and its path from the front of the queue
+        let current_node_key = node.toString(); // to string for comparison
+
+        if (current_node_key === destination.toString()) { // check if we have arrived at the solution
+            return { status: "found", path , expanded};
+        } else {
+            if (!(visited.hasOwnProperty(current_node_key))) { // if we have not been to this node, add it
+                visited[current_node_key] = true; // mark as visited
+                let neighbors = getNeighbors(grid, node); // get neighbors of the current node
                 for (let i = 0; i < neighbors.length; i++) {
-                    queue.push(neighbors[i]);
+                    let neighbor = neighbors[i];
+                    let neighbor_key = neighbor.toString();
+
+                    if (!(visited.hasOwnProperty(neighbor_key))) { // if the neighbor has not been visited, add to the queue
+                        if (!(grid[neighbor[0]][neighbor[1]] === "w")) { // if there is no wall, then we add to end of queue
+                            queue.push({ node: neighbor, path: path.concat([neighbor]) });
+                            expanded.push(neighbor); // add the expanded node to the list
+                        }
+                    }
                 }
             }
         }
     }
 
-    return "not found";
+    return { status: "not found", path: [], expanded};
 }
+
 
 

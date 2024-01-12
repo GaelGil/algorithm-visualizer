@@ -1,11 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { getMap } from './createMap';
 import './GraphTraversalVisualiser.css';
+import { UCS } from './graphAlgorithms/ucs';
+import { BFS } from './graphAlgorithms/bfs';
+import { DFS } from './graphAlgorithms/dfs';
 
 const GraphTraversalVisualiser = () => {
   const [graph, setGraph] = useState([]);
   const [algorithm, setAlgorithm] = useState('Reset');
   const [button, setButton] = useState(false);
+  const [path, setPath] = useState([]);
+  const [expanded, setExpanded] = useState([]);
+  const [startNode, setStartNode] = useState([]);
+  const [endNode, setEndNode] = useState([]);
 
   useEffect(() => {
     // Load the maze grid on page load
@@ -14,7 +21,7 @@ const GraphTraversalVisualiser = () => {
 
   // function to reset graph the graph
   const resetGraph = () => {
-    let n = 30;
+    let n = 20;
     const newGraph = [];
     for (let i = 0; i < n; i++) {
       const row = [];
@@ -45,6 +52,31 @@ const GraphTraversalVisualiser = () => {
 
   }
   
+  const colorNodes = () => {
+// TODO: make sure path overlaps the expanded if needed but not the other way around
+// TODO: currently the the algorithms are showing the viaul path for the grid before
+    // color nodes in the path
+    path.forEach(node => {
+      const [row, col] = node;
+      console.log(node)
+      const nodeElement = document.querySelector(`.row-index-${row} .grid-item-${col}`);
+      if (nodeElement) {
+        nodeElement.style.backgroundColor = "green";
+      }
+    });
+
+    // color nodes in the expanded list
+    // expanded.forEach(node => {
+    //   const [row, col] = node;
+    //   const nodeElement = document.querySelector(`.row-index-${row} .grid-item-${col}`);
+    //   if (nodeElement) {
+    //     nodeElement.style.backgroundColor = "blue"; // or any color you prefer for expanded nodes
+    //   }
+    // });
+  };
+  
+
+
   // set the new visuals
   const setGraphVisuals = (graph) => {
     // the graph comes from createmap.js where we create some number of obstacles 
@@ -59,12 +91,15 @@ const GraphTraversalVisualiser = () => {
           if (node){
             if (graph[i][j] === "o"){  // for objective
               node.style.backgroundColor = "green";
+              setEndNode([i, j])
             } 
             else if (graph[i][j] === "w"){  // for wall 
               node.style.backgroundColor = "black";
             }
             else if (graph[i][j] === "s"){  // for start
               node.style.backgroundColor = "red";
+              setStartNode([i, j])
+
             }
           }
         }
@@ -76,6 +111,7 @@ const GraphTraversalVisualiser = () => {
   const handleSubmit = (event) => {
 
     let method = algorithm;
+    // let startNode = []
     let time = 0;
     disableButtons();
     if (method === 'astar') {
@@ -83,13 +119,25 @@ const GraphTraversalVisualiser = () => {
       // time = mergeSort();
     } else if (method === 'BFS') {
       // time = startSorting(getBubbleSortAnimations(array));
+      const result = BFS(graph, startNode, endNode); // replace with your own search function
+      setPath(result.path);
+      setExpanded(result.expanded);
+      colorNodes();
     } else if (method === 'Reset') {
       resetGraph();
       enableButtons(1);
     } else if (method === 'DFS') {
+      const result = DFS(graph, startNode, endNode); // replace with your own search function
+      setPath(result.path);
+      setExpanded(result.expanded);
+      colorNodes();
       // time = startSorting(getInsertionSortAnimations(array));
     } else if (method === 'UCS') {
       // time = startSorting(getSelectionSortAnimations(array));
+      const result = UCS(graph, startNode, endNode); // replace with your own search function
+      setPath(result.path);
+      setExpanded(result.expanded);
+      colorNodes();
 
     }
 

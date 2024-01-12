@@ -1,18 +1,22 @@
-class PriorityQueue{
-    constructor(){
-        this.queue = queue 
+export class PriorityQueue {
+    constructor() {
+        this.elements = [];
     }
 
-    pop(){
-        
+    isEmpty() {
+        return this.elements.length === 0;
     }
 
-    push() {
-        queue.push(val);
+    enqueue(element, priority) {
+        this.elements.push({ element, priority });
+        this.elements.sort((a, b) => a.priority - b.priority);
     }
 
-
-
+    dequeue() {
+        if (this.isEmpty()) {
+            return undefined;
+        }
+        return this.elements.shift().element;
+    }
 }
 
-export default Queue;
