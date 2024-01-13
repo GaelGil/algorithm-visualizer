@@ -15,34 +15,26 @@ const GraphTraversalVisualiser = () => {
   const [endNode, setEndNode] = useState([]);
 
   useEffect(() => {
-    // Load the maze grid on page load
     resetGraph();
   }, []); // Empty dependency array to run only once on mount
 
   // function to reset graph the graph
   const resetGraph = () => {
-    let n = 20;
-    const newGraph = [];
-    for (let i = 0; i < n; i++) {
-      const row = [];
-      for (let j = 0; j < n; j++) {
-        row.push("0");
-      }
-      newGraph.push(row);
-    }
-    // set an empty graph
-    setGraph([]);
-    // create a new graph using createMap.js
+    setCleanGraph();
+    const n = 20;
+    const newGraph = Array.from({ length: n }, () => Array(n).fill("0"));
     const updatedGraph = getMap(newGraph);
-    // update the visuales of the graph
-    setGraphVisuals(updatedGraph);
-    // set the new graph
-    setGraph(updatedGraph);
 
+    setGraph(updatedGraph);
+    setGraphVisuals(updatedGraph);
   };
   
   // clear the old graph of its obstacles and medals
   const setCleanGraph = () => {
+    // setGraph([]);
+    setStartNode([]);
+    setEndNode([]);
+    setGraph([]);
     const graph = document.getElementsByClassName('grid-item');
     if (graph[0]){
       for (let i = 0; i < graph.length; i++){
@@ -58,7 +50,6 @@ const GraphTraversalVisualiser = () => {
     // color nodes in the path
     path.forEach(node => {
       const [row, col] = node;
-      console.log(node)
       const nodeElement = document.querySelector(`.row-index-${row} .grid-item-${col}`);
       if (nodeElement) {
         nodeElement.style.backgroundColor = "green";
@@ -79,10 +70,6 @@ const GraphTraversalVisualiser = () => {
 
   // set the new visuals
   const setGraphVisuals = (graph) => {
-    // the graph comes from createmap.js where we create some number of obstacles 
-    setCleanGraph(); // clear the old obstacles
-    const graphContainer = document.getElementsByClassName('graph-container');
-    if (graphContainer){
       for (let i = 0; i < graph.length; i++){
         for (let j = 0; j < graph[i].length; j++){
           let row = "row-index-" + i;
@@ -104,27 +91,24 @@ const GraphTraversalVisualiser = () => {
           }
         }
       }
-    }
   }
   
 
   const handleSubmit = (event) => {
-
     let method = algorithm;
-    // let startNode = []
     let time = 0;
     disableButtons();
     if (method === 'astar') {
       // time = startSorting(getMergeSortAnimations(array));
       // time = mergeSort();
     } else if (method === 'BFS') {
-      // time = startSorting(getBubbleSortAnimations(array));
       const result = BFS(graph, startNode, endNode); // replace with your own search function
       setPath(result.path);
       setExpanded(result.expanded);
       colorNodes();
     } else if (method === 'Reset') {
       resetGraph();
+      // setGraphVisuals(graph);
       enableButtons(1);
     } else if (method === 'DFS') {
       const result = DFS(graph, startNode, endNode); // replace with your own search function
@@ -186,8 +170,7 @@ const GraphTraversalVisualiser = () => {
               className='menu'
               id='menu'
               value={algorithm}
-              onChange={handleChange}
-            >
+              onChange={handleChange}>
               <option value='Reset'>Reset Array</option>
               <option value='BFS'>BFS</option>
               <option value='DFS'>DFS</option>

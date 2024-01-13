@@ -19,14 +19,14 @@ function conflict(i, j, maze) {
 }
 function setMap(numObjectives, numObstacles, maze) {
     let indices = {};
-    let x = Math.floor(Math.random() * (maze.length - 1));
-    let y = Math.floor(Math.random() * (maze[0].length - 1)); // Assuming the maze has consistent column lengths
+    let x = Math.floor(Math.random() * (maze.length));
+    let y = Math.floor(Math.random() * (maze[0].length)); // Assuming the maze has consistent column lengths
     maze[x][y] = "s";
     indices[`${x},${y}`] = 0;
     
     while (Object.keys(indices).length < numObjectives + numObstacles) {
-      x = Math.floor(Math.random() * (maze.length - 1));
-      y = Math.floor(Math.random() * (maze[0].length - 1)); // Assuming the maze has consistent column lengths
+      x = Math.floor(Math.random() * (maze.length));
+      y = Math.floor(Math.random() * (maze[0].length)); // Assuming the maze has consistent column lengths
   
       if (indices.hasOwnProperty(`${x},${y}`)) {
         continue;

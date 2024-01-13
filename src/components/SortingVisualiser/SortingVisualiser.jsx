@@ -18,13 +18,14 @@ const SortingVisualiser = () => {
     // Load a new array on page load
     resetArray();
   }, []); // Empty dependency array to run only once on mount
+  
   // Function to reset the array
   const resetArray = () => {
     const newArray = Array.from({ length: 50 }, () => randInts(5, 300));
     setArray(newArray);
   };
 
-  // Function to start sorting 
+  // Function to start sorting visuals
   const startSorting = (animations) => {
     // Function to handle the animations for sorting algorithms
     const arrayBars = document.getElementsByClassName('array-bar'); // select the array bars html
