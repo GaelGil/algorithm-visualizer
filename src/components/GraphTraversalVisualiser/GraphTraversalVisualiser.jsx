@@ -1,98 +1,72 @@
 import React, { useState, useEffect } from 'react';
-import { getMap } from './createMap';
-import './GraphTraversalVisualiser.css';
+import "./GraphTraversalVisualiser.css"
 import { UCS } from './graphAlgorithms/ucs';
 import { BFS } from './graphAlgorithms/bfs';
 import { DFS } from './graphAlgorithms/dfs';
 
-const GraphTraversalVisualiser = () => {
-  const [graph, setGraph] = useState([]);
+const MatrixVisualization = () => {
+  const [matrix, setMatrix] = useState([]);
+  const [start, setStart] = useState({ row: 0, col: 0 });
+  const [objective, setObjective] = useState({ row: 0, col: 0 });
+
+  const [objectives, setObjectives] = useState([]);
+  const [obstacles, setObstacles] = useState([]);
   const [algorithm, setAlgorithm] = useState('Reset');
   const [button, setButton] = useState(false);
-  const [path, setPath] = useState([]);
-  const [expanded, setExpanded] = useState([]);
-  const [startNode, setStartNode] = useState([]);
-  const [endNode, setEndNode] = useState([]);
+
 
   useEffect(() => {
-    resetGraph();
-  }, []); // Empty dependency array to run only once on mount
+    generateMatrix();
+  }, []);
 
-  // function to reset graph the graph
-  const resetGraph = () => {
-    setCleanGraph();
-    const n = 20;
-    const newGraph = Array.from({ length: n }, () => Array(n).fill("0"));
-    const updatedGraph = getMap(newGraph);
+  const generateMatrix = () => {
+    const newMatrix = Array.from({ length: 30 }, () => Array(30).fill(" "));
 
-    setGraph(updatedGraph);
-    setGraphVisuals(updatedGraph);
-  };
-  
-  // clear the old graph of its obstacles and medals
-  const setCleanGraph = () => {
-    // setGraph([]);
-    setStartNode([]);
-    setEndNode([]);
-    setGraph([]);
-    const graph = document.getElementsByClassName('grid-item');
-    if (graph[0]){
-      for (let i = 0; i < graph.length; i++){
-        graph[i].style.backgroundColor = "#282c34";
-      }
+    const randomRow = Math.floor(Math.random() * 30);
+    const randomCol = Math.floor(Math.random() * 30);
+
+    setStart({ row: randomRow, col: randomCol });
+
+    const objectivesCount = Math.floor(Math.random() * 1) + 1;
+    const objectivesArray = [];
+    for (let i = 0; i < objectivesCount; i++) {
+      const objRow = Math.floor(Math.random() * 30);
+      const objCol = Math.floor(Math.random() * 30);
+      objectivesArray.push({ row: objRow, col: objCol });
     }
 
-  }
-  
-  const colorNodes = () => {
-// TODO: make sure path overlaps the expanded if needed but not the other way around
-// TODO: currently the the algorithms are showing the viaul path for the grid before
-    // color nodes in the path
-    path.forEach(node => {
-      const [row, col] = node;
-      const nodeElement = document.querySelector(`.row-index-${row} .grid-item-${col}`);
-      if (nodeElement) {
-        nodeElement.style.backgroundColor = "green";
-      }
-    });
+    setObjectives(objectivesArray);
 
-    // color nodes in the expanded list
-    // expanded.forEach(node => {
-    //   const [row, col] = node;
-    //   const nodeElement = document.querySelector(`.row-index-${row} .grid-item-${col}`);
-    //   if (nodeElement) {
-    //     nodeElement.style.backgroundColor = "blue"; // or any color you prefer for expanded nodes
-    //   }
-    // });
+    const obstaclesCount = Math.floor(Math.random() * 10);
+    const obstaclesArray = [];
+    for (let i = 0; i < obstaclesCount; i++) {
+      const obsRow = Math.floor(Math.random() * 30);
+      const obsCol = Math.floor(Math.random() * 30);
+      obstaclesArray.push({ row: obsRow, col: obsCol });
+    }
+
+    setObstacles(obstaclesArray);
+
+    setMatrix(newMatrix);
   };
-  
 
+  const resetMatrix = () => {
+    generateMatrix();
+  };
 
-  // set the new visuals
-  const setGraphVisuals = (graph) => {
-      for (let i = 0; i < graph.length; i++){
-        for (let j = 0; j < graph[i].length; j++){
-          let row = "row-index-" + i;
-          let col = "grid-item-" + j;
-          let node = document.querySelector("." + row + " ." + col);
-          if (node){
-            if (graph[i][j] === "o"){  // for objective
-              node.style.backgroundColor = "green";
-              setEndNode([i, j])
-            } 
-            else if (graph[i][j] === "w"){  // for wall 
-              node.style.backgroundColor = "black";
-            }
-            else if (graph[i][j] === "s"){  // for start
-              node.style.backgroundColor = "red";
-              setStartNode([i, j])
-
-            }
+  const colorNodes = (path) => {
+    // TODO: make sure path overlaps the expanded if needed but not the other way around
+    // TODO: currently the the algorithms are showing the viaul path for the grid before
+        // color nodes in the path
+        console.log(path);
+        path.forEach(node => {
+          const [row, col] = node;
+          const nodeElement = document.querySelector(`.row-index-${row} .grid-item-${col}`);
+          if (nodeElement) {
+            nodeElement.style.backgroundColor = "green";
           }
-        }
+        });
       }
-  }
-  
 
   const handleSubmit = (event) => {
     let method = algorithm;
@@ -102,26 +76,20 @@ const GraphTraversalVisualiser = () => {
       // time = startSorting(getMergeSortAnimations(array));
       // time = mergeSort();
     } else if (method === 'BFS') {
-      const result = BFS(graph, startNode, endNode); // replace with your own search function
-      setPath(result.path);
-      setExpanded(result.expanded);
-      colorNodes();
+      const result = BFS(matrix, [start.row, start.col], objectives[0]); // replace with your own search function
+     console.log(result)
+      colorNodes(result.path);
     } else if (method === 'Reset') {
-      resetGraph();
-      // setGraphVisuals(graph);
+      resetMatrix();
       enableButtons(1);
     } else if (method === 'DFS') {
-      const result = DFS(graph, startNode, endNode); // replace with your own search function
-      setPath(result.path);
-      setExpanded(result.expanded);
-      colorNodes();
+      const result = DFS(matrix,[start.row, start.col], objectives[0]); // replace with your own search function
+      // colorNodes();
       // time = startSorting(getInsertionSortAnimations(array));
     } else if (method === 'UCS') {
       // time = startSorting(getSelectionSortAnimations(array));
-      const result = UCS(graph, startNode, endNode); // replace with your own search function
-      setPath(result.path);
-      setExpanded(result.expanded);
-      colorNodes();
+      const result = UCS(matrix, [start.row, start.col], objectives[0]);; // replace with your own search function
+      // colorNodes();
 
     }
 
@@ -144,26 +112,25 @@ const GraphTraversalVisualiser = () => {
   };
 
   return (
-    <div className="GraphTraversalVisualiser">
-      <div className="graph-container">
-        <table>
-          <tbody>
-            {graph.map((row, rowIndex) => (
-              <tr key={rowIndex} className={"row-index row-index-" + rowIndex}>
-                {row.map((cell, cellIndex) => (
-                  <td
-                    key={cellIndex}
-                    value={cell}
-                    className={"grid-item grid-item-" + cellIndex}
-                  ></td>
-                ))}
-              </tr>
+    <div className='GraphTraversalVisualiser'>
+      {/* <div className='graph-container'> */}
+      <div className="matrix-container">
+        {matrix.map((row, rowIndex) => (
+          <div key={rowIndex} className="matrix-row">
+            {row.map((cell, colIndex) => (
+              <div
+                key={colIndex}
+                className={`matrix-cell ${start.row === rowIndex && start.col === colIndex ? 'start' : ''}
+                            ${objectives.some(obj => obj.row === rowIndex && obj.col === colIndex) ? 'objective' : ''}
+                            ${obstacles.some(obs => obs.row === rowIndex && obs.col === colIndex) ? 'obstacle' : ''}`}
+              >
+                {cell}
+              </div>
             ))}
-          </tbody>
-        </table>
+          </div>
+        ))}
       </div>
-      <div style={{ text: 'black' }} className="custom-select">
-        <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
           <label htmlFor='algorithm' className='label'>
             Algorithms:
             <select
@@ -187,9 +154,9 @@ const GraphTraversalVisualiser = () => {
             disabled={button}
           />
         </form>
-      </div>
+      {/* </div> */}
     </div>
   );
 };
 
-export default GraphTraversalVisualiser;
+export default MatrixVisualization;

@@ -49,9 +49,9 @@ function setMap(numObjectives, numObstacles, maze) {
   }
   
 
-export function getMap(grid){
-    let maze = setMap(2, 10, grid);
-    // console.log(maze);
-    return maze;
+export function getMap(n){
+  let newGraph = Array.from({ length: 30 }, () => Array(30).fill("0"));
+  let maze = setMap(2, 10, newGraph);
+  return maze;
 }
 
