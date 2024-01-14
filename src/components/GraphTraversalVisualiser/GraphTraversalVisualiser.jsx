@@ -7,7 +7,7 @@ import { DFS } from './graphAlgorithms/dfs';
 const MatrixVisualization = () => {
   const [matrix, setMatrix] = useState([]);
   const [start, setStart] = useState({ row: 0, col: 0 });
-  const [objective, setObjective] = useState({ row: 0, col: 0 });
+  // const [objective, setObjective] = useState({ row: 0, col: 0 });
 
   const [objectives, setObjectives] = useState([]);
   const [obstacles, setObstacles] = useState([]);
@@ -19,78 +19,128 @@ const MatrixVisualization = () => {
     generateMatrix();
   }, []);
 
+  // function to check for conflict
+  const conflict = (i, j, maze) => {
+    // index checking
+    if (i < 0 || i >= maze.length || j < 0 || j >= maze[0].length) { 
+        return false;
+    }
+    // if its currently in use
+    if (maze[i][j] === "w") {
+        return true;
+    }
+    // if objective is surronded by obstacles
+    if (maze[i][j] === "o") { 
+        if (
+            (i > 0 && maze[i - 1][j] === "w") ||
+            (i < maze.length - 1 && maze[i + 1][j] === "w") ||
+            (j > 0 && maze[i][j - 1] === "w") ||
+            (j < maze[0].length - 1 && maze[i][j + 1] === "w")
+        ) {
+            return true;
+        }
+    }
+    return false;
+  }
+
+  // clear the old path
+  const clearPath = () => {
+    const pathNodes = document.querySelectorAll('.path');
+    pathNodes.forEach((node) => {
+      node.classList.remove('path');
+    });
+    const expandedNodes = document.querySelectorAll('.expanded');
+    expandedNodes.forEach((node) => {
+      node.classList.remove('expanded');
+    });
+  };
+
   const generateMatrix = () => {
-    const newMatrix = Array.from({ length: 30 }, () => Array(30).fill(" "));
-
-    const randomRow = Math.floor(Math.random() * 30);
-    const randomCol = Math.floor(Math.random() * 30);
-
-    setStart({ row: randomRow, col: randomCol });
-
-    const objectivesCount = Math.floor(Math.random() * 1) + 1;
-    const objectivesArray = [];
-    for (let i = 0; i < objectivesCount; i++) {
-      const objRow = Math.floor(Math.random() * 30);
-      const objCol = Math.floor(Math.random() * 30);
-      objectivesArray.push({ row: objRow, col: objCol });
+    const n = 40
+    const newMatrix = Array.from({ length: n }, () => Array(n).fill(" ")); // generate array
+    const objectivesArray = []; // array to hold bojectives
+    const obstaclesArray = []; // array to hold obstacles
+    const indices = {}; // dictionary to hold indicies to avoid overlap
+    const numObjectives = 2; // number of objectives
+    const numObstacles = 100; // number of obstacles
+    let x = Math.floor(Math.random() * (newMatrix.length)); // a random x cord
+    let y = Math.floor(Math.random() * (newMatrix[0].length)); // a randon y cord
+    setStart({ row: x, col: y }); // set the starting point
+    indices[`${x},${y}`] = 0; // add starting point to indices
+    
+    // generate the map
+    while (Object.keys(indices).length < numObjectives + numObstacles) {
+      x = Math.floor(Math.random() * (newMatrix.length)); // new x cord
+      y = Math.floor(Math.random() * (newMatrix[0].length)); // new y cord
+  
+      if (indices.hasOwnProperty(`${x},${y}`)) { // if its an index we have been do ignore it
+        continue;
+      } else {
+        if (Object.keys(indices).length > numObjectives - 1) {
+          if (conflict(x, y, newMatrix)) { // if there is a conflic ignore the index
+            continue;
+          } else {
+            obstaclesArray.push({ row: x, col: y }); // add to obstacles
+            indices[`${x},${y}`] = 0;
+            newMatrix[x][y] = "w";
+          }
+        } else {
+          objectivesArray.push({ row: x, col: y }); // add to objectives
+          indices[`${x},${y}`] = 0;
+        }
+      }
     }
-
+    // set the approriate obstacles, objectives and new matrix/grid
     setObjectives(objectivesArray);
-
-    const obstaclesCount = Math.floor(Math.random() * 10);
-    const obstaclesArray = [];
-    for (let i = 0; i < obstaclesCount; i++) {
-      const obsRow = Math.floor(Math.random() * 30);
-      const obsCol = Math.floor(Math.random() * 30);
-      obstaclesArray.push({ row: obsRow, col: obsCol });
-    }
-
     setObstacles(obstaclesArray);
-
     setMatrix(newMatrix);
   };
 
   const resetMatrix = () => {
-    generateMatrix();
+    clearPath(); // remove the previously drawn path
+    generateMatrix(); // generate a new matrix
   };
 
-  const colorNodes = (path) => {
-    // TODO: make sure path overlaps the expanded if needed but not the other way around
-    // TODO: currently the the algorithms are showing the viaul path for the grid before
-        // color nodes in the path
-        console.log(path);
-        path.forEach(node => {
-          const [row, col] = node;
-          const nodeElement = document.querySelector(`.row-index-${row} .grid-item-${col}`);
-          if (nodeElement) {
-            nodeElement.style.backgroundColor = "green";
-          }
-        });
-      }
+  const colorNodes = (path, expanded) => {
+    path.forEach(node => {
+      const [row, col] = node;
+      const nodeElement = document.querySelector(`.matrix-row-${row} .col-index-${col}`);
+      if (nodeElement) {
+        nodeElement.classList.add('path');          
+      }});
+
+    if (expanded){
+    expanded.forEach(node => {
+      const [row, col] = node;
+      const nodeElement = document.querySelector(`.matrix-row-${row} .col-index-${col}`);
+      if (nodeElement) {
+        if (!(nodeElement.classList.contains('path'))){
+          nodeElement.classList.add('expanded');          
+        } 
+      }});
+    }
+    }
 
   const handleSubmit = (event) => {
     let method = algorithm;
     let time = 0;
     disableButtons();
     if (method === 'astar') {
-      // time = startSorting(getMergeSortAnimations(array));
-      // time = mergeSort();
+      // 
     } else if (method === 'BFS') {
-      const result = BFS(matrix, [start.row, start.col], objectives[0]); // replace with your own search function
-     console.log(result)
-      colorNodes(result.path);
+      // console.log(objectives)
+      const result = BFS(matrix, [start.row, start.col], [objectives[0].row, objectives[0].col]); 
+      colorNodes(result.path, result.expanded);
     } else if (method === 'Reset') {
       resetMatrix();
       enableButtons(1);
     } else if (method === 'DFS') {
-      const result = DFS(matrix,[start.row, start.col], objectives[0]); // replace with your own search function
-      // colorNodes();
-      // time = startSorting(getInsertionSortAnimations(array));
+      const result = DFS(matrix,[start.row, start.col], [objectives[0].row, objectives[0].col]); 
+      colorNodes(result.path, result.expanded);
     } else if (method === 'UCS') {
-      // time = startSorting(getSelectionSortAnimations(array));
-      const result = UCS(matrix, [start.row, start.col], objectives[0]);; // replace with your own search function
-      // colorNodes();
-
+      const result = UCS(matrix, [start.row, start.col], [objectives[0].row, objectives[0].col]); 
+      console.log(result.expanded); // TODO: ucs is not saving expanded nodes
+      colorNodes(result.path, result.expanded);
     }
 
     enableButtons(time);
@@ -113,16 +163,15 @@ const MatrixVisualization = () => {
 
   return (
     <div className='GraphTraversalVisualiser'>
-      {/* <div className='graph-container'> */}
       <div className="matrix-container">
         {matrix.map((row, rowIndex) => (
-          <div key={rowIndex} className="matrix-row">
+          <div key={rowIndex} className={"matrix-row matrix-row-"+rowIndex }>
             {row.map((cell, colIndex) => (
               <div
                 key={colIndex}
                 className={`matrix-cell ${start.row === rowIndex && start.col === colIndex ? 'start' : ''}
                             ${objectives.some(obj => obj.row === rowIndex && obj.col === colIndex) ? 'objective' : ''}
-                            ${obstacles.some(obs => obs.row === rowIndex && obs.col === colIndex) ? 'obstacle' : ''}`}
+                            ${obstacles.some(obs => obs.row === rowIndex && obs.col === colIndex) ? 'obstacle' : ''} col-index-${colIndex}`}
               >
                 {cell}
               </div>
@@ -154,7 +203,6 @@ const MatrixVisualization = () => {
             disabled={button}
           />
         </form>
-      {/* </div> */}
     </div>
   );
 };

@@ -10,7 +10,6 @@ export function DFS(grid, start, destination) {
     while (queue.length > 0) {
         let { node, path } = queue.shift(); // get the node and its path from the front of the queue
         let current_node_key = node.toString(); // to string for comparison
-        // console.log(current_node_key)
         if (current_node_key === destination.toString()) { // check if we have arrived at the solution
             return { status: "found", path , expanded};
         } else {

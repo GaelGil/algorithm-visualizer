@@ -24,13 +24,21 @@
 }
 
 .objective {
-  background-color: #0f0;
+  background-color: gold;
 }
 
 .obstacle {
-  background-color: #f00;
+  background-color: black;
 }
 
+.path {
+  background-color: #0f0;
+}
+
+
+.expanded {
+  background-color: aquamarine;
+}
 
   /* button start */
   .btn {
