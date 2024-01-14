@@ -35,6 +35,10 @@
   background-color: #0f0;
 }
 
+.weight {
+  background-color: red;
+}
+
 
 .expanded {
   background-color: aquamarine;

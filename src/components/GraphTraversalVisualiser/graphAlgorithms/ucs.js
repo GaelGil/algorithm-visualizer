@@ -16,7 +16,7 @@ export function UCS(grid, start, destination) {
         let nodeKey = node.toString(); // to string for comparison
 
         if (nodeKey === destination.toString()) { // check if we have arrived at the solution
-            return { status: "found", path, cost };
+            return { status: "found", path, cost , expanded};
         } else {
             if (!(visited.hasOwnProperty(nodeKey))) { // if we have not been to this node, add it
                 visited[nodeKey] = true; // mark as visited

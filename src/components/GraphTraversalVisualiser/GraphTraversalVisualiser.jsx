@@ -139,7 +139,7 @@ const MatrixVisualization = () => {
       colorNodes(result.path, result.expanded);
     } else if (method === 'UCS') {
       const result = UCS(matrix, [start.row, start.col], [objectives[0].row, objectives[0].col]); 
-      console.log(result.expanded); // TODO: ucs is not saving expanded nodes
+      console.log(result.expanded); 
       colorNodes(result.path, result.expanded);
     }
 
