@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 import SortingVisualiser from './components/SortingVisualiser/SortingVisualiser';
 import GraphTraversalVisualiser from './components/GraphTraversalVisualiser/GraphTraversalVisualiser';
-import NavBar from './components/NavBar/NavBar';
+import NavBar from './components/NavBar/navbar'
 
 function App() {
   const [currentView, setCurrentView] = useState('sorting'); // Default to sorting visualization
