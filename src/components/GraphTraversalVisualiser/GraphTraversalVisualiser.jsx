@@ -56,7 +56,7 @@ const MatrixVisualization = () => {
   };
 
   const generateMatrix = () => {
-    const n = 40
+    const n = 30
     const newMatrix = Array.from({ length: n }, () => Array(n).fill(" ")); // generate array
     const objectivesArray = []; // array to hold bojectives
     const obstaclesArray = []; // array to hold obstacles
@@ -106,7 +106,9 @@ const MatrixVisualization = () => {
       const [row, col] = node;
       const nodeElement = document.querySelector(`.matrix-row-${row} .col-index-${col}`);
       if (nodeElement) {
-        nodeElement.classList.add('path');          
+        if (!(nodeElement.classList.contains('objective')) && !(nodeElement.classList.contains('start'))){
+          nodeElement.classList.add('path');          
+        }
       }});
 
     if (expanded){
@@ -114,7 +116,7 @@ const MatrixVisualization = () => {
       const [row, col] = node;
       const nodeElement = document.querySelector(`.matrix-row-${row} .col-index-${col}`);
       if (nodeElement) {
-        if (!(nodeElement.classList.contains('path'))){
+        if (!(nodeElement.classList.contains('path')) && !(nodeElement.classList.contains('objective')) && !(nodeElement.classList.contains('start'))){
           nodeElement.classList.add('expanded');          
         } 
       }});
@@ -171,14 +173,23 @@ const MatrixVisualization = () => {
                 key={colIndex}
                 className={`matrix-cell ${start.row === rowIndex && start.col === colIndex ? 'start' : ''}
                             ${objectives.some(obj => obj.row === rowIndex && obj.col === colIndex) ? 'objective' : ''}
-                            ${obstacles.some(obs => obs.row === rowIndex && obs.col === colIndex) ? 'obstacle' : ''} col-index-${colIndex}`}
-              >
+                            ${obstacles.some(obs => obs.row === rowIndex && obs.col === colIndex) ? 'obstacle' : ''} col-index-${colIndex}`}>
                 {cell}
               </div>
             ))}
           </div>
         ))}
       </div>
+      <div className='legend'>
+          <ul>
+            <li className='start'>Start</li>
+            <li className='objective'>Objective</li>
+            <li className='path'>Path</li>
+            <li className='obstacle white-text'>Obstacle</li>
+            <li className='expanded'>Expanded Nodes</li>
+            <li className='weight'>Weighted (ignored for bfs and dfs)</li>
+          </ul>
+        </div>
       <form onSubmit={handleSubmit}>
           <label htmlFor='algorithm' className='label'>
             Algorithms:
@@ -192,7 +203,7 @@ const MatrixVisualization = () => {
               <option value='DFS'>DFS</option>
               <option value='UCS'>UCS</option>
               <option value='Astar'>Astar</option>
-              <option value='IDS'>IDS</option>
+              {/* <option value='IDS'>IDS</option> */}
             </select>
           </label>
           <input
@@ -203,6 +214,7 @@ const MatrixVisualization = () => {
             disabled={button}
           />
         </form>
+
     </div>
   );
 };

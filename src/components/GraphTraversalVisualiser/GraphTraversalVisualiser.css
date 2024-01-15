@@ -1,6 +1,6 @@
 .matrix-container {
   align-content: center;
-  min-height: 100vh;
+  /* min-height: 100vh; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -42,6 +42,28 @@
 
 .expanded {
   background-color: aquamarine;
+}
+
+.legend {
+  align-content: center;
+  display: flex;
+  justify-content: center;
+}
+
+.legend ul {
+  list-style: none;
+}
+
+.legend li {
+  display: inline;
+  /* color: black; */
+  margin: 10px;
+  padding: 10px;
+}
+
+
+.white-text  {
+  color:white;
 }
 
   /* button start */
