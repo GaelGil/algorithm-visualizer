@@ -3,13 +3,13 @@ import "./GraphTraversalVisualiser.css"
 import { UCS } from './graphAlgorithms/ucs';
 import { BFS } from './graphAlgorithms/bfs';
 import { DFS } from './graphAlgorithms/dfs';
+import { conflict } from './graphAlgorithms/helper';
 
 const MatrixVisualization = () => {
   const [matrix, setMatrix] = useState([]);
   const [start, setStart] = useState({ row: 0, col: 0 });
-  // const [objective, setObjective] = useState({ row: 0, col: 0 });
-
   const [objectives, setObjectives] = useState([]);
+  // const [weights, setWeights] = useState([]);
   const [obstacles, setObstacles] = useState([]);
   const [algorithm, setAlgorithm] = useState('Reset');
   const [button, setButton] = useState(false);
@@ -19,42 +19,10 @@ const MatrixVisualization = () => {
     generateMatrix();
   }, []);
 
-  // function to check for conflict
-  const conflict = (i, j, maze) => {
-    // index checking
-    if (i < 0 || i >= maze.length || j < 0 || j >= maze[0].length) { 
-        return false;
-    }
-    // if its currently in use
-    if (maze[i][j] === "w") {
-        return true;
-    }
-    // if objective is surronded by obstacles
-    if (maze[i][j] === "o") { 
-        if (
-            (i > 0 && maze[i - 1][j] === "w") ||
-            (i < maze.length - 1 && maze[i + 1][j] === "w") ||
-            (j > 0 && maze[i][j - 1] === "w") ||
-            (j < maze[0].length - 1 && maze[i][j + 1] === "w")
-        ) {
-            return true;
-        }
-    }
-    return false;
-  }
 
-  // clear the old path
-  const clearPath = () => {
-    const pathNodes = document.querySelectorAll('.path');
-    pathNodes.forEach((node) => {
-      node.classList.remove('path');
-    });
-    const expandedNodes = document.querySelectorAll('.expanded');
-    expandedNodes.forEach((node) => {
-      node.classList.remove('expanded');
-    });
-  };
 
+
+  // generate a new matrix
   const generateMatrix = () => {
     const n = 30
     const newMatrix = Array.from({ length: n }, () => Array(n).fill(" ")); // generate array
@@ -93,9 +61,11 @@ const MatrixVisualization = () => {
     // set the approriate obstacles, objectives and new matrix/grid
     setObjectives(objectivesArray);
     setObstacles(obstaclesArray);
+    // setWeights(weightsArray);
     setMatrix(newMatrix);
   };
 
+  // reset the matrix
   const resetMatrix = () => {
     clearPath(); // remove the previously drawn path
     generateMatrix(); // generate a new matrix
@@ -123,10 +93,20 @@ const MatrixVisualization = () => {
     }
     }
 
+  // clear the old path
+  const clearPath = () => {
+    const pathNodes = document.querySelectorAll('.path');
+    pathNodes.forEach((node) => {
+      node.classList.remove('path');
+    });
+    const expandedNodes = document.querySelectorAll('.expanded');
+    expandedNodes.forEach((node) => {
+      node.classList.remove('expanded');
+    });
+  };
+
   const handleSubmit = (event) => {
     let method = algorithm;
-    let time = 0;
-    disableButtons();
     if (method === 'astar') {
       // 
     } else if (method === 'BFS') {
@@ -135,7 +115,6 @@ const MatrixVisualization = () => {
       colorNodes(result.path, result.expanded);
     } else if (method === 'Reset') {
       resetMatrix();
-      enableButtons(1);
     } else if (method === 'DFS') {
       const result = DFS(matrix,[start.row, start.col], [objectives[0].row, objectives[0].col]); 
       colorNodes(result.path, result.expanded);
@@ -145,7 +124,6 @@ const MatrixVisualization = () => {
       colorNodes(result.path, result.expanded);
     }
 
-    enableButtons(time);
     event.preventDefault();
   };
 
@@ -153,15 +131,6 @@ const MatrixVisualization = () => {
     setAlgorithm(event.target.value);
   };
 
-  const disableButtons = () => {
-    setButton(true);
-  };
-
-  const enableButtons = (time) => {
-    setTimeout(() => {
-      setButton(false);
-    }, time);
-  };
 
   return (
     <div className='GraphTraversalVisualiser'>

@@ -32,3 +32,28 @@ export function getNeighbors(matrix, current_node) {
 
     return neighbors;
 }
+
+
+  // function to check for conflict
+export function conflict(i, j, maze){
+    // index checking
+    if (i < 0 || i >= maze.length || j < 0 || j >= maze[0].length) { 
+        return false;
+    }
+    // if its currently in use
+    if (maze[i][j] === "w") {
+        return true;
+    }
+    // if objective is surronded by obstacles
+    if (maze[i][j] === "o") { 
+        if (
+            (i > 0 && maze[i - 1][j] === "w") ||
+            (i < maze.length - 1 && maze[i + 1][j] === "w") ||
+            (j > 0 && maze[i][j - 1] === "w") ||
+            (j < maze[0].length - 1 && maze[i][j + 1] === "w")
+        ) {
+            return true;
+        }
+    }
+    return false;
+  }
