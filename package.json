@@ -17,10 +17,9 @@
   },
   "scripts": {
     "predeploy": "npm run build",
-   "deploy": "gh-pages -d build",
-    "start": "export SET NODE_OPTIONS=--openssl-legacy-provider && react-scripts start",
+    "deploy": "gh-pages -b main -d build",
+    "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "./node_modules/.bin/mocha ./src/sortingAlgorithms/tests/",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
