@@ -172,7 +172,6 @@ const MatrixVisualization = () => {
               <option value='DFS'>DFS</option>
               <option value='UCS'>UCS</option>
               <option value='Astar'>Astar</option>
-              {/* <option value='IDS'>IDS</option> */}
             </select>
           </label>
           <input

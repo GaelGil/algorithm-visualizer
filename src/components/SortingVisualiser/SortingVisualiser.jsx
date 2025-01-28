@@ -6,8 +6,8 @@ import { getSelectionSortAnimations } from './sortingAlgorithms/selectionSort';
 import './SortingVisualiser.css'; 
 
 const ANIMATION_SPEED_MS = 5;
-const PRIMARY_COLOR = 'red';
-const SECONDARY_COLOR = 'grey';
+const PRIMARY_COLOR = 'green';
+const SECONDARY_COLOR = 'red';
 
 const SortingVisualiser = () => {
   const [array, setArray] = useState([]); 
@@ -104,7 +104,7 @@ const SortingVisualiser = () => {
                   className="array-bar"
                   key={idx}
                   style={{
-                    backgroundColor: "grey",
+                    backgroundColor: "red",
                     height: `${value}px`,
                     width: "20px",
                   }}>
