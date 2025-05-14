@@ -12,7 +12,8 @@ const MyNavbar = () => {
           <Nav className="ms-auto">
             <Nav.Link as={Link} to="/">Home</Nav.Link>
             <Nav.Link as={Link} to="/graph">Graph</Nav.Link>
-            <Nav.Link as={Link} to="/contact">Contact</Nav.Link>
+            <Nav.Link as={Link} to="/array">Array</Nav.Link>
+            {/* <Nav.Link as={Link} to="/contact">Contact</Nav.Link> */}
           </Nav>
         </Navbar.Collapse>
       </Container>

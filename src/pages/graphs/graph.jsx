@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import "./graph.css"
+import "./Graph.css"
 import { UCS } from './graphAlgorithms/ucs';
 import { BFS } from './graphAlgorithms/bfs';
 import { DFS } from './graphAlgorithms/dfs';
@@ -147,6 +147,7 @@ const MatrixVisualization = () => {
           </div>
         ))}
       </div>
+
       <div className='legend'>
           <ul>
             <li className='start'>Start</li>
@@ -180,7 +181,6 @@ const MatrixVisualization = () => {
             disabled={button}
           />
         </form>
-
     </div>
   );
 };
