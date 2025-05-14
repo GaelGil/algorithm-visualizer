@@ -5,7 +5,7 @@ import GraphTraversalVisualiser from './components/GraphTraversalVisualiser/Grap
 import NavBar from './components/NavBar/navbar'
 
 function App() {
-  const [currentView, setCurrentView] = useState('sorting'); // Default to sorting visualization
+  const [currentView, setCurrentView] = useState('sorting'); 
 
   const handleViewChange = (view) => {
     setCurrentView(view);
