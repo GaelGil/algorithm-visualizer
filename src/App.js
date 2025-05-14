@@ -1,22 +1,24 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import MyNavbar from './components/navbar/MyNavbar';
 
+import MyNavbar from './components/navbar/MyNavbar';
 import Home from './pages/Home';
-import Graph from './pages/graphs/Graphs';
-import Array from './pages/array/Arrays';
+import Graphs from './pages/graphs/Graphs';
+import Arrays from './pages/array/Arrays';
 
 function App() {
   return (
     <Router>
-      <MyNavbar />
-      <main className="p-4">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/graph" element={<Graph />} />
-          <Route path="/array" element={<Array />} />
-        </Routes>
-      </main>
+      <div>
+        <MyNavbar />
+        <main className="p-4">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/graph" element={<Graphs />} />
+            <Route path="/array" element={<Arrays />} />
+          </Routes>
+        </main>
+      </div>
     </Router>
   );
 }
