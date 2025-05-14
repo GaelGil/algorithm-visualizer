@@ -1,0 +1,122 @@
+.matrix-container {
+  align-content: center;
+  /* min-height: 100vh; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.matrix-row {
+  display: flex;
+}
+
+.matrix-cell {
+  border: 1px solid black;
+  height: 15px;
+  width: 15px;
+  padding: 0px;
+  margin: 0px;
+}
+
+.start {
+  background-color: #00f;
+}
+
+.objective {
+  background-color: gold;
+}
+
+.obstacle {
+  background-color: black;
+}
+
+.path {
+  background-color: #0f0;
+}
+
+.weight {
+  background-color: red;
+}
+
+
+.expanded {
+  background-color: aquamarine;
+}
+
+.legend {
+  align-content: center;
+  display: flex;
+  justify-content: center;
+}
+
+.legend ul {
+  list-style: none;
+}
+
+.legend li {
+  display: inline;
+  margin: 10px;
+  padding: 10px;
+}
+
+
+.white-text  {
+  color:white;
+}
+
+  /* button start */
+  .btn {
+    background-color: white;
+    border: none;
+    color: #282c34;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 1px;
+    width: 30%;
+  }
+  
+  /* button end */
+  
+  /* Select menu button start */
+  .custom-select .menu {
+    background-color: white;
+    border: none;
+    color: #282c34;
+    padding: 11px 28px;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 1px;
+  }
+  
+  /* Default app css */
+  .GraphTraversalVisualiser {
+    text-align: center;
+  }
+  
+
+
+  @media (prefers-reduced-motion: no-preference) {
+    .App-logo {
+      animation: App-logo-spin infinite 20s linear;
+    }
+  }
+  
+
+  
+  .App-link {
+    color: #61dafb;
+  }
+  
+  @keyframes App-logo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
