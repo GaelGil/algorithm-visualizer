@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import "./Graph.css"
+import "./Graphs.css"
 import { UCS } from './graphAlgorithms/ucs';
 import { BFS } from './graphAlgorithms/bfs';
 import { DFS } from './graphAlgorithms/dfs';

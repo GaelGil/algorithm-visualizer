@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import MyNavbar from './components/navbar/MyNavbar';
 
 import Home from './pages/Home';
-import Graph from './pages/graphs/Graph';
-import Array from './pages/array/Array';
+import Graph from './pages/graphs/Graphs';
+import Array from './pages/array/Arrays';
 
 function App() {
   return (

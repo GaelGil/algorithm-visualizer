@@ -3,13 +3,13 @@ import { getMergeSortAnimations } from "./sortingAlgorithms/mergeSort";
 import { getBubbleSortAnimations } from './sortingAlgorithms/bubbleSort';
 import { getInsertionSortAnimations } from './sortingAlgorithms/insertionSort';
 import { getSelectionSortAnimations } from './sortingAlgorithms/selectionSort';
-import './Array.css'; 
+import './Arrays.css'; 
 
 const ANIMATION_SPEED_MS = 5;
 const PRIMARY_COLOR = 'green';
 const SECONDARY_COLOR = 'red';
 
-const SortingVisualiser = () => {
+const Arrays = () => {
   const [array, setArray] = useState([]); 
   const [algorithm, setAlgorithm] = useState('Reset');
   const [button, setButton] = useState(false);
@@ -132,7 +132,7 @@ const SortingVisualiser = () => {
   );
 };
 
-export default SortingVisualiser;
+export default Arrays;
 
 function randInts(min, max) {
   min = Math.ceil(min);
