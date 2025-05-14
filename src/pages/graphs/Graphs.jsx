@@ -14,11 +14,9 @@ const MatrixVisualization = () => {
   const [algorithm, setAlgorithm] = useState('Reset');
   const [button] = useState(false);
 
-
   useEffect(() => {
     generateMatrix();
   }, []);
-
 
   // generate a new matrix
   const generateMatrix = () => {
@@ -39,7 +37,7 @@ const MatrixVisualization = () => {
       x = Math.floor(Math.random() * (newMatrix.length)); // new x cord
       y = Math.floor(Math.random() * (newMatrix[0].length)); // new y cord
   
-      if (indices.hasOwnProperty(`${x},${y}`)) { // if its an index we have been do ignore it
+      if (indices.hasOwnProperty(`${x},${y}`)) { // if its an index we have been to ignore it
         continue;
       } else {
         if (Object.keys(indices).length > numObjectives - 1) {
