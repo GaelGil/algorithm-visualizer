@@ -1,4 +1,3 @@
-/*  visualizer start */
 .array-container {
     width: 100%;
     height: 300px; /* or however tall you want the area */
@@ -12,23 +11,3 @@
     border-radius: 4px;
   }
   
-  /*  visualizer end */
-  
-
-
-  /* button start */
-  /* .btn */
-  
-  /* button end */
-  
-  /* Select menu button start */
-  /* .custom-select .menu {
-    background-color: white;
-    border: none;
-    color: #282c34;
-    padding: 11px 28px;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 1px;
-  } */

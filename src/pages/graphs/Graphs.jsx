@@ -129,65 +129,56 @@ const MatrixVisualization = () => {
 
 
   return (
-    <div className="GraphTraversalVisualiser container d-flex flex-column align-items-center py-4">
-
-  {/* Matrix Grid */}
-  <div className="matrix-container d-flex flex-column mb-4">
-    {matrix.map((row, rowIndex) => (
-      <div key={rowIndex} className={`matrix-row d-flex`}>
-        {row.map((cell, colIndex) => (
-          <div
-            key={colIndex}
-            className={`matrix-cell text-center border
-              ${start.row === rowIndex && start.col === colIndex ? 'start' : ''}
-              ${objectives.some(obj => obj.row === rowIndex && obj.col === colIndex) ? 'objective' : ''}
-              ${obstacles.some(obs => obs.row === rowIndex && obs.col === colIndex) ? 'obstacle' : ''}
-            `}
-          >
-            {cell}
+    <div className='GraphTraversalVisualiser container d-flex flex-column align-items-center py-4'>
+      <div className="matrix-container d-flex flex-column mb-4">
+        {matrix.map((row, rowIndex) => (
+          <div key={rowIndex} className={"matrix-row matrix-row-"+rowIndex }>
+            {row.map((cell, colIndex) => (
+              <div
+                key={colIndex}
+                className={`matrix-cell ${start.row === rowIndex && start.col === colIndex ? 'start' : ''}
+                            ${objectives.some(obj => obj.row === rowIndex && obj.col === colIndex) ? 'objective' : ''}
+                            ${obstacles.some(obs => obs.row === rowIndex && obs.col === colIndex) ? 'obstacle' : ''} col-index-${colIndex}`}>
+                {cell}
+              </div>
+            ))}
           </div>
         ))}
       </div>
-    ))}
-  </div>
+      <div className='legend mb-4 text-center'>
+          <ul>
+            <li className='start'>Start</li>
+            <li className='objective'>Objective</li>
+            <li className='path'>Path</li>
+            <li className='obstacle white-text'>Obstacle</li>
+            <li className='expanded'>Expanded Nodes</li>
+            <li className='weight'>Weighted (ignored for bfs and dfs)</li>
+          </ul>
+        </div>
+      <form onSubmit={handleSubmit} className="p-3 border rounded bg-light shadow w-100" style={{ maxWidth: '400px' }}>
+          <label htmlFor='algorithm' className='form-label fw-bold'>
+            Algorithms:
+            <select
+              className='form-select'
+              id='menu'
+              value={algorithm}
+              onChange={handleChange}>
+              <option value='Reset'>Reset Array</option>
+              <option value='BFS'>BFS</option>
+              <option value='DFS'>DFS</option>
+              <option value='UCS'>UCS</option>
+              <option value='Astar'>Astar</option>
+            </select>
+          </label>
+          <input
+            className="btn btn-primary w-100"
+            type="submit"
+            value="Submit"
+            disabled={button}
+          />
+        </form>
 
-  {/* Legend */}
-  <div className="legend mb-4 text-center">
-    <ul className="list-inline">
-      <li className="list-inline-item px-2"><span className="legend-box start"></span> Start</li>
-      <li className="list-inline-item px-2"><span className="legend-box objective"></span> Objective</li>
-      <li className="list-inline-item px-2"><span className="legend-box path"></span> Path</li>
-      <li className="list-inline-item px-2"><span className="legend-box obstacle"></span> Obstacle</li>
-      <li className="list-inline-item px-2"><span className="legend-box expanded"></span> Expanded Nodes</li>
-      <li className="list-inline-item px-2"><span className="legend-box weight"></span> Weighted</li>
-    </ul>
-  </div>
-
-  {/* Form */}
-  <form onSubmit={handleSubmit} className="p-3 border rounded bg-light shadow w-100" style={{ maxWidth: '400px' }}>
-    <div className="mb-3">
-      <label htmlFor="menu" className="form-label fw-bold">Algorithm:</label>
-      <select
-        className="form-select"
-        id="menu"
-        value={algorithm}
-        onChange={handleChange}
-      >
-        <option value="Reset">Reset Array</option>
-        <option value="BFS">BFS</option>
-        <option value="DFS">DFS</option>
-        <option value="UCS">UCS</option>
-        <option value="Astar">Astar</option>
-      </select>
     </div>
-    <input
-      className="btn btn-primary w-100"
-      type="submit"
-      value="Submit"
-      disabled={button}
-    />
-  </form>
-</div>
 
   );
 };
