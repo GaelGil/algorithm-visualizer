@@ -1,35 +1,28 @@
 /*  visualizer start */
 .array-container {
-    /* background-color: aqua; */
     width: 100%;
+    height: 300px; /* or however tall you want the area */
+    align-items: flex-end; 
   }
   
-  .array-bar {
+.array-bar {
     width: 2px;
     display: inline-block;
     margin: 0 1px;
+    border-radius: 4px;
   }
   
   /*  visualizer end */
   
+
+
   /* button start */
-  .btn {
-    /* background-color: white; */
-    border: none;
-    color: #282c34;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 1px;
-    width: 30%;
-  }
+  /* .btn */
   
   /* button end */
   
   /* Select menu button start */
-  .custom-select .menu {
+  /* .custom-select .menu {
     background-color: white;
     border: none;
     color: #282c34;
@@ -38,4 +31,4 @@
     display: inline-block;
     font-size: 16px;
     margin: 1px;
-  }
+  } */

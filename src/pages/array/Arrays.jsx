@@ -95,40 +95,36 @@ const Arrays = () => {
   };
 
   return (
-    <div className='App'>
-      <header className="App-header">
-        {/* The array to be sorted */}
-        <div className="array-container">
-              {array.map((value, idx) => (
-                <div
-                  className="array-bar"
-                  key={idx}
-                  style={{
-                    backgroundColor: "red",
-                    height: `${value}px`,
-                    width: "20px",
-                  }}>
-                </div>
-              ))}
-              <br></br>
-          </div> 
-        {/* Algorithms available */}
-        <div style={{ text: 'black' }} className="custom-select">
-          <form onSubmit={handleSubmit}>
-            <label htmlFor='algorithm' className='label'>Sorting Algorithms: 
-              <select className='menu' id='menu' value={algorithm} onChange={handleChange}>
-                <option value='Reset'>Reset Array</option>
-                <option value='Merge'>Merge Sort</option>
-                <option value='Bubble'>Bubble Sort</option>
-                <option value='Selection'>Selection Sort</option>
-                <option value='Insertion'>Insertion Sort</option>
-              </select>
-            </label>
-            <input style={{ color: 'black' }} className="btn" type="submit" value="Submit" disabled={button} />
-          </form>
+  <div className="container d-flex flex-column justify-content-center align-items-center min-vh-100">
+    <div className="array-container d-flex justify-content-center align-items-end mb-4 flex-wrap">
+      {array.map((value, idx) => (
+        <div className="array-bar"
+          key={idx}
+          style={{
+          backgroundColor: "red",
+          height: `${value}px`,
+          width: "20px",
+          }}>
         </div>
-      </header>
+        ))}
+    </div> 
+    
+    <div style={{ text: 'black' }} className='custom-select text-center'>
+      <form onSubmit={handleSubmit} className='p-3 border rounded bg-light shadow'>
+        <label htmlFor='algorithm' className='form-label fw-bold'>Sorting Algorithms: 
+          <select className='form-select my-2' id='menu' value={algorithm} onChange={handleChange}>
+            <option value='Reset'>Reset Array</option>
+            <option value='Merge'>Merge Sort</option>
+            <option value='Bubble'>Bubble Sort</option>
+            <option value='Selection'>Selection Sort</option>
+            <option value='Insertion'>Insertion Sort</option>
+          </select>
+        </label>
+        <input className='btn btn-primary w-100' type='submit' value='Submit' disabled={button} />
+      </form>
     </div>
+  </div>
+
   );
 };
 
