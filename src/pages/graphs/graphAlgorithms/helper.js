@@ -41,6 +41,12 @@ export function conflict(i, j, maze){
     if (maze[i][j] === "w") {
         return true;
     }
+
+    // if its currently in use
+    if (maze[i][j] === "e") {
+        return true;
+    }
+
     // if objective is surronded by obstacles
     if (maze[i][j] === "o") { 
         if (

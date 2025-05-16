@@ -21,7 +21,7 @@ export function BFS(grid, start, destination) {
 
                     if (!(visited.hasOwnProperty(neighbor_key))) { // if the neighbor has not been visited, add to the queue
                         if (!(grid[neighbor[0]][neighbor[1]] === "w")) { // if there is no wall, then we add to end of queue
-                            queue.push({ node: neighbor, path: path.concat([neighbor]) });
+                            queue.push({ node: neighbor, path: path.concat([neighbor]) }); // add to end of queue
                             expanded.push(neighbor); // add the expanded node to the list
                         }
                     }

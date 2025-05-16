@@ -8,6 +8,7 @@ export function DFS(grid, start, destination) {
     while (queue.length > 0) {
         let { node, path } = queue.shift(); // get the node and its path from the front of the queue
         let current_node_key = node.toString(); // to string for comparison
+
         if (current_node_key === destination.toString()) { // check if we have arrived at the solution
             return { status: "found", path , expanded};
         } else {
@@ -17,9 +18,10 @@ export function DFS(grid, start, destination) {
                 for (let i = 0; i < neighbors.length; i++) {
                     let neighbor = neighbors[i]; 
                     let neighbor_key = neighbor.toString();
+
                     if (!(visited.hasOwnProperty(neighbor_key))) { // if the neighbor has not been visited, add to the queue
                         if (!(grid[neighbor[0]][neighbor[1]] === "w")) { // if there is no wall, then we add beggining of queue
-                            queue.unshift({ node: neighbor, path: path.concat([neighbor]) });
+                            queue.unshift({ node: neighbor, path: path.concat([neighbor]) }); // add to beggining of queue
                             expanded.push(neighbor); // add the expanded node to the list
                         }
                     }

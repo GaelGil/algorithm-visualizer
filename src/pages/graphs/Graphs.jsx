@@ -9,8 +9,8 @@ const MatrixVisualization = () => {
   const [matrix, setMatrix] = useState([]);
   const [start, setStart] = useState({ row: 0, col: 0 });
   const [objectives, setObjectives] = useState([]);
-  const [weights, setWeights] = useState([]);
   const [obstacles, setObstacles] = useState([]);
+  const [weights, setWeights] = useState([]);
   const [algorithm, setAlgorithm] = useState('Reset');
   const [button] = useState(false);
 
@@ -25,43 +25,40 @@ const MatrixVisualization = () => {
     const objectivesArray = []; // array to hold bojectives
     const obstaclesArray = []; // array to hold obstacles
     const weightsArray = []; // array to hold obstacles
-    const indices = {}; // dictionary to hold indicies to avoid overlap
+    // const indices = {}; // dictionary to hold indicies to avoid overlap
     const numObjectives = 1; // number of objectives
     const numObstacles = 100; // number of obstacles
     const numWeights = 50; // number of weights
+    let placed = 0;
     // create and set the starting point
     let x = Math.floor(Math.random() * (newMatrix.length)); 
     let y = Math.floor(Math.random() * (newMatrix[0].length)); 
     setStart({ row: x, col: y }); 
     newMatrix[x][y] = "s";
-    indices[`${x},${y}`] = 0; // add starting point to indices
-    
-    // generate the map
-    while (Object.keys(indices).length < numObjectives + numObstacles +  numWeights) {
+
+
+    while (placed < numObjectives + numObstacles + numWeights){
       // generate random x and y cord 
       x = Math.floor(Math.random() * (newMatrix.length));
       y = Math.floor(Math.random() * (newMatrix[0].length));
-  
-      if (indices.hasOwnProperty(`${x},${y}`)) { // if its an index we have been to ignore it
-        continue;
-      }
-      else {
-        if (Object.keys(indices).length > numObjectives ) {
-          if (conflict(x, y, newMatrix)) { // if there is a conflic ignore the index
-            continue;
-          } else {
-            obstaclesArray.push({ row: x, col: y }); // add to obstacles
-            indices[`${x},${y}`] = 0;
-            newMatrix[x][y] = "w";
-          }
-        } else {
-          objectivesArray.push({ row: x, col: y }); // add to objectives
-          newMatrix[x][y] = "o";
-          indices[`${x},${y}`] = 0;
+      if (!conflict(x, y, newMatrix)){ // if not conflict 
+        if (placed === 0){
+            objectivesArray.push({ row: x, col: y }); // add to objective
+            newMatrix[x][y] = "o";
         }
+        else if (placed >= numObjectives && placed <= numObjectives+numObstacles){
+            obstaclesArray.push({ row: x, col: y }); // add to obstacles
+            newMatrix[x][y] = "w";
+        }
+        else {
+            obstaclesArray.push({ row: x, col: y }); // add to weight
+            newMatrix[x][y] = "e";
+        }
+        placed += 1
+
       }
     }
-    // set the approriate obstacles, objectives and new matrix/grid
+
     setObjectives(objectivesArray);
     setObstacles(obstaclesArray);
     setWeights(weightsArray);
@@ -139,7 +136,8 @@ const MatrixVisualization = () => {
             {row.map((cell, colIndex) => (
               <div
                 key={colIndex}
-                className={`matrix-cell ${start.row === rowIndex && start.col === colIndex ? 'start' : ''}
+                className={`matrix-cell
+                            ${start.row === rowIndex && start.col === colIndex ? 'start' : ''}
                             ${objectives.some(obj => obj.row === rowIndex && obj.col === colIndex) ? 'objective' : ''}
                             ${obstacles.some(obs => obs.row === rowIndex && obs.col === colIndex) ? 'obstacle' : ''} 
                             ${weights.some(weight => weight.row === rowIndex && weight.col === colIndex) ? 'weight' : ''}

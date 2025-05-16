@@ -1,9 +1,6 @@
 import { PriorityQueue } from './datastructures/priorityQueue';
 import { getNeighbors } from './helper';
 
-
-
-
 export function UCS(grid, start, destination) {
     let priorityQueue = new PriorityQueue();
     priorityQueue.enqueue({ node: start, path: [start], cost: 0 });
@@ -18,7 +15,7 @@ export function UCS(grid, start, destination) {
         if (nodeKey === destination.toString()) { // check if we have arrived at the solution
             return { status: "found", path, cost , expanded};
         } else {
-            if (!(visited.hasOwnProperty(nodeKey))) { // if we have not been to this node, add it
+            if (!(visited.hasOwnProperty(nodeKey))) { // if we have not been to this node
                 visited[nodeKey] = true; // mark as visited
                 let neighbors = getNeighbors(grid, node); // get neighbors of the current node
                 for (let i = 0; i < neighbors.length; i++) {
