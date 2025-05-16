@@ -1,22 +1,25 @@
-import React, { useState } from 'react';
-import './App.css';
-import SortingVisualiser from './components/SortingVisualiser/SortingVisualiser';
-import GraphTraversalVisualiser from './components/GraphTraversalVisualiser/GraphTraversalVisualiser';
-import NavBar from './components/NavBar/navbar'
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+import MyNavbar from './components/navbar/MyNavbar';
+import Home from './pages/Home';
+import Graphs from './pages/graphs/Graphs';
+import Arrays from './pages/array/Arrays';
 
 function App() {
-  const [currentView, setCurrentView] = useState('sorting'); 
-
-  const handleViewChange = (view) => {
-    setCurrentView(view);
-  };
-
   return (
-    <div className="App">
-      <NavBar onNavigate={handleViewChange} />
-      {currentView === 'sorting' ? <SortingVisualiser /> : null}
-      {currentView === 'traversal' ? <GraphTraversalVisualiser /> : null}
-    </div>
+    <Router>
+      <div>
+        <MyNavbar />
+        <main className="p-4">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/graph" element={<Graphs />} />
+            <Route path="/array" element={<Arrays />} />
+          </Routes>
+        </main>
+      </div>
+    </Router>
   );
 }
 
