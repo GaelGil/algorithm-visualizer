@@ -1,7 +1,7 @@
 import { PriorityQueue } from './datastructures/priorityQueue';
 import { getNeighbors } from './helper';
 
-export function Astar(grid, start, destination) {
+export function ASTAR(grid, start, destination) {
     let priorityQueue = new PriorityQueue();
     priorityQueue.enqueue({ node: start, path: [start], cost: 0 });
 

@@ -37,19 +37,11 @@ export function conflict(i, j, maze){
     if (i < 0 || i >= maze.length || j < 0 || j >= maze[0].length) { 
         return false;
     }
-    // if its currently in use
-    if (maze[i][j] === 'w') {
-        console.log(maze[i][j])
+
+
+    if (maze[i][j] === 'w' || maze[i][j] === 'e' || maze[i][j] === 'o' || maze[i][j] === 's'){
         return true;
     }
-
-    if (maze[i][j] === 'e') {
-        return true;
-    }
-
-      if (maze[i][j] === 'o') { 
-        return true;
-      }
 
     // if objective is surronded by obstacles
   

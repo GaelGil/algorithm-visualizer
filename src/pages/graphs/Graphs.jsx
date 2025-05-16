@@ -3,6 +3,7 @@ import "./Graphs.css"
 import { UCS } from './graphAlgorithms/ucs';
 import { BFS } from './graphAlgorithms/bfs';
 import { DFS } from './graphAlgorithms/dfs';
+import { ASTAR } from './graphAlgorithms/astar';
 import { conflict } from './graphAlgorithms/helper';
 
 const MatrixVisualization = () => {
@@ -33,8 +34,9 @@ const MatrixVisualization = () => {
     // create and set the starting point
     let x = Math.floor(Math.random() * (newMatrix.length)); 
     let y = Math.floor(Math.random() * (newMatrix[0].length)); 
+    
     setStart({ row: x, col: y }); 
-    newMatrix[x][y] = "s";
+    newMatrix[x][y] = 's';
 
 
     while (placed < numObjectives + numObstacles + numWeights){
@@ -57,6 +59,7 @@ const MatrixVisualization = () => {
         placed += 1
       }
     }
+
 
     setObjectives(objectivesArray);
     setObstacles(obstaclesArray);
@@ -105,8 +108,9 @@ const MatrixVisualization = () => {
 
   const handleSubmit = (event) => {
     let method = algorithm;
-    if (method === 'astar') {
-      // 
+    if (method === 'ASTAR') {
+      const result = ASTAR(matrix, [start.row, start.col], [objectives[0].row, objectives[0].col]); 
+      colorNodes(result.path, result.expanded);
     } else if (method === 'BFS') {
       const result = BFS(matrix, [start.row, start.col], [objectives[0].row, objectives[0].col]); 
       colorNodes(result.path, result.expanded);
@@ -169,7 +173,7 @@ const MatrixVisualization = () => {
               <option value='BFS'>BFS</option>
               <option value='DFS'>DFS</option>
               <option value='UCS'>UCS</option>
-              <option value='Astar'>Astar</option>
+              <option value='ASTAR'>Astar</option>
             </select>
           </label>
           <input
