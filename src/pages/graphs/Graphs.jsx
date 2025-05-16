@@ -22,7 +22,7 @@ const MatrixVisualization = () => {
   // generate a new matrix
   const generateMatrix = () => {
     const n = 30 // nxn array
-    const newMatrix = Array.from({ length: n }, () => Array(n).fill(" ")); // generate array
+    const newMatrix = Array.from({ length: n }, () => Array(50).fill(" ")); // generate array
     const objectivesArray = []; // array to hold bojectives
     const obstaclesArray = []; // array to hold obstacles
     const weightsArray = []; // array to hold obstacles
