@@ -9,7 +9,7 @@ const MatrixVisualization = () => {
   const [matrix, setMatrix] = useState([]);
   const [start, setStart] = useState({ row: 0, col: 0 });
   const [objectives, setObjectives] = useState([]);
-  // const [weights, setWeights] = useState([]);
+  const [weights, setWeights] = useState([]);
   const [obstacles, setObstacles] = useState([]);
   const [algorithm, setAlgorithm] = useState('Reset');
   const [button] = useState(false);
@@ -20,22 +20,26 @@ const MatrixVisualization = () => {
 
   // generate a new matrix
   const generateMatrix = () => {
-    const n = 30
+    const n = 30 // nxn array
     const newMatrix = Array.from({ length: n }, () => Array(n).fill(" ")); // generate array
     const objectivesArray = []; // array to hold bojectives
     const obstaclesArray = []; // array to hold obstacles
+    const weightsArray = []; // array to hold obstacles
     const indices = {}; // dictionary to hold indicies to avoid overlap
     const numObjectives = 2; // number of objectives
     const numObstacles = 100; // number of obstacles
-    let x = Math.floor(Math.random() * (newMatrix.length)); // a random x cord
-    let y = Math.floor(Math.random() * (newMatrix[0].length)); // a randon y cord
-    setStart({ row: x, col: y }); // set the starting point
+    const numWeights = 50; // number of weights
+    // create and set the starting point
+    let x = Math.floor(Math.random() * (newMatrix.length)); 
+    let y = Math.floor(Math.random() * (newMatrix[0].length)); 
+    setStart({ row: x, col: y }); 
     indices[`${x},${y}`] = 0; // add starting point to indices
     
     // generate the map
-    while (Object.keys(indices).length < numObjectives + numObstacles) {
-      x = Math.floor(Math.random() * (newMatrix.length)); // new x cord
-      y = Math.floor(Math.random() * (newMatrix[0].length)); // new y cord
+    while (Object.keys(indices).length < numObjectives + numObstacles +  numWeights) {
+      // generate random x and y cord 
+      x = Math.floor(Math.random() * (newMatrix.length));
+      y = Math.floor(Math.random() * (newMatrix[0].length));
   
       if (indices.hasOwnProperty(`${x},${y}`)) { // if its an index we have been to ignore it
         continue;
@@ -57,7 +61,7 @@ const MatrixVisualization = () => {
     // set the approriate obstacles, objectives and new matrix/grid
     setObjectives(objectivesArray);
     setObstacles(obstaclesArray);
-    // setWeights(weightsArray);
+    setWeights(weightsArray);
     setMatrix(newMatrix);
   };
 
@@ -76,7 +80,6 @@ const MatrixVisualization = () => {
           nodeElement.classList.add('path');          
         }
       }});
-
     if (expanded){
     expanded.forEach(node => {
       const [row, col] = node;
@@ -106,7 +109,6 @@ const MatrixVisualization = () => {
     if (method === 'astar') {
       // 
     } else if (method === 'BFS') {
-      // console.log(objectives)
       const result = BFS(matrix, [start.row, start.col], [objectives[0].row, objectives[0].col]); 
       colorNodes(result.path, result.expanded);
     } else if (method === 'Reset') {
@@ -116,10 +118,8 @@ const MatrixVisualization = () => {
       colorNodes(result.path, result.expanded);
     } else if (method === 'UCS') {
       const result = UCS(matrix, [start.row, start.col], [objectives[0].row, objectives[0].col]); 
-      console.log(result.expanded); 
       colorNodes(result.path, result.expanded);
     }
-
     event.preventDefault();
   };
 
@@ -132,15 +132,17 @@ const MatrixVisualization = () => {
     <div className='GraphTraversalVisualiser container d-flex flex-column align-items-center py-4'>
       <div className="matrix-container d-flex flex-column mb-4">
         {matrix.map((row, rowIndex) => (
-          <div key={rowIndex} className={"matrix-row matrix-row-"+rowIndex }>
+          <div key={rowIndex} className={"matrix-row matrix-row-"+rowIndex}>
             {row.map((cell, colIndex) => (
               <div
                 key={colIndex}
                 className={`matrix-cell ${start.row === rowIndex && start.col === colIndex ? 'start' : ''}
                             ${objectives.some(obj => obj.row === rowIndex && obj.col === colIndex) ? 'objective' : ''}
-                            ${obstacles.some(obs => obs.row === rowIndex && obs.col === colIndex) ? 'obstacle' : ''} col-index-${colIndex}`}>
+                            ${obstacles.some(obs => obs.row === rowIndex && obs.col === colIndex) ? 'obstacle' : ''} 
+                            ${weights.some(weight => weight.row === rowIndex && weight.col === colIndex) ? 'weight' : ''}
+                            col-index-${colIndex}`}>
                 {cell}
-              </div>
+              </div> 
             ))}
           </div>
         ))}
@@ -150,7 +152,7 @@ const MatrixVisualization = () => {
             <li className='start'>Start</li>
             <li className='objective'>Objective</li>
             <li className='path'>Path</li>
-            <li className='obstacle white-text'>Obstacle</li>
+            <li className='obstacle'>Obstacle</li>
             <li className='expanded'>Expanded Nodes</li>
             <li className='weight'>Weighted (ignored for bfs and dfs)</li>
           </ul>

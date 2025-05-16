@@ -20,15 +20,12 @@ export function getNeighbors(matrix, current_node) {
     // left neighbor
     if (isValidIndex(matrix, i, j - 1)) {
         neighbors.push([i, j-1]);
-
     }
 
     // right neighbor
     if (isValidIndex(matrix, i, j + 1)) {
         neighbors.push([i, j+1]);
-
     }
-
 
     return neighbors;
 }

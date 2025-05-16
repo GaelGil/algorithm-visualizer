@@ -1,11 +1,3 @@
-.matrix-container {
-  align-content: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
 .matrix-row {
   display: flex;
 }
@@ -18,30 +10,7 @@
   margin: 0px;
 }
 
-.start {
-  background-color: #00f;
-}
 
-.objective {
-  background-color: gold;
-}
-
-.obstacle {
-  background-color: black;
-}
-
-.path {
-  background-color: #0f0;
-}
-
-.weight {
-  background-color: red;
-}
-
-
-.expanded {
-  background-color: aquamarine;
-}
 
 .legend {
   align-content: center;
@@ -59,54 +28,6 @@
   padding: 10px;
 }
 
-
-.white-text  {
-  color:white;
-}
-
-  /* button start */
-  .btn {
-    background-color: white;
-    border: none;
-    color: #282c34;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 1px;
-    width: 30%;
-  }
-  
-  /* button end */
-  
-  /* Select menu button start */
-  .custom-select .menu {
-    background-color: white;
-    border: none;
-    color: #282c34;
-    padding: 11px 28px;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 1px;
-  }
-  
-  /* Default app css */
-  .GraphTraversalVisualiser {
-    text-align: center;
-  }
-  
-
-
-  .matrix-container {
-  display: flex;
-  flex-direction: column;
-}
-
-.matrix-row {
-  display: flex;
-}
 
 .matrix-cell {
   width: 30px;
@@ -137,27 +58,20 @@
   background-color: #ffc107 !important;
 }
 
-.expanded {
+/* .expanded {
   background-color: #0dcaf0 !important;
-}
+    color: white;
+
+} */
 
 .weight {
-  background-color: #f8d7da !important;
+  background-color: red;
+    color: white;
+
 }
 
-/* Legend styling */
-.legend-box {
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  vertical-align: middle;
-  margin-right: 5px;
-  border: 1px solid #ccc;
-}
+.expanded {
+  background-color: aquamarine;
+    /* color: white; */
 
-/* .legend .start { background-color: #0d6efd; }
-.legend .objective { background-color: #198754; }
-.legend .path { background-color: #ffc107; }
-.legend .obstacle { background-color: #6c757d; }
-.legend .expanded { background-color: #0dcaf0; }
-.legend .weight { background-color: #f8d7da; } */
+}
