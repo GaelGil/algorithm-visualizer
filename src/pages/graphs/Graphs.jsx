@@ -26,13 +26,14 @@ const MatrixVisualization = () => {
     const obstaclesArray = []; // array to hold obstacles
     const weightsArray = []; // array to hold obstacles
     const indices = {}; // dictionary to hold indicies to avoid overlap
-    const numObjectives = 2; // number of objectives
+    const numObjectives = 1; // number of objectives
     const numObstacles = 100; // number of obstacles
     const numWeights = 50; // number of weights
     // create and set the starting point
     let x = Math.floor(Math.random() * (newMatrix.length)); 
     let y = Math.floor(Math.random() * (newMatrix[0].length)); 
     setStart({ row: x, col: y }); 
+    newMatrix[x][y] = "s";
     indices[`${x},${y}`] = 0; // add starting point to indices
     
     // generate the map
@@ -43,8 +44,9 @@ const MatrixVisualization = () => {
   
       if (indices.hasOwnProperty(`${x},${y}`)) { // if its an index we have been to ignore it
         continue;
-      } else {
-        if (Object.keys(indices).length > numObjectives - 1) {
+      }
+      else {
+        if (Object.keys(indices).length > numObjectives ) {
           if (conflict(x, y, newMatrix)) { // if there is a conflic ignore the index
             continue;
           } else {
@@ -54,6 +56,7 @@ const MatrixVisualization = () => {
           }
         } else {
           objectivesArray.push({ row: x, col: y }); // add to objectives
+          newMatrix[x][y] = "o";
           indices[`${x},${y}`] = 0;
         }
       }
