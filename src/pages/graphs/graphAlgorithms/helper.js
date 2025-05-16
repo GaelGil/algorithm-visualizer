@@ -56,3 +56,8 @@ export function conflict(i, j, maze){
     
     return false;
   }
+
+
+  export function heuristic(neighbor, destination){
+    return 1;
+  }
