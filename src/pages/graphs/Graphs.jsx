@@ -44,18 +44,17 @@ const MatrixVisualization = () => {
       if (!conflict(x, y, newMatrix)){ // if not conflict 
         if (placed === 0){
             objectivesArray.push({ row: x, col: y }); // add to objective
-            newMatrix[x][y] = "o";
+            newMatrix[x][y] = 'o';
         }
         else if (placed >= numObjectives && placed <= numObjectives+numObstacles){
             obstaclesArray.push({ row: x, col: y }); // add to obstacles
-            newMatrix[x][y] = "w";
+            newMatrix[x][y] = 'w';
         }
         else {
-            obstaclesArray.push({ row: x, col: y }); // add to weight
-            newMatrix[x][y] = "e";
+            weightsArray.push({ row: x, col: y }); // add to weight
+            newMatrix[x][y] = 'e';
         }
         placed += 1
-
       }
     }
 

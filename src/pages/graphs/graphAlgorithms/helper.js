@@ -38,17 +38,21 @@ export function conflict(i, j, maze){
         return false;
     }
     // if its currently in use
-    if (maze[i][j] === "w") {
+    if (maze[i][j] === 'w') {
+        console.log(maze[i][j])
         return true;
     }
 
-    // if its currently in use
-    if (maze[i][j] === "e") {
+    if (maze[i][j] === 'e') {
         return true;
     }
+
+      if (maze[i][j] === 'o') { 
+        return true;
+      }
 
     // if objective is surronded by obstacles
-    if (maze[i][j] === "o") { 
+  
         if (
             (i > 0 && maze[i - 1][j] === "w") ||
             (i < maze.length - 1 && maze[i + 1][j] === "w") ||
@@ -57,6 +61,6 @@ export function conflict(i, j, maze){
         ) {
             return true;
         }
-    }
+    
     return false;
   }
