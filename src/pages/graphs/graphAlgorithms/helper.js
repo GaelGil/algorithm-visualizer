@@ -58,6 +58,6 @@ export function conflict(i, j, maze){
   }
 
 
-  export function heuristic(neighbor, destination){
-    return 1;
+  export function heuristic(node, destination){
+    return (Math.abs(node[0]-destination[0]) + Math.abs(node[1]-destination[1]));
   }
