@@ -6,7 +6,7 @@ export function DFS(grid, start, destination) {
     let expanded = [];
 
     while (stack) {
-        let { node, path } = stack.shift(); // get the node and its path from the front of the queue
+        let { node, path } = stack.shift(); // get the node and its path from the front of the stack
         let current_node_key = node.toString(); // to string for comparison
 
         if (current_node_key === destination.toString()) { // check if we have arrived at the solution
@@ -21,8 +21,8 @@ export function DFS(grid, start, destination) {
         let neighbors = getNeighbors(grid, node); // get neighbors of the current node
         for (let i = 0; i < neighbors.length; i++) {
             let neighbor = neighbors[i]; 
-            if (!(grid[neighbor[0]][neighbor[1]] === "w")) { // if there is no wall, then we add beggining of queue
-                stack.unshift({ node: neighbor, path: path.concat([neighbor]) }); // add to beggining of queue
+            if (!(grid[neighbor[0]][neighbor[1]] === "w")) { // if there is no wall
+                stack.unshift({ node: neighbor, path: path.concat([neighbor]) }); // add to beggining of stack
                 expanded.push(neighbor); // add the expanded node to the list
             }
         }
