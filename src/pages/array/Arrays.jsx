@@ -8,6 +8,24 @@ import './Arrays.css';
 const ANIMATION_SPEED_MS = 5;
 const PRIMARY_COLOR = 'green';
 const SECONDARY_COLOR = 'red';
+const algorithmsInfo = [
+  {
+    name: 'Bubble Sort',
+    description: `desciption`,
+  },
+  {
+    name: 'Merge Sort',
+    description: `desc`,
+  },
+  {
+    name: 'Selection Sort',
+    description: `desc`,
+  },
+  {
+    name: 'Insertion Sort',
+    description: ``,
+  },
+];
 
 const Arrays = () => {
   const [array, setArray] = useState([]); 
@@ -59,6 +77,9 @@ const Arrays = () => {
       }
     return animations.length*ANIMATION_SPEED_MS;
   };
+
+
+  
 
   const handleSubmit = (event) => {
     let method = algorithm;
@@ -123,6 +144,23 @@ const Arrays = () => {
         <input className='btn btn-primary w-100' type='submit' value='Submit' disabled={button} />
       </form>
     </div>
+
+    <div className="container mt-5">
+      <h2 className="mb-4 text-center">About Sorting Algorithms</h2>
+      <div className="row">
+        {algorithmsInfo.map((algo, index) => (
+          <div className="col-md-6 mb-4" key={index}>
+            <div className="card h-100 shadow-sm">
+              <div className="card-body">
+                <h5 className="card-title">{algo.name}</h5>
+                <p className="card-text">{algo.description}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
   </div>
 
   );

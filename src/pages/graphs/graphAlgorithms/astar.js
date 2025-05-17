@@ -6,10 +6,8 @@ export function ASTAR(grid, start, destination) {
     priorityQueue.enqueue({ node: start, path: [start], cost: heuristic(start, destination)}); // add start node with cost being heuristic value
     let expanded = []; // expanded nodes (nodes that weve checked all neighbors)
 
-
     while (!priorityQueue.isEmpty()) {
         let { node, path, cost } = priorityQueue.dequeue(); // get the node, its path, and cost from the front of the priority queue
-
         if (node.toString() === destination.toString()) { // if node is destination 
             return { status: "found", path, cost, expanded }; // return found, path, cost, and expanded. 
         }
