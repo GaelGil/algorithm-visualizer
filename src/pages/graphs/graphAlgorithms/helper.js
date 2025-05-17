@@ -7,6 +7,7 @@ export function getNeighbors(matrix, current_node) {
     let neighbors = []
     let i = current_node[0];
     let j = current_node[1];
+    
     // top neihgbor
     if (isValidIndex(matrix, i - 1, j)) {
         neighbors.push([i - 1, j]);
@@ -58,6 +59,18 @@ export function conflict(i, j, maze){
   }
 
 
-  export function heuristic(node, destination){
+export function heuristic(node, destination){
     return (Math.abs(node[0]-destination[0]) + Math.abs(node[1]-destination[1]));
-  }
+}
+
+
+export function exists(list_, node) {
+    const nodeString = JSON.stringify(node);
+    return list_.some(item => JSON.stringify(item) === nodeString);
+}
+
+export function randInts(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
