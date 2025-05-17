@@ -15,7 +15,6 @@ export function UCS(grid, start, destination) {
         if (visited[nodeKey]) {
             continue; // skip if already visited node
         }
-
         visited[nodeKey] = true; // mark as visited
         expanded.push(node); // add to expanded list
 
@@ -28,7 +27,6 @@ export function UCS(grid, start, destination) {
             let neighbor = neighbors[i]; 
             let neighborKey = neighbor.toString();
 
-            if (visited[neighborKey]) continue; // skip visited
 
             if (grid[neighbor[0]][neighbor[1]] !== "w") { // not a wall
                 let moveCost = grid[neighbor[0]][neighbor[1]] === "e" ? 5 : 1; // calculate if neighbor is weighted
