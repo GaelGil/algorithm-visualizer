@@ -6,13 +6,15 @@ import { DFS } from './graphAlgorithms/dfs';
 import { ASTAR } from './graphAlgorithms/astar';
 import { conflict } from './graphAlgorithms/helper';
 
-{/* <a href="https://github.com/GaelGil/algorithm-visualizer/tree/main/src/pages/graphs/graphAlgorithms"> here</a> */}
 
 const algorithmsInfo = [
   {
     name: 'General',
     description: `In this project you can visualize path finding algorithms.
-    Each weighted node has a cost of 5 while non weighted node cost is 1. Below are some basic notes on each algorithm`,
+    Each weighted node has a cost of 5 while non weighted node cost is 1. Below are some basic notes on each algorithm. To learn more
+    about the implementation of the algorithms click the link below.`,
+    link: 'https://github.com/GaelGil/algorithm-visualizer/tree/main/src/pages/graphs/graphAlgorithms', // ← Add this line
+
   },
   {
     name: 'Breadth First Search (BFS)',
@@ -237,6 +239,12 @@ const MatrixVisualization = () => {
               <div className="card-body">
                 <h5 className="card-title">{algo.name}</h5>
                 <p className="card-text">{algo.description}</p>
+                {algo.link && (
+              <>
+              {' '}
+             <a href={algo.link} target="_blank" rel="noopener noreferrer">Learn more</a>
+              </>
+              )}
               </div>
             </div>
           </div>
