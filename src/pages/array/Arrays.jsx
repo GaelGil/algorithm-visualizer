@@ -10,12 +10,19 @@ const PRIMARY_COLOR = 'green';
 const SECONDARY_COLOR = 'red';
 const algorithmsInfo = [
   {
+    name: 'General',
+    description: `Here you can visulize sorting algorithms. The array contains 50 items. Below are some basic notes on each algorithm.`,
+  },
+  {
     name: 'Bubble Sort',
-    description: `desciption`,
+    description: `Bubble sort goes through every element in the array comparing the current item to the one after it.
+    If the current is greater than the next we swap them.  We repeat this until were done. The time complexity of this is
+    O(N^2)`,
   },
   {
     name: 'Merge Sort',
-    description: `desc`,
+    description: `In merge sort we split the array recursively. The idea is that we want to solve a smaller version of the problem so we break it down
+    to its simplest form. This would be two items that we compare which merge into correct order. Then we repeat again until fully merged`,
   },
   {
     name: 'Selection Sort',

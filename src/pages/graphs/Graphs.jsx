@@ -11,7 +11,8 @@ import { conflict } from './graphAlgorithms/helper';
 const algorithmsInfo = [
   {
     name: 'General',
-    description: `In this project you can visualize path finding algorithms. Each weighted node has a cost of 5 while non weighted node cost is 1.`,
+    description: `In this project you can visualize path finding algorithms.
+    Each weighted node has a cost of 5 while non weighted node cost is 1. Below are some basic notes on each algorithm`,
   },
   {
     name: 'Breadth First Search (BFS)',
@@ -40,8 +41,9 @@ const algorithmsInfo = [
     name: 'A* (Astar)',
     description: `A* algorithm is very similar to UCS however we use a heuristic to calculate how close we are to our goal.
     What we pass in to our priorityqueue is f = h + g. Where g is the total cost to the node and h is the approximate distance from 
-    the node to the destination. 
-    This algorithm is an informed algorithm because we are using some information on the destination to guide us.
+    the node to the destination. The priority here is the f value. This algorithm is an informed algorithm because we are using some
+    information on the destination to guide us. This algorithm finds the least costly path. This also expands a less number of nodes
+    them all the aobve
   `,
   },
 ];
