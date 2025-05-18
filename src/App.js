@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import MyNavbar from './components/NavBar/MyNavbar';
+import Navigattion from './components/navigation/Navigattion';
 import Graphs from './pages/graphs/Graphs';
 import Arrays from './pages/array/Arrays';
 
@@ -9,7 +9,7 @@ function App() {
   return (
     <Router>
       <div>
-        <MyNavbar />
+        <Navigattion />
         <main className="p-4">
           <Routes>
             <Route path="/" element={<Graphs />} />

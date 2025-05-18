@@ -2,7 +2,7 @@ import React from 'react';
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-const MyNavbar = () => {
+const Navigation = () => {
   return (
     <Navbar bg="dark" variant="dark" expand="md" collapseOnSelect>
       <Container>
@@ -19,4 +19,4 @@ const MyNavbar = () => {
   );
 };
 
-export default MyNavbar;
+export default Navigation;

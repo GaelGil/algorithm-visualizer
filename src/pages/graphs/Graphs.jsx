@@ -51,13 +51,13 @@ const algorithmsInfo = [
 ];
 
 
-const MatrixVisualization = () => {
+const Graphs = () => {
   const [matrix, setMatrix] = useState([]);
   const [start, setStart] = useState({ row: 0, col: 0 });
   const [objectives, setObjectives] = useState([]);
   const [obstacles, setObstacles] = useState([]);
   const [weights, setWeights] = useState([]);
-  const [algorithm, setAlgorithm] = useState('Reset');
+  const [algorithm, setAlgorithm] = useState('');
   const [button] = useState(false);
 
   useEffect(() => {
@@ -105,7 +105,6 @@ const MatrixVisualization = () => {
       }
     }
 
-
     setObjectives(objectivesArray);
     setObstacles(obstaclesArray);
     setWeights(weightsArray);
@@ -114,6 +113,8 @@ const MatrixVisualization = () => {
 
   // reset the matrix
   const resetMatrix = () => {
+    console.log('here')
+    setAlgorithm('')
     clearPath(); // remove the previously drawn path
     generateMatrix(); // generate a new matrix
   };
@@ -128,7 +129,7 @@ const MatrixVisualization = () => {
         }
       }});
     if (expanded){
-    expanded.forEach(node => {
+      expanded.forEach(node => {
       const [row, col] = node;
       const nodeElement = document.querySelector(`.matrix-row-${row} .col-index-${col}`);
       if (nodeElement) {
@@ -160,15 +161,15 @@ const MatrixVisualization = () => {
     } else if (method === 'BFS') {
       const result = BFS(matrix, [start.row, start.col], [objectives[0].row, objectives[0].col]); 
       colorNodes(result.path, result.expanded);
-    } else if (method === 'Reset') {
-      resetMatrix();
     } else if (method === 'DFS') {
       const result = DFS(matrix,[start.row, start.col], [objectives[0].row, objectives[0].col]); 
       colorNodes(result.path, result.expanded);
     } else if (method === 'UCS') {
       const result = UCS(matrix, [start.row, start.col], [objectives[0].row, objectives[0].col]); 
       colorNodes(result.path, result.expanded);
-    }
+    } else {
+      resetMatrix();
+    } 
     event.preventDefault();
   };
 
@@ -215,7 +216,7 @@ const MatrixVisualization = () => {
               id='menu'
               value={algorithm}
               onChange={handleChange}>
-              <option value='Reset'>Reset Array</option>
+              <option value="">Select Algorithm</option>
               <option value='BFS'>BFS</option>
               <option value='DFS'>DFS</option>
               <option value='UCS'>UCS</option>
@@ -223,11 +224,12 @@ const MatrixVisualization = () => {
             </select>
           </label>
           <input
-            className="btn btn-primary w-100"
+            className="btn btn-primary"
             type="submit"
             value="Submit"
             disabled={button}
           />
+        <button className='btn btn-secondary' onClick={resetMatrix} value='Submit' type='button'>Reset Array</button>
         </form>
 
       <div className="container mt-5">
@@ -257,4 +259,4 @@ const MatrixVisualization = () => {
   );
 };
 
-export default MatrixVisualization;
+export default Graphs;
