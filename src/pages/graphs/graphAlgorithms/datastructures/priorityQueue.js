@@ -14,8 +14,8 @@ export class PriorityQueue {
         return this.heap.shift(); // return from beggining of pq { node, path, cost }
     }
 
-    enqueue({ node, path, cost }) {
-        const newNode = { node, path, cost }; // create new node for pq
+    enqueue({ node, path, cost, gcost=0}) { // priority is f cost not g cost 
+        const newNode = { node, path, cost, gcost }; // create new node for pq
         if (this.isEmpty() || newNode.cost >= this.heap[this.heap.length - 1].cost) { // if pq is empty or larger than current largest
             this.heap.push(newNode); // add to the end
         } else { 

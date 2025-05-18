@@ -1,5 +1,5 @@
 import { PriorityQueue } from './datastructures/priorityQueue';
-import { getNeighbors, exists, randInts } from './helper';
+import { getNeighbors, exists } from './helper';
 
 export function UCS(grid, start, destination) {
     let priorityQueue = new PriorityQueue(); // create pq
@@ -22,7 +22,7 @@ export function UCS(grid, start, destination) {
             if (grid[neighbor[0]][neighbor[1]] !== "w") { // if not a wall
                 let costToNeighbor =  1 // set cost to move to neighbor as one
                 if (grid[neighbor[0]][neighbor[1]] === 'e'){ // if weighted 
-                    costToNeighbor = randInts(5, 10); // set random weight cost
+                    costToNeighbor = 5; // set weight cost 5
                 }
                 let total_cost = cost + costToNeighbor; // add up cost to neighbor (cost from current node to negihbor)
                 priorityQueue.enqueue({ node: neighbor, path: path.concat([neighbor]), cost: total_cost }); // add neihhbor, path and total cost to neighbor
