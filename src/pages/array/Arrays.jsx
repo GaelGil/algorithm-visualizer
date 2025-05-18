@@ -149,7 +149,7 @@ const Arrays = () => {
       <form onSubmit={handleSubmit} className='p-3 border rounded bg-light shadow'>
         <label htmlFor='algorithm' className='form-label fw-bold'>Sorting Algorithms: 
           <select className='form-select my-2' id='menu' value={algorithm} onChange={handleChange}>
-            <option value='Reset'>Reset Array</option>
+            <option value="">Select Algorithm</option>
             <option value='Merge'>Merge Sort</option>
             <option value='Bubble'>Bubble Sort</option>
             <option value='Selection'>Selection Sort</option>
@@ -157,6 +157,7 @@ const Arrays = () => {
           </select>
         </label>
         <input className='btn btn-primary w-100' type='submit' value='Submit' disabled={button} />
+        <button className='btn btn-secondary' onClick={resetArray} value='Submit' type='button'>Reset Array</button>
       </form>
     </div>
 

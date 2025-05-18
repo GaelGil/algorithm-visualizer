@@ -13,8 +13,7 @@ const algorithmsInfo = [
     description: `In this project you can visualize path finding algorithms.
     Each weighted node has a cost of 5 while non weighted node cost is 1. Below are some basic notes on each algorithm. To learn more
     about the implementation of the algorithms click the link below.`,
-    link: 'https://github.com/GaelGil/algorithm-visualizer/tree/main/src/pages/graphs/graphAlgorithms', // ← Add this line
-
+    link: 'https://github.com/GaelGil/algorithm-visualizer/tree/main/src/pages/graphs/graphAlgorithms',
   },
   {
     name: 'Breadth First Search (BFS)',
@@ -83,7 +82,6 @@ const Graphs = () => {
     setStart({ row: x, col: y }); 
     newMatrix[x][y] = 's';
 
-
     while (placed < numObjectives + numObstacles + numWeights){
       // generate random x and y cord 
       x = Math.floor(Math.random() * (newMatrix.length));
@@ -113,7 +111,6 @@ const Graphs = () => {
 
   // reset the matrix
   const resetMatrix = () => {
-    console.log('here')
     setAlgorithm('')
     clearPath(); // remove the previously drawn path
     generateMatrix(); // generate a new matrix
@@ -229,7 +226,7 @@ const Graphs = () => {
             value="Submit"
             disabled={button}
           />
-        <button className='btn btn-secondary' onClick={resetMatrix} value='Submit' type='button'>Reset Array</button>
+        <button className='btn btn-secondary' onClick={resetMatrix} value='Submit' type='button'>Reset Matrix</button>
         </form>
 
       <div className="container mt-5">
