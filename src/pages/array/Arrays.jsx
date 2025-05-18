@@ -13,7 +13,7 @@ const algorithmsInfo = [
     name: 'General',
     description: `Here you can visulize sorting algorithms. The array contains 50 items. Below are some basic notes on each algorithm. To learn more
     about the implementation of the algorithms click the link below.`,
-    link: 'https://en.wikipedia.org/wiki/Sorting_algorithm', // ← Add this line
+    link: 'https://en.wikipedia.org/wiki/Sorting_algorithm', 
   },
   {
     name: 'Bubble Sort',
@@ -50,7 +50,7 @@ const Arrays = () => {
   useEffect(() => {
     // Load a new array on page load
     resetArray();
-  }, []); // Empty dependency array to run only once on mount
+  }, []); 
   
   // Function to reset the array
   const resetArray = () => {
@@ -93,9 +93,6 @@ const Arrays = () => {
     return animations.length*ANIMATION_SPEED_MS;
   };
 
-
-  
-
   const handleSubmit = (event) => {
     let method = algorithm;
     let time = 0;
@@ -104,9 +101,6 @@ const Arrays = () => {
       time = startSorting(getMergeSortAnimations(array));
     } else if (method === 'Bubble') {
       time = startSorting(getBubbleSortAnimations(array));
-    } else if (method === 'Reset') {
-      resetArray();
-      enableButtons(1);
     } else if (method === 'Insertion') {
       time = startSorting(getInsertionSortAnimations(array));
     } else if (method === 'Selection') {

@@ -57,7 +57,6 @@ const Graphs = () => {
   const [obstacles, setObstacles] = useState([]);
   const [weights, setWeights] = useState([]);
   const [algorithm, setAlgorithm] = useState('');
-  const [button] = useState(false);
 
   useEffect(() => {
     generateMatrix();
@@ -70,7 +69,6 @@ const Graphs = () => {
     const objectivesArray = []; // array to hold bojectives
     const obstaclesArray = []; // array to hold obstacles
     const weightsArray = []; // array to hold obstacles
-    // const indices = {}; // dictionary to hold indicies to avoid overlap
     const numObjectives = 1; // number of objectives
     const numObstacles = 100; // number of obstacles
     const numWeights = 50; // number of weights
@@ -224,7 +222,6 @@ const Graphs = () => {
             className="btn btn-primary"
             type="submit"
             value="Submit"
-            disabled={button}
           />
         <button className='btn btn-secondary' onClick={resetMatrix} value='Submit' type='button'>Reset Matrix</button>
         </form>
