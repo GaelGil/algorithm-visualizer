@@ -1,5 +1,5 @@
 # Project
-View a live working version of this project [here](https://algorithm-visualizer-gg.herokuapp.com/)
+View a live working version of this project [here](https://gaelgil.github.io/algorithm-visualizer/)
 
 
 ## Setup
@@ -7,6 +7,9 @@ To get this project started locally you will first need a couple of things. Firs
 
 ~~~
 cd algorithm-visualizer
+~~~
+
+~~~
 npm install
 ~~~
 This will install all the necessary packages to run the project. Once it is done you can run it like this:
@@ -20,4 +23,4 @@ To find where the sorting algorithms are implemented go to `src/SortingAlgorithm
 
 ### Deployment
 
-This was deployed on heroku and can be found [here](https://algorithm-visualizer-gg.herokuapp.com/)
+This was deployed on heroku and can be found [here](https://gaelgil.github.io/algorithm-visualizer/)
