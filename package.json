@@ -1,7 +1,7 @@
 {
   "name": "visualiser",
   "version": "0.1.0",
-  "homepage": "https://gaelgil.github.io/",
+  "homepage": "https://gaelgil.github.io/algorithm-visualizer/",
   "private": true,
   "dependencies": {
     "@testing-library/dom": "^10.4.0",
