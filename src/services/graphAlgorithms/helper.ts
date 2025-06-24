@@ -65,7 +65,7 @@ export function heuristic(node: number[], destination: number[]) {
   );
 }
 
-export function exists(list_, node) {
+export function exists(list_: any[], node: any[]) {
   const nodeString = JSON.stringify(node);
   return list_.some((item) => JSON.stringify(item) === nodeString);
 }

@@ -1,19 +1,19 @@
 import "./css/App.css";
 import NavBar from "./components/Navigation";
-import { Route, Routes } from "react-router-dom";
-import Arrays from "./pages/Arrays";
-import Graphs from "./pages/Graphs";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import VisualizersPage from "./pages/Visualiser";
 
 function App() {
   return (
     <>
       <NavBar />
       <main className="main-content">
-        <Routes>
-          {/* set the routes to the pages */}
-          <Route path="/" element={<Arrays />} />
-          <Route path="/graphs" element={<Graphs />} />
-        </Routes>
+        <Router>
+          <Routes>
+            <Route path="/" element={<VisualizersPage />} />
+            {/* Add more routes here */}
+          </Routes>
+        </Router>
       </main>
     </>
   );
