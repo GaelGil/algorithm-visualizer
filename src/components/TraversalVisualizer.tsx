@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Container } from "react-bootstrap";
 import AlgorithmForm from "./AlgorithmForm";
 import AlgorithmInfo from "./AlgorithmInfo";
-import { graphsInfo } from "../data/graphsInfo";
-import "../css/Arrays.css";
+import type { GraphProps } from "../types/info";
 
 const generateRandomArray = (length = 50, min = 20, max = 200): number[] =>
   Array.from(
@@ -11,7 +10,7 @@ const generateRandomArray = (length = 50, min = 20, max = 200): number[] =>
     () => Math.floor(Math.random() * (max - min + 1)) + min
   );
 
-const TraversalVisualizer: React.FC = () => {
+const TraversalVisualizer: React.FC<GraphProps> = ({ graphsInfo }) => {
   const [array, setArray] = useState<number[]>([]);
   const [algorithm, setAlgorithm] = useState<string>("");
   const [isSorting, setIsSorting] = useState(false);

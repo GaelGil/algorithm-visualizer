@@ -3,3 +3,11 @@ export type Info = {
   description: string;
   link?: string;
 };
+
+export type ArrayProps = {
+  arraysInfo: Info[];
+};
+
+export type GraphProps = {
+  graphsInfo: Info[];
+};

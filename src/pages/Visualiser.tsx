@@ -4,9 +4,9 @@ import SortingVisualizer from "../components/SortingVisualizer";
 import TraversalVisualizer from "../components/TraversalVisualizer";
 import { arraysInfo } from "../data/arraysInfo";
 import { graphsInfo } from "../data/graphsInfo";
-import type { Info } from "../types/info";
+// import type { Info, InfoProps } from "../types/info";
 
-const VisualizersPage: React.FC<SortingVisualizerProps> = ({ arraysInfo }) => {
+const VisualizersPage: React.FC = () => {
   const [selected, setSelected] = useState<"sorting" | "graph">("sorting");
 
   return (
@@ -41,7 +41,7 @@ const VisualizersPage: React.FC<SortingVisualizerProps> = ({ arraysInfo }) => {
       {selected === "sorting" ? (
         <SortingVisualizer arraysInfo={arraysInfo} />
       ) : (
-        <TraversalVisualizer graphInfo={graphsInfo} />
+        <TraversalVisualizer graphsInfo={graphsInfo} />
       )}
     </Container>
   );

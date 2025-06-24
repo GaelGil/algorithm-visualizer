@@ -8,12 +8,9 @@ function App() {
     <>
       <NavBar />
       <main className="main-content">
-        <Router>
-          <Routes>
-            <Route path="/" element={<VisualizersPage />} />
-            {/* Add more routes here */}
-          </Routes>
-        </Router>
+        <Routes>
+          <Route path="/" element={<VisualizersPage />} />
+        </Routes>
       </main>
     </>
   );

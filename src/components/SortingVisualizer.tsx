@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Container } from "react-bootstrap";
 import AlgorithmForm from "./AlgorithmForm";
 import AlgorithmInfo from "./AlgorithmInfo";
-import { arraysInfo } from "../data/arraysInfo";
-
+import type { ArrayProps } from "../types/info";
 import "../css/Arrays.css";
 
 const generateRandomArray = (length = 50, min = 20, max = 200): number[] =>
@@ -12,7 +11,7 @@ const generateRandomArray = (length = 50, min = 20, max = 200): number[] =>
     () => Math.floor(Math.random() * (max - min + 1)) + min
   );
 
-const SortingVisualizer: React.FC = () => {
+const SortingVisualizer: React.FC<ArrayProps> = ({ arraysInfo }) => {
   const [array, setArray] = useState<number[]>([]);
   const [algorithm, setAlgorithm] = useState<string>("");
   const [isSorting, setIsSorting] = useState(false);
