@@ -1,12 +1,12 @@
 export function getBubbleSortAnimations(array: number[]) {
-  const animations = [];
+  const animations: any[] = [];
   if (array.length <= 1) return array;
   // const auxiliaryArray = array.slice();
   bubbleSort(array.slice(), animations);
   return animations;
 }
 
-function bubbleSort(arr: number[], animations) {
+function bubbleSort(arr: number[], animations: any[]) {
   for (let j = 0; j < arr.length; j++) {
     for (let i = 0; i < arr.length - 1; i++) {
       // add the animations once to change the color

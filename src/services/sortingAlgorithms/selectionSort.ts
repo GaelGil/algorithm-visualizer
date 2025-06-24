@@ -1,11 +1,11 @@
 export function getSelectionSortAnimations(array: number[]) {
-  const animations = [];
+  const animations: any[] = [];
   if (array.length <= 1) return array;
   selectionSort(array.slice(), animations);
   return animations;
 }
 
-function selectionSort(arr: number[], animations) {
+function selectionSort(arr: number[], animations: any[]) {
   for (let i = 0; i < arr.length - 1; i++) {
     let currentMin = i;
 

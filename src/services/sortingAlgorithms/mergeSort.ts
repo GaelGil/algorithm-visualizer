@@ -1,5 +1,5 @@
 export function getMergeSortAnimations(array: number[]) {
-  const animations = [];
+  const animations: any[] = [];
   if (array.length <= 1) return array;
   const auxiliaryArray = array.slice();
   mergeSortHelper(
@@ -13,11 +13,11 @@ export function getMergeSortAnimations(array: number[]) {
 }
 
 function mergeSortHelper(
-  mainArray,
-  startIdx,
-  endIdx,
-  auxiliaryArray,
-  animations
+  mainArray: number[],
+  startIdx: number,
+  endIdx: number,
+  auxiliaryArray: number[],
+  animations: any[]
 ) {
   if (startIdx === endIdx) return;
   const middleIdx = Math.floor((startIdx + endIdx) / 2);
@@ -27,12 +27,12 @@ function mergeSortHelper(
 }
 
 function doMerge(
-  mainArray,
-  startIdx,
-  middleIdx,
-  endIdx,
-  auxiliaryArray,
-  animations
+  mainArray: number[],
+  startIdx: number,
+  middleIdx: number,
+  endIdx: number,
+  auxiliaryArray: number[],
+  animations: any[]
 ) {
   let k = startIdx;
   let i = startIdx;

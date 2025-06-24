@@ -5,12 +5,18 @@ const Navigation = () => {
   return (
     <Navbar bg="dark" variant="dark" expand="md" collapseOnSelect>
       <Container>
-        <Navbar.Brand>Algorithm Visualiser</Navbar.Brand>
+        <Navbar.Brand as={Link} to="/">
+          Algorithm Visualiser
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbar-nav" />
         <Navbar.Collapse id="navbar-nav">
           <Nav className="ms-auto">
-            <Nav.Link>Graphs</Nav.Link>
-            <Nav.Link>Arrays</Nav.Link>
+            <Nav.Link as={Link} to="/graphs">
+              Graphs
+            </Nav.Link>
+            <Nav.Link as={Link} to="/">
+              Arrays
+            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

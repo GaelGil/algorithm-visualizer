@@ -1,11 +1,11 @@
 export function getInsertionSortAnimations(array: number[]) {
-  const animations = [];
+  const animations: any[] = [];
   if (array.length <= 1) return array;
   insertionSort(array.slice(), animations);
   return animations;
 }
 
-function insertionSort(arr: number, animations) {
+function insertionSort(arr: number[], animations: any[]) {
   for (let i = 1; i < arr.length; i++) {
     let right = arr[i];
     // add the animations once to change the color
