@@ -39,16 +39,16 @@ const SortingVisualizer: React.FC<ArrayProps> = ({ arraysInfo }) => {
     e.preventDefault();
     if (!algorithm || isSorting) return;
     setIsSorting(true);
-    let time: number = 0;
+    // let time: number = 0;
     let method: string = algorithm;
     if (method === "Merge") {
-      time = startSorting(getMergeSortAnimations(array));
+      startSorting(getMergeSortAnimations(array));
     } else if (method === "Bubble") {
-      time = startSorting(getBubbleSortAnimations(array));
+      startSorting(getBubbleSortAnimations(array));
     } else if (method === "Insertion") {
-      time = startSorting(getInsertionSortAnimations(array));
+      startSorting(getInsertionSortAnimations(array));
     } else if (method === "Selection") {
-      time = startSorting(getSelectionSortAnimations(array));
+      startSorting(getSelectionSortAnimations(array));
     }
     setIsSorting(false);
   };
