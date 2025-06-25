@@ -1,0 +1,13 @@
+.array-bar {
+  background-color: red;
+  width: 20px;
+  transition: height 0.2s ease-in-out;
+}
+
+.array-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 2px;
+}
