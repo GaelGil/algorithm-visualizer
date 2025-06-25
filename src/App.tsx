@@ -1,6 +1,6 @@
 import "./css/App.css";
 import NavBar from "./components/Navigation";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Routes, Route } from "react-router-dom";
 import VisualizersPage from "./pages/Visualiser";
 
 function App() {

@@ -8,7 +8,10 @@ export function UCS(grid: any[][], start: number[], destination: number[]) {
   let expanded = []; // create expanded list
 
   while (!priorityQueue.isEmpty()) {
-    let { node, path, cost } = priorityQueue.dequeue(); // deqeue node with lowest cost
+    const dequeued = priorityQueue.dequeue();
+    if (!dequeued) return; // or handle empty case
+
+    const { node, path, cost } = dequeued;
     if (node.toString() === destination.toString()) {
       // if node is destination
       // return found, path, cost, and expanded.

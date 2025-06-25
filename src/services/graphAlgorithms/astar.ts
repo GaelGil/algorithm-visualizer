@@ -12,7 +12,10 @@ export function ASTAR(grid: any[][], start: number[], destination: number[]) {
   let expanded = []; // expanded nodes (nodes that weve checked all neighbors)
 
   while (!priorityQueue.isEmpty()) {
-    let { node, path, cost, gcost } = priorityQueue.dequeue(); // get the node, its path, and cost from the front of the priority queue
+    const dequeued = priorityQueue.dequeue();
+    if (!dequeued) return; // or handle empty case
+
+    const { node, path, cost, gcost } = dequeued; // get the node, its path, and cost from the front of the priority queue
     if (node.toString() === destination.toString()) {
       // if node is destination
       return { status: "found", path, cost, expanded }; // return found, path, cost, and expanded.
