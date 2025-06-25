@@ -154,7 +154,7 @@ const TraversalVisualizer: React.FC<GraphProps> = ({ graphsInfo }) => {
       />
 
       <Container className="mt-5">
-        <h2 className="text-center mb-4">About Sorting Algorithms</h2>
+        <h2 className="text-center mb-4">About Traversal Algorithms</h2>
         <AlgorithmInfo items={graphsInfo} />
       </Container>
     </div>
