@@ -2,9 +2,16 @@ import React, { useState, useEffect } from "react";
 import { Container } from "react-bootstrap";
 import AlgorithmForm from "./AlgorithmForm";
 import AlgorithmInfo from "./AlgorithmInfo";
+import GraphLengend from "./GraphLegend";
 import type { GraphProps } from "../types/info";
-import { conflict } from "../services/graphAlgorithms/helper";
 import type { Item } from "../types/item";
+import { UCS } from "../services/graphAlgorithms/ucs";
+import { BFS } from "../services/graphAlgorithms/bfs";
+import { DFS } from "../services/graphAlgorithms/dfs";
+import { ASTAR } from "../services/graphAlgorithms/astar";
+import { conflict } from "../services/graphAlgorithms/helper";
+import { colorNodes, clearPath } from "../services/utils";
+
 import "../css/Graphs.css";
 
 const TraversalVisualizer: React.FC<GraphProps> = ({ graphsInfo }) => {
@@ -59,7 +66,6 @@ const TraversalVisualizer: React.FC<GraphProps> = ({ graphsInfo }) => {
     setObjectives(objectivesArray);
     setObstacles(obstaclesArray);
     setWeights(weightsArray);
-    // setMatrix(newMatrix);
     return newMatrix;
   };
 
@@ -69,6 +75,8 @@ const TraversalVisualizer: React.FC<GraphProps> = ({ graphsInfo }) => {
 
   const resetMatrix = () => {
     if (!isSorting) {
+      setAlgorithm("");
+      clearPath();
       setMatrix(generateMatrix());
     }
   };
@@ -81,9 +89,29 @@ const TraversalVisualizer: React.FC<GraphProps> = ({ graphsInfo }) => {
     e.preventDefault();
     if (!algorithm || isSorting) return;
     setIsSorting(true);
+    let method: string = algorithm;
+    let result;
+    const startPos = [start.row, start.col];
+    const endPos = [objectives[0].row, objectives[0].col];
 
-    // await fakeSort(array, setArray, algorithm);
+    switch (method) {
+      case "Astar":
+        result = ASTAR(matrix, startPos, endPos);
+        break;
+      case "BFS":
+        result = BFS(matrix, startPos, endPos);
+        break;
+      case "DFS":
+        result = DFS(matrix, startPos, endPos);
+        break;
+      case "UCS":
+        result = UCS(matrix, startPos, endPos);
+        break;
+    }
 
+    if (result) {
+      colorNodes(result.path, result.expanded);
+    }
     setIsSorting(false);
   };
 
@@ -134,16 +162,7 @@ const TraversalVisualizer: React.FC<GraphProps> = ({ graphsInfo }) => {
           </div>
         ))}
       </div>
-      <div className="legend mb-4 text-center">
-        <ul>
-          <li className="start">Start</li>
-          <li className="objective">Objective</li>
-          <li className="path">Path</li>
-          <li className="obstacle">Obstacle</li>
-          <li className="expanded">Expanded Nodes</li>
-          <li className="weight">Weighted (ignored for bfs and dfs)</li>
-        </ul>
-      </div>
+      <GraphLengend />
       <AlgorithmForm
         value={algorithm}
         options={["Astar", "BFS", "DFS", "UCS"]}
@@ -152,7 +171,6 @@ const TraversalVisualizer: React.FC<GraphProps> = ({ graphsInfo }) => {
         onReset={resetMatrix}
         disabled={isSorting}
       />
-
       <Container className="mt-5">
         <h2 className="text-center mb-4">About Traversal Algorithms</h2>
         <AlgorithmInfo items={graphsInfo} />
