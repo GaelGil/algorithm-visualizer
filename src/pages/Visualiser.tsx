@@ -4,15 +4,15 @@ import SortingVisualizer from "../components/SortingVisualizer";
 import TraversalVisualizer from "../components/TraversalVisualizer";
 import { arraysInfo } from "../data/arraysInfo";
 import { graphsInfo } from "../data/graphsInfo";
-// import type { Info, InfoProps } from "../types/info";
 
 const VisualizersPage: React.FC = () => {
-  const [selected, setSelected] = useState<"sorting" | "graph">("sorting");
+  const [selected, setSelected] = useState<"sorting" | "graph">("sorting"); // declare the default state as string
 
   return (
     <Container className="mt-5">
       <h1 className="text-center mb-4">Algorithm Visualizers</h1>
 
+      {/* the selection options for sorting options */}
       <ButtonGroup className="mb-4 d-flex justify-content-center">
         <ToggleButton
           id="sorting-toggle"
@@ -38,6 +38,7 @@ const VisualizersPage: React.FC = () => {
         </ToggleButton>
       </ButtonGroup>
 
+      {/* if we are sorting  render the sorting component */}
       {selected === "sorting" ? (
         <SortingVisualizer arraysInfo={arraysInfo} />
       ) : (

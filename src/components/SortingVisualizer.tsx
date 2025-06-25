@@ -35,7 +35,7 @@ const SortingVisualizer: React.FC<ArrayProps> = ({ arraysInfo }) => {
     if (!algorithm || isSorting) return;
     setIsSorting(true);
 
-    await fakeSort(array, setArray, algorithm);
+    // await fakeSort(array, setArray, algorithm);
 
     setIsSorting(false);
   };

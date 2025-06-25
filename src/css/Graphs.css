@@ -10,8 +10,6 @@
   margin: 0px;
 }
 
-
-
 .legend {
   align-content: center;
   display: flex;
@@ -27,7 +25,6 @@
   margin: 10px;
   padding: 10px;
 }
-
 
 .matrix-cell {
   width: 30px;
@@ -58,15 +55,12 @@
   background-color: #ffc107 !important;
 }
 
-
 .weight {
   background-color: red !important;
-    color: white;
-
+  color: white;
 }
 
 .expanded {
   background-color: aquamarine !important;
-    /* color: white; */
-
+  /* color: white; */
 }
