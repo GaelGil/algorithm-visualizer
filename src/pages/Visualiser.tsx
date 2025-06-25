@@ -38,7 +38,10 @@ const VisualizersPage: React.FC = () => {
         </ToggleButton>
       </ButtonGroup>
 
-      {/* if we are sorting  render the sorting component */}
+      {/* if the current state of our variable selected=sorting then we load the 
+        sorting component with its info, otherwise we will load the traversal
+        visualiser component
+      */}
       {selected === "sorting" ? (
         <SortingVisualizer arraysInfo={arraysInfo} />
       ) : (
