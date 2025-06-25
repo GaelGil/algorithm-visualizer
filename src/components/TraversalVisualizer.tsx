@@ -23,6 +23,7 @@ const TraversalVisualizer: React.FC<GraphProps> = ({ graphsInfo }) => {
   const [algorithm, setAlgorithm] = useState("");
   const [isSorting, setIsSorting] = useState(false);
 
+  // function to generate a new matrix/grid
   const generateMatrix = () => {
     const n = 30; // nxn array
     const newMatrix = Array.from({ length: n }, () => Array(50).fill(" ")); // generate array
@@ -69,10 +70,12 @@ const TraversalVisualizer: React.FC<GraphProps> = ({ graphsInfo }) => {
     return newMatrix;
   };
 
+  // function that gets called on component load
   useEffect(() => {
     setMatrix(generateMatrix());
   }, []);
 
+  // function to reset the matrix
   const resetMatrix = () => {
     if (!isSorting) {
       setAlgorithm("");
@@ -81,10 +84,13 @@ const TraversalVisualizer: React.FC<GraphProps> = ({ graphsInfo }) => {
     }
   };
 
+  // function to handle if algorithm changes
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setAlgorithm(e.target.value);
   };
-
+  // function to handle what happens on submit.
+  // in our case we will get the paths and expanded nodes and then
+  // color the nodes accordingly
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!algorithm || isSorting) return;
@@ -163,7 +169,9 @@ const TraversalVisualizer: React.FC<GraphProps> = ({ graphsInfo }) => {
           </div>
         ))}
       </div>
+      {/* importing legend for our graph/matrix/grid */}
       <GraphLengend />
+      {/* importing algorithm form component with sorting specific values */}
       <AlgorithmForm
         value={algorithm}
         options={["Astar", "BFS", "DFS", "UCS"]}
@@ -174,6 +182,7 @@ const TraversalVisualizer: React.FC<GraphProps> = ({ graphsInfo }) => {
       />
       <Container className="mt-5">
         <h2 className="text-center mb-4">About Traversal Algorithms</h2>
+        {/* importing algorithm info component with traversal specific values */}
         <AlgorithmInfo info={graphsInfo} />
       </Container>
     </div>
