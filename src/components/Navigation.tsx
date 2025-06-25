@@ -1,6 +1,7 @@
 import { Navbar, Nav, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
+// simple navbar component to be usedon all pages
 const Navigation = () => {
   return (
     <Navbar bg="dark" variant="dark" expand="md" collapseOnSelect>

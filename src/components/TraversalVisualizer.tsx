@@ -115,6 +115,7 @@ const TraversalVisualizer: React.FC<GraphProps> = ({ graphsInfo }) => {
     setIsSorting(false);
   };
 
+  // the traversal visualizer component
   return (
     <div className="GraphTraversalVisualiser container d-flex flex-column align-items-center py-4">
       <div className="matrix-container d-flex flex-column mb-4">
@@ -173,7 +174,7 @@ const TraversalVisualizer: React.FC<GraphProps> = ({ graphsInfo }) => {
       />
       <Container className="mt-5">
         <h2 className="text-center mb-4">About Traversal Algorithms</h2>
-        <AlgorithmInfo items={graphsInfo} />
+        <AlgorithmInfo info={graphsInfo} />
       </Container>
     </div>
   );

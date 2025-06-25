@@ -1,15 +1,16 @@
 import { Form, Button } from "react-bootstrap";
+import type { FormProps } from "../types/formProps";
 
-type Props = {
-  value: string;
-  options: string[];
-  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
-  onReset: () => void;
-  disabled?: boolean;
-};
+// type Props = {
+//   value: string;
+//   options: string[];
+//   onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+//   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+//   onReset: () => void;
+//   disabled?: boolean;
+// };
 
-const AlgorithmForm: React.FC<Props> = ({
+const AlgorithmForm: React.FC<FormProps> = ({
   value,
   options,
   onChange,

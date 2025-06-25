@@ -1,3 +1,4 @@
+// Graph legend component. Only imported in traversal visualiser
 const GraphLengend = () => {
   return (
     <>

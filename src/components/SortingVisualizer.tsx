@@ -53,6 +53,7 @@ const SortingVisualizer: React.FC<ArrayProps> = ({ arraysInfo }) => {
     setIsSorting(false);
   };
 
+  // the sorting visualizer component
   return (
     <Container className="d-flex flex-column justify-content-center align-items-center min-vh-100">
       <div className="array-container mb-4">
@@ -78,7 +79,7 @@ const SortingVisualizer: React.FC<ArrayProps> = ({ arraysInfo }) => {
 
       <Container className="mt-5">
         <h2 className="text-center mb-4">About Sorting Algorithms</h2>
-        <AlgorithmInfo items={arraysInfo} />
+        <AlgorithmInfo info={arraysInfo} />
       </Container>
     </Container>
   );
