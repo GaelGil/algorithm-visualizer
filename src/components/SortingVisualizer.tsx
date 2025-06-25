@@ -3,6 +3,11 @@ import { Container } from "react-bootstrap";
 import AlgorithmForm from "./AlgorithmForm";
 import AlgorithmInfo from "./AlgorithmInfo";
 import type { ArrayProps } from "../types/info";
+import { getMergeSortAnimations } from "../services/sortingAlgorithms/mergeSort";
+import { getInsertionSortAnimations } from "../services/sortingAlgorithms/insertionSort";
+import { getBubbleSortAnimations } from "../services/sortingAlgorithms/bubbleSort";
+import { getSelectionSortAnimations } from "../services/sortingAlgorithms/selectionSort";
+import { startSorting } from "../services/utils";
 import "../css/Arrays.css";
 
 const generateRandomArray = (length = 50, min = 20, max = 200): number[] =>
@@ -34,9 +39,17 @@ const SortingVisualizer: React.FC<ArrayProps> = ({ arraysInfo }) => {
     e.preventDefault();
     if (!algorithm || isSorting) return;
     setIsSorting(true);
-
-    // await fakeSort(array, setArray, algorithm);
-
+    let time: number = 0;
+    let method: string = algorithm;
+    if (method === "Merge") {
+      time = startSorting(getMergeSortAnimations(array));
+    } else if (method === "Bubble") {
+      time = startSorting(getBubbleSortAnimations(array));
+    } else if (method === "Insertion") {
+      time = startSorting(getInsertionSortAnimations(array));
+    } else if (method === "Selection") {
+      time = startSorting(getSelectionSortAnimations(array));
+    }
     setIsSorting(false);
   };
 
