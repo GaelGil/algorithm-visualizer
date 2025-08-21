@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Container } from "react-bootstrap";
+// import { Container } from "react-bootstrap";
 import AlgorithmForm from "./AlgorithmForm";
 import AlgorithmInfo from "./AlgorithmInfo";
 import type { ArrayProps } from "../types/info";
@@ -60,7 +60,7 @@ const SortingVisualizer: React.FC<ArrayProps> = ({ arraysInfo }) => {
 
   // the sorting visualizer component
   return (
-    <Container className="d-flex flex-column justify-content-center align-items-center min-vh-100">
+    <div className="min-h-screen flex flex-col justify-center items-center">
       <div className="array-container mb-4">
         {array.map((value, idx) => (
           <div
@@ -71,24 +71,24 @@ const SortingVisualizer: React.FC<ArrayProps> = ({ arraysInfo }) => {
         ))}
       </div>
 
-      <div style={{ maxWidth: "400px", width: "100%" }}>
-        {/* importing algorithm form component with sorting specific values */}
-        <AlgorithmForm
-          value={algorithm}
-          options={["Merge", "Bubble", "Selection", "Insertion"]}
-          onChange={handleChange}
-          onSubmit={handleSubmit}
-          onReset={resetArray}
-          disabled={isSorting}
-        />
-      </div>
+      {/* importing algorithm form component with sorting specific values */}
+      <AlgorithmForm
+        value={algorithm}
+        options={["Merge", "Bubble", "Selection", "Insertion"]}
+        onChange={handleChange}
+        onSubmit={handleSubmit}
+        onReset={resetArray}
+        disabled={isSorting}
+      />
 
-      <Container className="mt-5">
-        <h2 className="text-center mb-4">About Sorting Algorithms</h2>
+      <div className="mt-5">
+        <h2 className="text-2xl font-bold mb-4 text-center">
+          About Sorting Algorithms
+        </h2>
         {/* importing algorithm form component with sorting specific values */}
         <AlgorithmInfo info={arraysInfo} />
-      </Container>
-    </Container>
+      </div>
+    </div>
   );
 };
 

@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Container } from "react-bootstrap";
 import AlgorithmForm from "./AlgorithmForm";
 import AlgorithmInfo from "./AlgorithmInfo";
-import GraphLengend from "./GraphLegend";
+import GraphLegend from "./GraphLegend";
 import type { GraphProps } from "../types/info";
 import type { Item } from "../types/item";
 import { UCS } from "../services/graphAlgorithms/ucs";
@@ -170,7 +169,7 @@ const TraversalVisualizer: React.FC<GraphProps> = ({ graphsInfo }) => {
         ))}
       </div>
       {/* importing legend for our graph/matrix/grid */}
-      <GraphLengend />
+      <GraphLegend />
       {/* importing algorithm form component with sorting specific values */}
       <AlgorithmForm
         value={algorithm}
@@ -180,11 +179,11 @@ const TraversalVisualizer: React.FC<GraphProps> = ({ graphsInfo }) => {
         onReset={resetMatrix}
         disabled={isSorting}
       />
-      <Container className="mt-5">
+      <div className="mt-5">
         <h2 className="text-center mb-4">About Traversal Algorithms</h2>
         {/* importing algorithm info component with traversal specific values */}
         <AlgorithmInfo info={graphsInfo} />
-      </Container>
+      </div>
     </div>
   );
 };

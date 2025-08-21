@@ -1,4 +1,3 @@
-import { Card, Col, Row } from "react-bootstrap";
 import type { Info } from "../types/info";
 
 // Algorithm info component to display info on the algorithms.
@@ -6,27 +5,26 @@ import type { Info } from "../types/info";
 // since we have sorting and traversal algorithms we can use this
 // to load in on each page without having to rewrite this
 const AlgorithmInfo: React.FC<{ info: Info[] }> = ({ info }) => (
-  <Row>
+  <div className="flex flex-wrap justify-center mb-4">
     {info.map((info, index) => (
-      <Col md={6} key={index} className="mb-4">
-        <Card className="h-100 shadow-sm">
-          <Card.Body>
-            <Card.Title>{info.name}</Card.Title>
-            <Card.Text>{info.description}</Card.Text>
-            {info.link && (
-              <Card.Link
-                href={info.link}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Learn more
-              </Card.Link>
-            )}
-          </Card.Body>
-        </Card>
-      </Col>
+      <div key={index} className="w-full md:w-1/2 xl:w-1/3 p-4">
+        <div className="bg-white rounded shadow-md p-4 h-full">
+          <h2 className="text-lg font-bold mb-2">{info.name}</h2>
+          <p className="text-gray-700">{info.description}</p>
+          {info.link && (
+            <a
+              href={info.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-500 hover:text-blue-700"
+            >
+              Learn more
+            </a>
+          )}
+        </div>
+      </div>
     ))}
-  </Row>
+  </div>
 );
 
 export default AlgorithmInfo;
