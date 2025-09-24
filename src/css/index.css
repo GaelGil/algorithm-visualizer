@@ -1,1 +1,17 @@
 @import "tailwindcss";
+
+@layer base {
+  html {
+    @apply text-white;
+  }
+}
+
+@theme {
+  --color-secondary-300: oklch(98.5% 0.001 106.423);
+  --color-primary-600: oklch(55.2% 0.016 285.938);
+}
+
+body {
+  background-color: oklch(12.9% 0.042 264.695);
+  font-family: "Roboto", sans-serif;
+}

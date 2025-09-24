@@ -7,7 +7,7 @@ const Navigation = () => {
       <div className="flex p-2 mx-auto space-x-4">
         <Link
           to="/"
-          className="py-2 text-white text-lg font-bold text-decoration-none"
+          className="py-2 text-white  text-lg font-bold text-decoration-none hover:bg-gray-300 rounded"
         >
           Algorithm Visualiser
         </Link>
