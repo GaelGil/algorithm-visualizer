@@ -8,7 +8,7 @@ const VisualizersPage: React.FC = () => {
   const [selected, setSelected] = useState<"sorting" | "graph">("sorting"); // declare the default state as string
 
   return (
-    <div className="mt-5">
+    <div className="">
       <h1 className="text-center mb-4">Algorithm Visualizers</h1>
 
       {/* the selection options for sorting options */}

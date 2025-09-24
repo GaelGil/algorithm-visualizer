@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-// import { Container } from "react-bootstrap";
 import AlgorithmForm from "./AlgorithmForm";
 import AlgorithmInfo from "./AlgorithmInfo";
 import type { ArrayProps } from "../types/info";
@@ -80,7 +79,7 @@ const SortingVisualizer: React.FC<ArrayProps> = ({ arraysInfo }) => {
         disabled={isSorting}
       />
 
-      <div className="mt-5">
+      <div className="mt-6">
         <h2 className="text-2xl font-bold mb-4 text-center">
           About Sorting Algorithms
         </h2>

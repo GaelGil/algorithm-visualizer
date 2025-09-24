@@ -8,10 +8,7 @@ const AlgorithmForm: React.FC<FormProps> = ({
   onReset,
   disabled,
 }) => (
-  <form
-    onSubmit={onSubmit}
-    className="max-w-md mx-auto p-4 bg-white rounded shadow-md"
-  >
+  <form onSubmit={onSubmit} className="max-w-md mx-auto p-4  rounded shadow-md">
     <div className="mb-4">
       <label
         className="block text-gray-700 text-sm font-bold mb-2"
