@@ -44,7 +44,6 @@ const SortingVisualizer: React.FC<ArrayProps> = ({ arraysInfo }) => {
     e.preventDefault();
     if (!algorithm || isSorting) return;
     setIsSorting(true);
-    // let time: number = 0;
     let method: string = algorithm;
     if (method === "Merge") {
       startSorting(getMergeSortAnimations(array));
