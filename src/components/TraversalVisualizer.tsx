@@ -122,8 +122,8 @@ const TraversalVisualizer: React.FC<GraphProps> = ({ graphsInfo }) => {
 
   // the traversal visualizer component
   return (
-    <div className="min-h-screen ">
-      <div className=" d-flex flex-column mb-4">
+    <div className=" ">
+      <div className="">
         {matrix.map((row, rowIndex) => (
           <div key={rowIndex} className={"matrix-row matrix-row-" + rowIndex}>
             {row.map((cell, colIndex) => (
@@ -179,13 +179,8 @@ const TraversalVisualizer: React.FC<GraphProps> = ({ graphsInfo }) => {
         onReset={resetMatrix}
         disabled={isSorting}
       />
-      <div className="mt-5">
-        <h2 className="text-center font-bold text-2xl">
-          About Traversal Algorithms
-        </h2>
-        {/* importing algorithm info component with traversal specific values */}
-        <AlgorithmInfo info={graphsInfo} />
-      </div>
+      {/* importing algorithm info component with traversal specific values */}
+      <AlgorithmInfo info={graphsInfo} name="Traversal" />
     </div>
   );
 };

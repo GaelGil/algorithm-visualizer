@@ -58,8 +58,8 @@ const SortingVisualizer: React.FC<ArrayProps> = ({ arraysInfo }) => {
 
   // the sorting visualizer component
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center">
-      <div className="array-container mb-4">
+    <div className="">
+      <div className="array-container">
         {array.map((value, idx) => (
           <div
             key={idx}
@@ -79,13 +79,8 @@ const SortingVisualizer: React.FC<ArrayProps> = ({ arraysInfo }) => {
         disabled={isSorting}
       />
 
-      <div className="mt-5">
-        <h2 className="text-center font-bold text-2xl">
-          About Sorting Algorithms
-        </h2>
-        {/* importing algorithm form component with sorting specific values */}
-        <AlgorithmInfo info={arraysInfo} />
-      </div>
+      {/* importing algorithm form component with sorting specific values */}
+      <AlgorithmInfo info={arraysInfo} name="Sorting" />
     </div>
   );
 };

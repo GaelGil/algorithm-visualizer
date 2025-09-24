@@ -8,7 +8,10 @@ const AlgorithmForm: React.FC<FormProps> = ({
   onReset,
   disabled,
 }) => (
-  <form onSubmit={onSubmit} className="">
+  <form
+    onSubmit={onSubmit}
+    className="mt-4 flex flex-wrap gap-2 justify-center "
+  >
     <div className="mb-4 flex items-center">
       <label className="font-bold" htmlFor="algorithm">
         Algorithms
