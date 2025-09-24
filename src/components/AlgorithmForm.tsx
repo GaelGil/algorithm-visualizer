@@ -34,20 +34,23 @@ const AlgorithmForm: React.FC<FormProps> = ({
       </select>
     </div>
 
-    <button
-      type="submit"
-      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-      disabled={disabled}
-    >
-      Submit
-    </button>
-    <button
-      type="button"
-      className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded"
-      onClick={onReset}
-    >
-      Reset
-    </button>
+    <div className="mb-4 flex m-2 space-x-4">
+      <button
+        type="submit"
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        disabled={disabled}
+      >
+        Submit
+      </button>
+      <button
+        type="button"
+        className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded"
+        onClick={onReset}
+        disabled={disabled}
+      >
+        Reset
+      </button>
+    </div>
   </form>
 );
 
