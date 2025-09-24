@@ -8,13 +8,11 @@ const VisualizersPage: React.FC = () => {
   const [selected, setSelected] = useState<"sorting" | "graph">("sorting"); // declare the default state as string
 
   return (
-    <div className="">
-      <h1 className="text-center mb-4">Algorithm Visualizers</h1>
-
+    <>
       {/* the selection options for sorting options */}
-      <div className="mb-4 d-flex justify-content-center">
+      <div className="flex justify-center m-5 text-white">
         <button
-          className={`rounded  text-white px-4 py-2 ${
+          className={`rounded px-4 py-2 ${
             selected === "sorting" ? "bg-blue-500" : "bg-gray-500"
           }`}
           onClick={() => setSelected("sorting")}
@@ -22,7 +20,7 @@ const VisualizersPage: React.FC = () => {
           Sorting Visualizer
         </button>
         <button
-          className={`rounded text-white  px-4 py-2  ${
+          className={`rounded px-4 py-2  ${
             selected === "graph" ? "bg-blue-500" : "bg-gray-500"
           }`}
           onClick={() => setSelected("graph")}
@@ -40,7 +38,7 @@ const VisualizersPage: React.FC = () => {
       ) : (
         <TraversalVisualizer graphsInfo={graphsInfo} />
       )}
-    </div>
+    </>
   );
 };
 

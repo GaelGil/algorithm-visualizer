@@ -3,23 +3,23 @@ import { Link } from "react-router-dom";
 // simple navbar component to be usedon all pages
 const Navigation = () => {
   return (
-    <nav className="bg-gray-900 text-white p-3">
+    <div className=" p-3 border-b border-gray-300">
       <div className="flex p-2 mx-auto space-x-4">
         <Link
           to="/"
-          className="py-2 text-white  text-lg font-bold text-decoration-none hover:bg-gray-300 rounded"
+          className="py-2 text-lg hover:text-blue-500 font-bold text-decoration-none"
         >
           Algorithm Visualiser
         </Link>
 
         <a
           href="https://github.com/GaelGil/algorithm-visualizer"
-          className="py-2 text-white text-lg font-bold text-decoration-none"
+          className="py-2 text-lg hover:text-blue-500 font-bold text-decoration-none"
         >
           GitHub
         </a>
       </div>
-    </nav>
+    </div>
   );
 };
 

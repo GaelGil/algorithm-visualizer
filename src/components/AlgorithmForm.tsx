@@ -8,19 +8,16 @@ const AlgorithmForm: React.FC<FormProps> = ({
   onReset,
   disabled,
 }) => (
-  <form onSubmit={onSubmit} className="max-w-md mx-auto p-4  rounded shadow-md">
-    <div className="mb-4">
-      <label
-        className="block text-gray-700 text-sm font-bold mb-2"
-        htmlFor="algorithm"
-      >
+  <form onSubmit={onSubmit} className="">
+    <div className="mb-4 flex items-center">
+      <label className="font-bold" htmlFor="algorithm">
         Algorithms
       </label>
       <select
         id="algorithm"
         value={value}
         onChange={onChange}
-        className="block w-full p-2 pl-10 text-sm text-gray-700 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+        className="block w-full p-2 pl-10 text-sm text-gray-700 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 ml-2"
       >
         <option value="">Select Algorithm</option>
         {options.map((opt) => (
@@ -31,17 +28,17 @@ const AlgorithmForm: React.FC<FormProps> = ({
       </select>
     </div>
 
-    <div className="mb-4 flex m-2 space-x-4">
+    <div className="mb-4 flex space-x-4 text-white">
       <button
         type="submit"
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        className="bg-blue-500 hover:bg-blue-700 font-bold py-2 px-4 rounded"
         disabled={disabled}
       >
         Submit
       </button>
       <button
         type="button"
-        className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded"
+        className="bg-black hover:bg-gray-400 font-bold py-2 px-4 rounded"
         onClick={onReset}
         disabled={disabled}
       >

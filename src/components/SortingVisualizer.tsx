@@ -79,8 +79,8 @@ const SortingVisualizer: React.FC<ArrayProps> = ({ arraysInfo }) => {
         disabled={isSorting}
       />
 
-      <div className="mt-6">
-        <h2 className="text-2xl font-bold mb-4 text-center">
+      <div className="mt-5">
+        <h2 className="text-center font-bold text-2xl">
           About Sorting Algorithms
         </h2>
         {/* importing algorithm form component with sorting specific values */}
