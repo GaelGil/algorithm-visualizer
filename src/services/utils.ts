@@ -11,7 +11,7 @@ export const colorNodes = (path: any[], expanded: any) => {
       `.matrix-row-${row} .col-index-${col}`
     ) as HTMLElement | null;
 
-  // Color path nodes with delay
+  // Color path nodes
   path.forEach((node: any) => {
     const el = getNodeElement(node);
     if (
@@ -77,11 +77,13 @@ export const startSorting = (animations: any[]) => {
   return animations.length * ANIMATION_SPEED_MS;
 };
 
-export const clearPath = () => {
+export const clearGrid = () => {
+  // Function to clear the grid of path and expanded nodes
   const pathNodes = document.querySelectorAll(".matrix-cell.path");
   pathNodes.forEach((node) => {
     node.classList.remove("path");
   });
+
   const expandedNodes = document.querySelectorAll(".matrix-cell.expanded");
   expandedNodes.forEach((node) => {
     node.classList.remove("expanded");

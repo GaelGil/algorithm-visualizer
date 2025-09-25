@@ -9,7 +9,7 @@ import { BFS } from "../services/graphAlgorithms/bfs";
 import { DFS } from "../services/graphAlgorithms/dfs";
 import { ASTAR } from "../services/graphAlgorithms/astar";
 import { conflict } from "../services/graphAlgorithms/helper";
-import { colorNodes, clearPath } from "../services/utils";
+import { colorNodes, clearGrid } from "../services/utils";
 
 import "../css/Graphs.css";
 
@@ -78,7 +78,7 @@ const TraversalVisualizer: React.FC<GraphProps> = ({ graphsInfo }) => {
   const resetMatrix = () => {
     if (!isSorting) {
       setAlgorithm("");
-      clearPath();
+      clearGrid();
       setMatrix(generateMatrix());
     }
   };
