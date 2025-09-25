@@ -1,54 +1,22 @@
-.matrix-row {
-  display: flex;
-}
-
 .matrix-cell {
-  border: 1px solid black;
-  height: 15px;
   width: 15px;
-  padding: 0px;
-  margin: 0px;
-}
-
-.legend {
-  align-content: center;
-  display: flex;
-  justify-content: center;
-}
-
-.legend ul {
-  list-style: none;
-}
-
-.legend li {
-  display: inline;
-  margin: 10px;
-  padding: 10px;
-}
-
-.matrix-cell {
-  width: 30px;
-  height: 30px;
+  height: 15px;
   margin: 1px;
-  line-height: 30px;
-  font-size: 0.75rem;
+  font-size: 0;
   background-color: #e9ecef;
-  transition: background-color 0.3s;
+  transition: background-color 0.5s;
 }
 
 .start {
   background-color: #0d6efd !important;
-  color: white;
 }
 
 .objective {
   background-color: #198754 !important;
-  color: white;
 }
 
 .obstacle {
   background-color: #6c757d !important;
-  color: white;
 }
 
 .path {
@@ -57,10 +25,8 @@
 
 .weight {
   background-color: red !important;
-  color: white;
 }
 
 .expanded {
   background-color: aquamarine !important;
-  /* color: white; */
 }

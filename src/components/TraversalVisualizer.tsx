@@ -122,10 +122,10 @@ const TraversalVisualizer: React.FC<GraphProps> = ({ graphsInfo }) => {
 
   // the traversal visualizer component
   return (
-    <div className=" ">
+    <div className=" mx-auto ">
       <div className="">
         {matrix.map((row, rowIndex) => (
-          <div key={rowIndex} className={"matrix-row matrix-row-" + rowIndex}>
+          <div key={rowIndex} className={"flex matrix-row-" + rowIndex}>
             {row.map((cell, colIndex) => (
               <div
                 key={colIndex}

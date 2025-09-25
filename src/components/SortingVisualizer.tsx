@@ -59,11 +59,11 @@ const SortingVisualizer: React.FC<ArrayProps> = ({ arraysInfo }) => {
   // the sorting visualizer component
   return (
     <div className="">
-      <div className="array-container">
+      <div className="flex flex-wrap justify-center items-end  h-full w-full">
         {array.map((value, idx) => (
           <div
             key={idx}
-            className="array-bar"
+            className="array-bar mr-1"
             style={{ height: `${value}px` }}
           ></div>
         ))}
