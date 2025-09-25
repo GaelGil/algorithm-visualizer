@@ -122,44 +122,40 @@ const TraversalVisualizer: React.FC<GraphProps> = ({ graphsInfo }) => {
 
   // the traversal visualizer component
   return (
-    <div className=" mx-auto ">
-      <div className="">
+    <div className="p-4">
+      <div className="flex flex-wrap justify-center items-end h-full w-full">
         {matrix.map((row, rowIndex) => (
           <div key={rowIndex} className={"flex matrix-row-" + rowIndex}>
             {row.map((cell, colIndex) => (
               <div
                 key={colIndex}
-                className={`matrix-cell
-                            ${
-                              start.row === rowIndex && start.col === colIndex
-                                ? "start"
-                                : ""
-                            }
-                            ${
-                              objectives.some(
-                                (obj) =>
-                                  obj.row === rowIndex && obj.col === colIndex
-                              )
-                                ? "objective"
-                                : ""
-                            }
-                            ${
-                              obstacles.some(
-                                (obs) =>
-                                  obs.row === rowIndex && obs.col === colIndex
-                              )
-                                ? "obstacle"
-                                : ""
-                            } 
-                            ${
-                              weights.some(
-                                (weight) =>
-                                  weight.row === rowIndex &&
-                                  weight.col === colIndex
-                              )
-                                ? "weight"
-                                : ""
-                            }
+                className={`matrix-cell ${
+                  start.row === rowIndex && start.col === colIndex
+                    ? "start"
+                    : ""
+                }
+                ${
+                  objectives.some(
+                    (obj) => obj.row === rowIndex && obj.col === colIndex
+                  )
+                    ? "objective"
+                    : ""
+                }
+                ${
+                  obstacles.some(
+                    (obs) => obs.row === rowIndex && obs.col === colIndex
+                  )
+                    ? "obstacle"
+                    : ""
+                } 
+                ${
+                  weights.some(
+                    (weight) =>
+                      weight.row === rowIndex && weight.col === colIndex
+                  )
+                    ? "weight"
+                    : ""
+                }
                             col-index-${colIndex}`}
               >
                 {cell}

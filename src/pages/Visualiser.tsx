@@ -8,9 +8,9 @@ const VisualizersPage: React.FC = () => {
   const [selected, setSelected] = useState<"sorting" | "graph">("sorting"); // declare the default state as string
 
   return (
-    <div className="max-w-6xl mx-auto p-8 px-2">
+    <div className="max-w-6xl mx-auto p-8  px-2">
       {/* the selection options for sorting options */}
-      <div className="flex mb-6 text-white">
+      <div className="flex mb-6 space-x-4 text-white">
         <button
           className={`rounded px-4 py-2 ${
             selected === "sorting" ? "bg-blue-500" : "bg-gray-500"

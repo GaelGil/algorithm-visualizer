@@ -3,30 +3,30 @@
   height: 15px;
   margin: 1px;
   font-size: 0;
-  background-color: #e9ecef;
+  border: 0.5px solid #6c757d;
   transition: background-color 0.5s;
 }
 
 .start {
-  background-color: #0d6efd !important;
+  background-color: oklch(54.6% 0.245 262.881) !important;
 }
 
 .objective {
-  background-color: #198754 !important;
+  background-color: oklch(79.2% 0.209 151.711) !important;
 }
 
 .obstacle {
-  background-color: #6c757d !important;
+  background-color: oklch(37% 0.013 285.805) !important;
 }
 
 .path {
-  background-color: #ffc107 !important;
+  background-color: oklch(87.9% 0.169 91.605) !important;
 }
 
 .weight {
-  background-color: red !important;
+  background-color: oklch(58.6% 0.253 17.585) !important;
 }
 
 .expanded {
-  background-color: aquamarine !important;
+  background-color: oklch(85.5% 0.138 181.071) !important;
 }

@@ -3,26 +3,38 @@ const PRIMARY_COLOR: string = "green";
 const SECONDARY_COLOR: string = "red";
 
 export const colorNodes = (path: any[], expanded: any) => {
+  // Function to color nodes
+  // for each node in the path
   path.forEach((node) => {
+    // select the node from the matrix
     const [row, col] = node;
+    // select the node from html matching the row and col
     const nodeElement = document.querySelector(
       `.matrix-row-${row} .col-index-${col}`
     );
+    // if the node exists
     if (nodeElement) {
+      // if the node is not an objective or start
       if (
         !nodeElement.classList.contains("objective") &&
         !nodeElement.classList.contains("start")
       ) {
+        // add the path class
         nodeElement.classList.add("path");
       }
     }
   });
+  // if expanded node
   if (expanded) {
+    // for each expanded node
     expanded.forEach((node: any) => {
+      // select the node from the matrix
       const [row, col] = node;
+      // select the node from html matching the row and col
       const nodeElement = document.querySelector(
         `.matrix-row-${row} .col-index-${col}`
       );
+      // if the node exists
       if (nodeElement) {
         if (
           !nodeElement.classList.contains("path") &&

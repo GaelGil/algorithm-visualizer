@@ -7,7 +7,6 @@ import { getInsertionSortAnimations } from "../services/sortingAlgorithms/insert
 import { getBubbleSortAnimations } from "../services/sortingAlgorithms/bubbleSort";
 import { getSelectionSortAnimations } from "../services/sortingAlgorithms/selectionSort";
 import { startSorting } from "../services/utils";
-import "../css/Arrays.css";
 
 const generateRandomArray = (length = 50, min = 20, max = 200): number[] =>
   Array.from(
@@ -58,12 +57,12 @@ const SortingVisualizer: React.FC<ArrayProps> = ({ arraysInfo }) => {
 
   // the sorting visualizer component
   return (
-    <div className="">
-      <div className="flex flex-wrap justify-center items-end  h-full w-full">
+    <div className="p-4">
+      <div className="flex flex-wrap justify-center items-end h-full w-full">
         {array.map((value, idx) => (
           <div
             key={idx}
-            className="array-bar mr-1"
+            className="array-bar w-4 bg-red-500 mr-1"
             style={{ height: `${value}px` }}
           ></div>
         ))}
