@@ -29,4 +29,5 @@
 
 .expanded {
   background-color: oklch(85.5% 0.138 181.071) !important;
+  animation: changeColor 2s linear infinite;
 }
