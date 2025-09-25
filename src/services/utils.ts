@@ -2,9 +2,8 @@ const ANIMATION_SPEED_MS: number = 5;
 const PRIMARY_COLOR: string = "green";
 const SECONDARY_COLOR: string = "red";
 
-export const colorNodes = (path: any[], expanded: any) => {
-  // Function to color nodes
-
+// Function to color nodes
+export const colorNodes = (path: any[], expanded: any[]) => {
   // get node html element by row and col
   const getNodeElement = ([row, col]: any) =>
     document.querySelector(
