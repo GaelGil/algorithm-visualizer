@@ -1,27 +1,16 @@
 const ANIMATION_SPEED_MS: number = 5;
 const PRIMARY_COLOR: string = "green";
 const SECONDARY_COLOR: string = "red";
+const EXPAND_DELAY = 10;
+// Function to color nodes
 
 export const colorNodes = (path: any[], expanded: any) => {
-  // Function to color nodes
-
+  const timeToAnimateExpanded = (expanded?.length || 0) * EXPAND_DELAY;
   // get node html element by row and col
   const getNodeElement = ([row, col]: any) =>
     document.querySelector(
       `.matrix-row-${row} .col-index-${col}`
     ) as HTMLElement | null;
-
-  // Color path nodes
-  path.forEach((node: any) => {
-    const el = getNodeElement(node);
-    if (
-      el &&
-      !el.classList.contains("objective") &&
-      !el.classList.contains("start")
-    ) {
-      el.classList.add("path");
-    }
-  });
 
   // Color expanded nodes with delay
   expanded?.forEach((node: any, index: number) => {
@@ -35,9 +24,26 @@ export const colorNodes = (path: any[], expanded: any) => {
     ) {
       setTimeout(() => {
         el.classList.add("expanded");
-      }, index * 10);
+      }, index * EXPAND_DELAY);
     }
   });
+
+  // Color path nodes
+  setTimeout(() => {
+    path.forEach((node: any) => {
+      const el = getNodeElement(node);
+      if (
+        el &&
+        !el.classList.contains("objective") &&
+        !el.classList.contains("start")
+      ) {
+        if (el.classList.contains("expanded")) {
+          el.classList.remove("expanded");
+        }
+        el.classList.add("path");
+      }
+    });
+  }, timeToAnimateExpanded * 2);
 };
 
 export const startSorting = (animations: any[]) => {
