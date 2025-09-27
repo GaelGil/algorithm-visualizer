@@ -5,7 +5,8 @@ const EXPAND_DELAY = 10;
 // Function to color nodes
 
 export const colorNodes = (path: any[], expanded: any) => {
-  const timeToAnimateExpanded = (expanded?.length || 0) * EXPAND_DELAY;
+  // get expanded time
+  const expandedTime = (expanded?.length || 0) * EXPAND_DELAY;
   // get node html element by row and col
   const getNodeElement = ([row, col]: any) =>
     document.querySelector(
@@ -28,7 +29,7 @@ export const colorNodes = (path: any[], expanded: any) => {
     }
   });
 
-  // Color path nodes
+  // Color path nodes after we colored expanded
   setTimeout(() => {
     path.forEach((node: any) => {
       const el = getNodeElement(node);
@@ -37,13 +38,15 @@ export const colorNodes = (path: any[], expanded: any) => {
         !el.classList.contains("objective") &&
         !el.classList.contains("start")
       ) {
+        // remove expanded class from path nodes
         if (el.classList.contains("expanded")) {
           el.classList.remove("expanded");
         }
+        // add path class
         el.classList.add("path");
       }
     });
-  }, timeToAnimateExpanded * 2);
+  }, expandedTime * 1.1);
 };
 
 export const startSorting = (animations: any[]) => {
